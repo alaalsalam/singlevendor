@@ -1,0 +1,36 @@
+{
+ "creation": "2020-05-29 17:50:58.391624",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "contact_type",
+  "contact_detail"
+ ],
+ "fields": [
+  {
+   "fieldname": "contact_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Contact Type",
+   "options": "Email\nMobile\nWhats App",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contact_detail",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact Detail",
+   "reqd": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-05-29 17:50:58.391624",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Customer Support Contact",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

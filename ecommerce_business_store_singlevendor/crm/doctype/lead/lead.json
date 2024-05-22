@@ -1,0 +1,158 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2023-04-10 11:34:35.254156",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "first_name",
+  "last_name",
+  "store_name",
+  "store_class",
+  "store_image",
+  "lead_source",
+  "lead_status",
+  "customer_id",
+  "se_employee_id",
+  "column_break_sg9k",
+  "mobile_no",
+  "address",
+  "lat",
+  "long",
+  "visit_status",
+  "business_type",
+  "remark",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First Name"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "store_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Store Name"
+  },
+  {
+   "fieldname": "store_class",
+   "fieldtype": "Select",
+   "label": "Store Class",
+   "options": "Class A\nClass B\nClass C"
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "Mobile No"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "lat",
+   "fieldtype": "Data",
+   "label": "Lat"
+  },
+  {
+   "fieldname": "long",
+   "fieldtype": "Data",
+   "label": "Long"
+  },
+  {
+   "fieldname": "lead_source",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lead Source",
+   "options": "Lead Source",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Lead Status",
+   "options": "\nOpen\nOnboarded\nDropped",
+   "reqd": 1
+  },
+  {
+   "fieldname": "visit_status",
+   "fieldtype": "Select",
+   "label": "Visit Status",
+   "options": "\nConverted\nPending\nDropped\nInvalid\nInterested"
+  },
+  {
+   "fieldname": "business_type",
+   "fieldtype": "Link",
+   "label": "Business Type",
+   "options": "Seller Type"
+  },
+  {
+   "fieldname": "customer_id",
+   "fieldtype": "Data",
+   "label": "Customer ID"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "se_employee_id",
+   "fieldtype": "Link",
+   "label": "SE Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_sg9k",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "store_image",
+   "fieldtype": "Attach Image",
+   "label": "Store Image"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming  Series",
+   "options": "CRM-LEAD-.YYYY.-"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-05-05 14:41:10.302555",
+ "modified_by": "Administrator",
+ "module": "crm",
+ "name": "Lead",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

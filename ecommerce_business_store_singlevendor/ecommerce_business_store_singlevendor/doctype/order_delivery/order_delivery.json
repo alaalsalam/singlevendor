@@ -1,0 +1,131 @@
+{
+ "creation": "2019-07-17 17:58:00.201633",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "order_id",
+  "order_required_date",
+  "delivery_status",
+  "driver_allocation_count",
+  "reschedule_time",
+  "column_break_4",
+  "order_created_on",
+  "order_required_time",
+  "posted_date",
+  "cancelled_scheduler_count",
+  "check_reallocation",
+  "section_break_8",
+  "driver_assigned"
+ ],
+ "fields": [
+  {
+   "fieldname": "order_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Order",
+   "options": "Order",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "order_id.order_date",
+   "fieldname": "order_required_date",
+   "fieldtype": "Data",
+   "label": "Order Required Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_status",
+   "fieldtype": "Select",
+   "label": "Delivery Status",
+   "options": "Pending\nDriver Assigned\nDelivered\nCancelled"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "order_id.creation",
+   "fieldname": "order_created_on",
+   "fieldtype": "Datetime",
+   "label": "Order Created On",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "order_id.order_time",
+   "fieldname": "order_required_time",
+   "fieldtype": "Data",
+   "label": "Order Required Time",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posted_date",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Posted Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "Drivers"
+  },
+  {
+   "fieldname": "driver_assigned",
+   "fieldtype": "Table",
+   "label": "Driver Assigned",
+   "options": "Driver Assigned"
+  },
+  {
+   "default": "0",
+   "fieldname": "driver_allocation_count",
+   "fieldtype": "Int",
+   "label": "Driver Allocation Count",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "cancelled_scheduler_count",
+   "fieldtype": "Int",
+   "label": "Cancelled Scheduler Count",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "reschedule_time",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "label": "Reschedule Allocated Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_reallocation",
+   "fieldtype": "Check",
+   "label": "Check Reallocation"
+  }
+ ],
+ "modified": "2020-09-23 00:20:12.090394",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Order Delivery",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

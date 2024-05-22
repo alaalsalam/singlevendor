@@ -1,0 +1,30 @@
+{
+ "content": null,
+ "creation": "2020-10-16 07:21:27.004617",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "fa fa-cogs",
+ "idx": 0,
+ "modified": "2020-10-16 07:21:27.004617",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "settings",
+ "owner": "Administrator",
+ "page_name": "Settings",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Admin"
+  },
+  {
+   "role": "Vendor"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Settings"
+}

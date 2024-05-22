@@ -1,0 +1,92 @@
+{
+ "charts": [
+  {
+   "chart_name": "Orders",
+   "label": "Orders"
+  }
+ ],
+ "content": "[{\"id\":\"83n3othgu7\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Sales</b></span>\",\"col\":12}},{\"id\":\"LNbS-vKXKE\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Daily Orders\",\"col\":3}},{\"id\":\"Rvwud62Uxz\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Weekly Orders\",\"col\":3}},{\"id\":\"A5aN3-F6eE\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Orders\",\"col\":3}},{\"id\":\"iUZgR-DKje\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Vendor Orders\",\"col\":3}},{\"id\":\"h2Sy3KUJIe\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rtOc7G-UMg\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Links</b></span>\",\"col\":12}},{\"id\":\"2u8DOj594E\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Orders\",\"col\":3}},{\"id\":\"XUMiugF3Ro\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Orders\",\"col\":3}},{\"id\":\"8SmDNmEYaZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Return Requests\",\"col\":3}},{\"id\":\"uWo0k7UZcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Return Request Reasons\",\"col\":3}},{\"id\":\"nvRyGpsUoN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shipping Rate Method\",\"col\":3}},{\"id\":\"WvYdKAXToC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Message Forum\",\"col\":3}},{\"id\":\"wgoBLqcl07\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"EMJK8FeFH9\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Orders\",\"col\":12}}]",
+ "creation": "2023-04-15 14:40:59.412659",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "income",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Sales",
+ "links": [],
+ "modified": "2023-07-06 13:56:54.428726",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Sales",
+ "number_cards": [
+  {
+   "label": "Daily Orders",
+   "number_card_name": "Today Orders"
+  },
+  {
+   "label": "Total Orders",
+   "number_card_name": "Total Orders"
+  },
+  {
+   "label": "Weekly Orders",
+   "number_card_name": "Weekly Orders"
+  },
+  {
+   "label": "Total Vendor Orders",
+   "number_card_name": "Vendor Orders"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "Go1 Commerce",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 8.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Orders",
+   "link_to": "Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Vendor Orders",
+   "link_to": "Vendor Orders",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Return Requests",
+   "link_to": "Return Request",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Return Request Reasons",
+   "link_to": "Return Request Reasons",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Shipping Rate Method",
+   "link_to": "Shipping Rate Method",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Message Forum",
+   "link_to": "Message Forum",
+   "type": "DocType"
+  }
+ ],
+ "title": "Sales"
+}

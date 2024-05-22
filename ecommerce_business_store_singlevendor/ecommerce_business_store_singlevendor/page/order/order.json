@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2021-04-28 13:58:00.938843",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2021-04-28 13:59:05.163945",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "order",
+ "owner": "Administrator",
+ "page_name": "Order",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Order"
+}

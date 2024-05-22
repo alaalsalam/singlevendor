@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-03-28 20:00:25.761208",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "first_unit",
+  "last_unit",
+  "per_unit",
+  "flat_rate"
+ ],
+ "fields": [
+  {
+   "fieldname": "first_unit",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "First Unit"
+  },
+  {
+   "fieldname": "last_unit",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Last Unit"
+  },
+  {
+   "fieldname": "per_unit",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Per Unit"
+  },
+  {
+   "fieldname": "flat_rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Flat Rate"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-03-29 13:32:08.702970",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Product Price Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2019-07-08 11:18:01.017906",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "review_for",
+  "business",
+  "business_name",
+  "contact_email",
+  "column_break_2",
+  "customer",
+  "email",
+  "section_break_5",
+  "reference_type",
+  "review_title",
+  "column_break_7",
+  "reference",
+  "review_message",
+  "column_break_11",
+  "is_approved",
+  "section_break_11",
+  "overall_rating",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "default": "Business",
+   "fieldname": "review_for",
+   "fieldtype": "Link",
+   "label": "Review For",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "business",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Business",
+   "options": "review_for",
+   "reqd": 1
+  },
+  {
+   "fieldname": "business_name",
+   "fieldtype": "Data",
+   "label": "Business Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Contact Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:((doc.reference_type))",
+   "fieldname": "reference_type",
+   "fieldtype": "Link",
+   "label": "Reference Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "review_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Review Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:((doc.reference))",
+   "fieldname": "reference",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference",
+   "options": "reference_type"
+  },
+  {
+   "fieldname": "review_message",
+   "fieldtype": "Small Text",
+   "label": "Review Message"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_approved",
+   "fieldtype": "Check",
+   "label": "Is Approved"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Ratings"
+  },
+  {
+   "fieldname": "overall_rating",
+   "fieldtype": "Float",
+   "label": "Overall Rating"
+  },
+  {
+   "default": "RVW-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "RVW-"
+  }
+ ],
+ "links": [],
+ "modified": "2024-02-15 16:07:50.869466",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Business Reviews",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "restrict_to_domain": "Multi Vendor",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

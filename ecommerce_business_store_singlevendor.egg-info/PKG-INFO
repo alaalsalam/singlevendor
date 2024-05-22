@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: ecommerce_business_store_singlevendor
+Version: 0.0.1
+Summary: Single vendor ecommerce app
+Author: Tridotstech Private Ltd.
+Author-email: info@valiantsystems.com
+Requires-Dist: PyPDF2

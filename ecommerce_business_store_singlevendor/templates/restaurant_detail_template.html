@@ -1,0 +1,805 @@
+<div class="order_box default-template">
+    <div class="row it-sec" style="margin-left: 0px;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+       <!--  <div class="mobile-order-info">
+            <div class="col-md-6 col-sm-6 col-xs-12" style="border: 1px solid #ddd"> -->
+                 <div class="row mobile-order-info col-md-12" style="border: 1px solid #ddd">
+            <div class="{% if restaurant %}col-md-4 col-sm-6 col-xs-12{%else%}col-md-6 col-sm-6 col-xs-12{%endif%}" style="border-right: #dddddd solid 1px;">
+                <h4>{{ _("Customer Details") }}</h4> 
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Customer") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.customer}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Name") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.customer_name}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Email") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.customer_email}}</div>
+                    </div>
+                </div>
+                {% if order_details.phone %}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Phone") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.phone}}</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="{% if restaurant %}col-md-4 col-sm-6 col-xs-12{%else%}col-md-6 col-sm-6 col-xs-12{%endif%}">
+                <h4>{{ _("Order Details") }}</h4>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order Date") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.creation.strftime("%b %d, %Y %I:%M %p")}}</div>
+                        
+                    </div>
+                </div>
+                {% if order_details.order_reference %}
+                <!-- <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order Ref.") }}</h5>
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.order_reference}}</div>
+                    </div>
+                </div> -->
+                {% else%}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order #") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.name}}</div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order Status") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{ order_details.status }}</div>
+                    </div>
+                </div>
+                
+                {% if multi_vendor==1 and order_details.business  and not restaurant%}
+                {% set business_name = frappe.db.get_value("Business", order_details.business, "restaurant_name") %}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Business") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{ business_name or order_details.business }}</div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if multi_vendor==1 and order_details.shipping_provider %}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Shipping Provider") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.shipping_provider }}</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% if restaurant %}
+             {% set restaurant_info = frappe.db.get_all("Business", filters={"name":order_details.business}, fields= ["restaurant_name","contact_number","contact_email"]) %}
+             <div class="{% if restaurant %}col-md-4 col-sm-6 col-xs-12{%else%}col-md-6 col-sm-6 col-xs-12{%endif%}" style="
+    min-height: 192px;
+    border-left: 1px solid #ddd;
+">
+                <h4>{{ _("Restaurant Details") }}</h4>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Name") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{restaurant_info[0].restaurant_name}}</div>
+                        
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Email") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{restaurant_info[0].contact_email}}</div>
+                        
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Phone") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{restaurant_info[0].contact_number}}</div>
+                        
+                    </div>
+                </div>
+                {%if order_details.order_accepted_time%}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Accepted Time") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.order_accepted_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                        
+                    </div>
+                </div>
+             {% endif %}
+
+            </div>
+             {% endif %}
+        </div>
+
+        </div>
+    </div>
+    <div class="row it-sec">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="addrBox">
+                <div class="row">
+                    {% if show_address %}{% if order_details.address %}         
+                    <div class="{% if restaurant %}col-md-3 col-xs-12 col-sm-4{% else %}col-md-4 col-xs-12 col-sm-4{% endif %}">
+                        <h5>{% if restaurant %}{{ _("Address") }}{% else %}{{ _("Billing Address") }}{% endif %}</h5>
+                        <div class="od-info">
+                            {{order_details.first_name}} {% if order_details.last_name %}{{order_details.last_name}}{% endif %}<br>
+                            {% if restaurant and order_details.door_no %}{{ _("Block No") }}: {{order_details.door_no}} {% endif %}
+                            {% if restaurant and order_details.unit_number %}{{ _("Unit No") }}: {{order_details.unit_number}} {% endif %}
+                            {{order_details.address}}<br>
+                            {{order_details.city}}
+                            {% if order_details.state %}<br>{{order_details.state}} {% endif %}
+                            <br>{{order_details.country}} - {{order_details.zipcode}}
+                            {% if restaurant and order_details.landmark %}<br>{{ _("Landmark") }}: {{order_details.landmark}} {% endif %}
+                        </div>
+                        <div>
+                            <p>{{ _("Phone") }}: {{order_details.phone}}</p>
+                        </div>
+                    </div>
+                    {% endif %}{% endif %}
+                    {% if not restaurant %}{% if order_details.shipping_shipping_address %}
+                    <div class="{% if restaurant %}col-md-3 col-xs-12 col-sm-6{%else%}col-md-4 col-xs-12 col-sm-4{%endif%}">
+                        <h5>{{ _("Shipping Address") }}</h5>
+                        <div class="od-info">
+                            {{order_details.shipping_first_name}} {% if order_details.shipping_last_name %}{{order_details.shipping_last_name}}{% endif %}<br>
+                            {{order_details.shipping_shipping_address}}<br>
+                            {{order_details.shipping_city}}
+                            {% if order_details.shipping_state %}<br>{{order_details.shipping_state}}{% endif %}
+                            <br>{{order_details.shipping_country}} - {{order_details.shipping_zipcode}}
+                        </div>
+                        <div>
+                            <p>{{ _("Phone") }}: {{order_details.shipping_phone}}</p>
+                        </div>
+                    </div>
+                    {% endif %}{% endif %}                                
+                    <div class="{% if restaurant %}col-md-3 col-xs-12 col-sm-6{%else%}col-md-4 col-xs-12 col-sm-4{%endif%}">
+                        {% if order_details.shipping_method %}
+                        <h5>{{ _("Shipping Method") }}</h5>
+                        <div class="od-info">{{order_details.shipping_method_name}}</div>
+                        {% endif %}
+                        {% if order_details.payment_method %}
+                        <h5>{{ _("Payment Method") }}</h5>
+                        <div class="od-info">
+                            {{order_details.payment_method_name}}
+                          <span style="text-transform: capitalize;">  {% if order_details.cash_collected_mode %}({{order_details.cash_collected_mode}}){% endif %}</span>
+                        </div>
+                        {% endif %}
+                        {% if order_details.transaction_id %}
+                        <h5>{{ _("Transaction Id") }}</h5>
+                        <div class="od-info">
+                            {{order_details.transaction_id}}
+                        </div>
+                        {% endif %}
+                        {% if order_details.payment_status %}
+                        <h5>{{ _("Payment Status") }}</h5>
+                        <div class="od-info">{{order_details.payment_status}}</div>
+                        {% endif %}
+                    </div>    
+                    {% if restaurant %}
+                    <div class="col-md-2 col-xs-12 col-sm-4" id="custom-info">
+                        <h5>{{ _("Preferred Date & Time") }}</h5>
+                        <div class="od-info">{{order_details.order_date.strftime("%b %d, %Y")}} {{order_details.order_time}}</div>
+                        <h5>{{ _("Restaurant Status") }}</h5>
+                        <div class="od-info">{{order_details.restaurant_status}}</div>
+                        {% if order_details.order_time == "ASAP" and (order_details.preparation_time and (order_details.preparation_time | int) > 0) %}
+                        <h5>{{ _("Preparation Time") }}</h5>
+                        <div class="od-info">{{order_details.preparation_time}} mins</div>
+                        {% endif %}
+                        {% if order_details.pickup_time %}
+                        <div class="arrival-time">
+                            <h5>{% if order_details.shipping_method_name == "Delivery" %}{{ _("Driver Arrival Time") }}{%else%}{{ _("Customer Pickup Time") }}{%endif%}</h5>
+                        <div class="od-info">{{order_details.pickup_time}}</div>
+                        </div>
+                        {%endif%}
+                    </div>
+                    {%if order_details.driver_status !="Pending" %}
+                        <div class="col-md-4 col-xs-12 col-sm-4" id="delivery-info" style="min-height: 235px;border-left:1px solid #ddd">
+                             <h4>{{ _("Delivery Details") }}</h5>
+                            {%if order_details.driver%}
+                            {% set driver_info = frappe.db.get_all("Drivers", filters={"name":order_details.driver}, fields= ["driver_name"]) %}
+                           
+                           <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Driver") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{driver_info[0].driver_name}}</div>
+                                </div>
+                            </div>
+                            {% set driver_phone = frappe.db.get_value("Drivers", order_details.driver, "driver_phone") %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Driver Phone") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{driver_phone}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.driver_accepted_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Accepted Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver_accepted_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.driver_arrived_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Arrived Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver_arrived_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.driver_picked_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Picked Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver_picked_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.delivered_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Delivered Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.delivered_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                        </div>
+                    {% endif %}  
+                    {% endif %}                
+                </div>
+            </div>
+                    
+        </div>
+    </div>
+    {% if order_details.order_item %}
+    <div class="row it-sec">
+        <div class="col-md-12 col-xs-12">
+            <div class="it-box">
+                <div class="row item-table-head hidden-xs clearfix">
+                    <div class="col-md-2 col-sm-2">{{ _("ID") }}</div>
+                    <div class="col-md-4 col-sm-4">{{ _("Item") }}</div>
+                    <div class="col-md-6 col-sm-6">
+                         <div class="row">
+                        {% if not restaurant %}
+                        <div class="col-md-3 col-sm-3" style="text-align: center;">{{ _("SKU") }}</div>
+                        {% endif %}
+                        <div class="{% if not restaurant %}col-md-3 col-sm-3 ralign{% else %}col-md-4 col-sm-4 col-xs-4{% endif %} ralign">{{ _("Price") }}</div>
+                        <div class="{% if not restaurant %}col-md-3 col-sm-3 ralign{% else %}col-md-4 col-sm-4 col-xs-4{% endif %}" style="text-align: center;">{{ _("Quantity") }}</div>
+                        <div class="{% if not restaurant %}col-md-3 col-sm-3 ralign{% else %}col-md-4 col-sm-4 col-xs-4{% endif %} ralign">{{ _("Total") }}</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="item-details sss">
+                    {% for item in order_details.order_item %}
+                    <div class="it-list">
+                        <div class="row" data-id="{{item.name}}" data-product="{{item.item_name}}" data-price="{{item.price}}" data-qty="{{item.quantity}}">
+          <div class="col-md-2 col-sm-2 col-xs-12">
+                                <div class="col-md-12 col-sm-12" style="text-align: left;">
+                                    {{item.item}}
+                                </div>
+          </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-md-3 col-xs-12 col-sm-3">     
+                                {% if item.is_free_item==1 %}
+                                <div class="free-item"><div class="wrap"><span>Free</span></div></div>
+                                {% endif %}                                
+                                    <img src="{% if item.item_image %}{{item.item_image}}{% else %}/assets/{% if restaurant %}restaurantcmswebsite{% else %}cmswebsite{% endif %}/images/no-img-120.jpg{% endif %}" class="img-responsive" style="margin: auto;" />
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                     <a href="/desk#Form/Product/{{item.item}}" target="_blank">
+                                    <h5>{{item.item_name}}</h5>
+                                    {% if item.attribute_description %}
+                                    <div class="attr-list">{{item.attribute_description}}</div>
+                                    {% endif %}
+                                    {% if item.special_instruction %}<p>{{item.special_instruction}}</p>{% endif %}
+                                </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 hidden-xs">
+                                <div class="row">
+                                {% if not restaurant %}
+                                <div class="col-md-3 col-sm-3" style="text-align: center;">
+                                    {{item.item_sku}}
+                                </div>
+                                {% endif %}
+                                <div class="{% if not restaurant %}col-md-3 col-sm-3 ralign{% else %}col-md-4 col-sm-4 col-xs-4{% endif %} ralign">
+                                    {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.price | float }}
+                                </div>
+                                <div class="{% if not restaurant %}col-md-3 col-sm-3 ralign{% else %}col-md-4 col-sm-4 col-xs-4{% endif %}" style="text-align: center;">
+                                    {{item.quantity}}
+                                </div>
+                                <div class="{% if not restaurant %}col-md-3 col-sm-3 ralign{% else %}col-md-4 col-sm-4 col-xs-4{% endif %} ralign">
+                                    {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.amount | float }}
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12 hide-desk">
+                                <div class="col-md-4 col-xs-4">
+                                    <p>{{ _("Price") }}</p>
+                                    {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.price | float }}
+                                </div>
+                                <div class="col-md-4 col-xs-4" style="text-align: center;">
+                                    <p>{{ _("Quantity") }}</p>
+                                    {{item.quantity}}
+                                </div>
+                                <div class="col-md-4 col-xs-4 ralign">
+                                    <p>{{ _("Total") }}</p>
+                                    {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.amount | float }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="item-footer">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-6">
+                            {% if delivery_slot %}
+                            <table>
+                                <thead><tr><th style="padding: 5px 15px;"><b>{{_("Preferred Delivery Slot")}}:</b></th></tr></thead>
+                                <tbody>
+                                    {% for item in delivery_slot %}
+                                    <tr>
+                                        <!-- <td style="width: 25%;"><b>{{_("Preferred Delivery Slot")}}:</b></td> -->
+                                        
+                                        <td>{% if item.category %}{{item.category}} - {% endif %}{{item.delivery_date}} ({{item.from_time}} - {{item.to_time}})</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                            {% if restaurant and order_details.customer_comments %}
+                            <div style="padding: 10px;">
+                                <div><b>{{_("Special Instructions:")}}</b></div>
+                                <div>{{order_details.customer_comments}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <table >
+         <tr>
+                                    <td>{{ _("Total Items") }}:</td>
+                                    <td class="ralign">{{ order_details.order_item | sum(attribute='quantity') }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ _("Sub Total") }}:</td>
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.order_subtotal | float }}</td>
+                                </tr>
+                                {% if order_details.discount %}
+                                <tr>
+                                    <td>{{ _("Discount") }}:</td>
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.discount | float }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if order_details.gift_card_amount %}
+                                <tr>
+                                    <td>{{ _("Gift Card Amount") }}:</td>
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.gift_card_amount | float }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if restaurant and order_details.tip_amount > 0 %}
+                                <tr>
+                                    <td>{{ _("Tip Amount") }}:</td>
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.tip_amount | float }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if restaurant %}
+                                {% if order_details.shipping_method_name == "Delivery" %}
+                                <tr>
+                                    <td>{{ _("Shipping Charge") }}:</td>
+                                    <td class="ralign">
+                                        {% if order_details.actual_shipping_charges > order_details.shipping_charges %}<span style="font-size: 12px;text-decoration: line-through;padding-right: 10px;">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.actual_shipping_charges | float }}</span>{% endif %}
+                                        {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.shipping_charges | float }}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% if order_details.shipping_method_name == "Pickup" and order_details.pickup_charge > 0 %}
+                                <tr>
+                                    <td>{{ _("Pickup Charge") }}:</td>
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.pickup_charge | float }}</td>
+                                </tr>
+                                {% endif %}
+                                {% else %}
+                                <tr>
+                                    <td>{{ _("Shipping Charge") }}:</td>
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.shipping_charges | float }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if order_details.total_tax_amount %}
+                                <tr>
+                                    {% if catalog_settings.included_tax == 1 %}
+                                    <td>{{ _("Tax (Incl. tax)") }}:</td>
+                                    {% else %}
+                                    <td>{{ _("Tax") }}:</td>
+                                    {% endif %}
+                                    <td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.total_tax_amount | float }}</td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if order_details.checkout_attributes %}
+                                <tr>
+                                    <td>{{_("Additional Charges")}}:</td><td class="ralign"></td>
+                                </tr>
+                                {% for attrs in order_details.checkout_attributes %}
+                                <tr>
+                                    <td style="color:#a5a5a5;">{{attrs.attribute_description}}</td><td class="ralign">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % attrs.price_adjustment | float }}</td>
+                                </tr>
+                                {% endfor %}
+                                {% endif %}
+                                <tr>
+                                    <td><b>{{ _("Order Total") }}:</b></td>
+                                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.total_amount | float }}</b></td>
+                                </tr>
+        
+                                {% if loyalty and order_details.loyalty_points %}
+                                <tr>
+                                    <td><b>{{ _("Loyalty Amount") }} </b> ({{order_details.loyalty_points}}pts)</td>
+                                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.loyalty_amount | float}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b>{{ _("Total Amount") }} </b></td>
+                                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % (order_details.total_amount - order_details.loyalty_amount) | float}}</b></td>
+                                </tr>
+                                {% endif %}
+                                {% if order_details.paid_using_wallet %}
+                                <tr>
+                                    <td><b>{{ _("Paid Using Wallet") }}:</b></td>
+                                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.paid_using_wallet | float }}</b></td>
+                                </tr>
+        {% endif %}
+        {%if order_details.paid_amount | float > 0%}
+                                 <tr>
+                                    <td><b>{{ _("Paid Amount") }}:</b></td>
+                                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.paid_amount | float }}</b></td>
+                                </tr>
+                                {% endif %}
+         {%if order_details.outstanding_amount | float > 0%}
+                                 <tr>
+                                    <td><b>{{ _("Outstanding Amount") }}:</b></td>
+                                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.outstanding_amount | float }}</b></td>
+                                </tr>
+                                {% endif %}
+                    {% if order_settings.enable_preorder==1 %}
+                {% if order_details.advance_amount %}
+                 <tr>
+                    <td><b>{{ _("Advance Amount") }}:</b></td>
+                    <td class="ralign"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.advance_amount | float }}</b></td>
+                </tr>
+                {% endif %}
+                    {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{%if order_details.driver_status !="Pending" %}
+<div class="order_box driver-template">
+    <div class="it-sec">
+      <div class="mobile-order-info col-md-12" style="border: 1px solid #ddd;padding:0">
+            <div class="col-md-12 col-sm-6 col-xs-12" style="padding: 0" >
+      <div class="col-md-6 col-sm-6 col-xs-12" >
+                <h4>{{ _("Order Details") }}</h4>
+
+                 <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order #") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.name}}</div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order Date") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.creation.strftime("%b %d, %Y %I:%M %p")}}</div>
+                        
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                 <h5>{{ _("Preferred Date & Time") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{order_details.order_date.strftime("%b %d, %Y")}} {{order_details.order_time}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Order Status") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{ order_details.status }}</div>
+                    </div>
+                </div>
+                {% set business_name = frappe.db.get_value("Business", order_details.business, "restaurant_name") %}
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-xs-12">
+                        <h5>{{ _("Restaurant") }}</h5>
+                    </div>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <div class="detail_content">{{ business_name or order_details.business }}</div>
+                    </div>
+                </div>
+
+                      
+            </div>
+            <div class="{% if restaurant %}col-md-6 col-sm-6 col-xs-12{%else%}col-md-6 col-sm-6 col-xs-12{%endif%}" style="border-left: #dddddd solid 1px;">
+                <h4>{{ _("Delivery Details") }}</h4>
+
+               <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Driver") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver}}</div>
+                                </div>
+                            </div>
+                            {% set driver_phone = frappe.db.get_value("Drivers", order_details.driver, "driver_phone") %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Driver Phone") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{driver_phone}}</div>
+                                </div>
+                            </div>
+                             {% if order_details.driver_accepted_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Accepted Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver_accepted_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.driver_arrived_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Arrived Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver_arrived_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.driver_picked_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Picked Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.driver_picked_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.delivered_time %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Delivered Time") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{{order_details.delivered_time.strftime("%b %d, %Y %I:%M %p")}}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+                             {% if order_details.total_driver_charges %}
+                            <div class="row">
+                                <div class="col-md-4 col-sm-3 col-xs-12">
+                                    <h5>{{ _("Total Earnings") }}</h5>
+                                </div>
+                                <div class="col-md-8 col-sm-9 col-xs-12">
+                                    <div class="detail_content">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.total_driver_charges | float }}</div>
+                                </div>
+                            </div>
+                            {%endif%}
+
+            </div>
+          </div>
+    </div>
+  </div>
+  {%endif%}
+<style type="text/css">
+{%if is_driver%}
+.arrival-time{display: none;}
+{%endif%}
+  .driver-template{display: none;}
+    .free-item{
+    text-transform: uppercase;
+}
+.wrap {
+    width: 100%;
+    height: 188px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    overflow: hidden;
+}
+.free-item span {
+    width: 131px;
+    height: 14px;
+    position: absolute;
+    top: 12px;
+    left: -45px;
+    z-index: 2;
+    overflow: hidden;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    box-shadow: 0 0 0 3px {{themes}}, 0px 21px 5px -18px rgba(0,0,0,0.6);
+    background: {{themes}};
+}
+    .order_box{
+        {%if not restaurant%}
+        max-width: 1133px;
+        {%endif%}
+        margin: 0 auto;
+        float: none;
+    }
+    .it-sec{
+        margin-bottom: 20px;
+    }
+    .detail_content{
+        padding: 7.5px 0px;
+    }
+    .addrBox{
+        background: #fff;
+        padding: 0px 15px;
+        border: 1px solid #ddd;
+    }
+    .item-table-head{
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+    }
+    .it-box{
+        background: #fff;
+        border: 1px solid #ddd;
+    }
+    .it-list{
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+    }
+    .item-footer table td{
+        padding: 5px 15px;
+    }
+    .item-footer table{
+        width: 100%;
+    }
+    .ralign{
+        text-align: right;
+    }
+    .item-table-head div{
+        font-weight: 600;
+    }
+    .hide-desk{
+        display: none;
+        margin-top: 10px;
+    }
+    .hide-desk div{
+        font-size: 12px;
+    }
+    .hide-desk p{
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 13px;
+    }
+    .order_box h5{
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    .attr-list{
+        font-size: 13px;
+    }
+    .addrBox h6{
+        font-weight: normal;
+        font-size: 14px;
+    }
+    .it-list img{
+        height: 60px;
+    }
+    @media only screen and (max-width: 768px){
+        .hide-desk{
+            display: block;
+        }
+        .it-list .row .col-xs-12{
+            padding-left: 10px;
+            padding-right: 5px;
+        }
+        .od-info{
+            font-size: 13px;
+        }
+        h3{
+            font-size: 18px;
+        }
+        .mobile-order-info{
+            background-color: #fff;
+    float: left;
+    border: 1px solid #ddd;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+        }
+        .mobile-order-info h5 {
+  float: left;
+    width: 50%;
+    font-weight: normal;
+}
+.mobile-order-info .col-xs-12 div
+{
+        /*float: left;
+    width: 50%;*/
+    padding-top: 3px;
+}
+    }
+    @media only screen and (min-width: 769px){
+    .second-row
+    {
+        margin-top: 15px
+    }
+}
+.re-order{
+    float: right;
+}
+</style>
+

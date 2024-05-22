@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include ecommerce_business_store_singlevendor *.css
+recursive-include ecommerce_business_store_singlevendor *.csv
+recursive-include ecommerce_business_store_singlevendor *.html
+recursive-include ecommerce_business_store_singlevendor *.ico
+recursive-include ecommerce_business_store_singlevendor *.js
+recursive-include ecommerce_business_store_singlevendor *.json
+recursive-include ecommerce_business_store_singlevendor *.md
+recursive-include ecommerce_business_store_singlevendor *.png
+recursive-include ecommerce_business_store_singlevendor *.py
+recursive-include ecommerce_business_store_singlevendor *.svg
+recursive-include ecommerce_business_store_singlevendor *.txt
+recursive-exclude ecommerce_business_store_singlevendor *.pyc

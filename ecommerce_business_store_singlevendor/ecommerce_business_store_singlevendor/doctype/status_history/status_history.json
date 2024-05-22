@@ -1,0 +1,51 @@
+{
+ "creation": "2019-09-07 17:24:50.709643",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "before_change",
+  "new_status",
+  "updated_on",
+  "notes"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "before_change",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "From"
+  },
+  {
+   "columns": 3,
+   "fieldname": "new_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "To"
+  },
+  {
+   "columns": 4,
+   "fieldname": "updated_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Updated On"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-07-13 08:08:43.758267",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Status History",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

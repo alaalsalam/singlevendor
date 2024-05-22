@@ -1,0 +1,184 @@
+<div class="cartitems" style="display: block;">
+
+					<div class="CartFooter clearfix">
+						     <div class="row main-border" style="padding: 5px;">
+
+ <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 34%; float: left;height: 100%" onclick="search()"><i class="lni-enter" aria-hidden="true" style="padding: 0px 10px;"></i>Pay</a>
+            <div class="col-md-8" style="padding: 5px;">
+</div>
+                    </div>
+						
+					</div>					
+				</div>
+                <script>
+
+function autocomplete(inp, arr) {
+
+var currentFocus;
+inp.addEventListener("input", function(e) {
+    var a, b, i, val = this.value;
+
+    closeAllLists();
+    if (!val) { return false; }
+    currentFocus = -1;
+
+    a = document.createElement("DIV");
+    a.setAttribute("id", this.id + "autocomplete-list");
+    a.setAttribute("class", "autocomplete-items");
+    a.setAttribute("style", "border:#e8e6e6 solid 0.1px !important;position:absolute;z-index:99;border-bottom:1px solid #ecf0f7;width:268px;margin-left: 1px !important;background-color: #ffffff;;background-size: 1px;padding: 10px;max-height: 300px;overflow-y: scroll;");
+    this.parentNode.appendChild(a);
+    for (i = 0; i < arr[0].length; i++) {
+        if (arr[0][i].name.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            var cust_email;
+            var cust_name;
+            
+            b = document.createElement("DIV");
+            b.setAttribute("id", "sec-auto");
+            $("div#sec-auto").css("padding", "3px");
+            $("div#sec-auto").css("margin", "5px");
+            $("div#sec-auto").css("font-size", "14px");
+            $("div#sec-auto").css("border-bottom","1px solid #d2d2d2 !important");
+
+
+            b.innerHTML = "<strong>" + arr[0][i].name.substr(0, val.length) + "</strong>";
+
+            b.innerHTML += arr[0][i].name.substr(val.length);
+
+            b.innerHTML += "<input type='hidden' value='" + arr[0][i].name + "'>";
+            b.innerHTML += "<div>";
+            if(arr[0][i].first_name){
+                cust_name=arr[0][i].first_name
+            }
+            if(arr[0][i].last_name){
+                cust_name+=' '+ arr[0][i].last_name
+            }
+            
+            if(cust_name){
+                b.innerHTML += "<span>"+cust_name+"</span>";
+            }
+            if(arr[0][i].email){
+                cust_email=arr[0][i].email
+                 b.innerHTML += ", <span>"+ arr[0][i].email+"</span>";
+            }
+            
+            
+            b.innerHTML += "</div>";
+
+            b.addEventListener("click", function(e) {
+               
+                
+                inp.value = this.getElementsByTagName("input")[0].value;
+                    $('.customer_email').text("")
+                    $('#cust_names').text("")
+                    $('input[data-fieldname="customers"]').val(inp.value);
+
+                    $('.customer_email').text(cust_email)
+                    $('#cust_names').text(cust_name)
+                    
+                    GetCustomerBalance()
+            
+     closeAllLists();
+            });
+            a.appendChild(b);
+        }
+    }
+});
+
+inp.addEventListener("keydown", function(e) {
+    var x = document.getElementById(this.id + "autocomplete-list");
+
+    if (x) x = x.getElementsByTagName("div");
+
+    if (e.keyCode == 40) {
+
+        currentFocus++;
+        addActive(x);
+    } else if (e.keyCode == 38) {
+
+        currentFocus--;
+        addActive(x);
+    } else if (e.keyCode == 13) {
+
+        e.preventDefault();
+        if (currentFocus > -1) {
+           
+            if (x) x[currentFocus].click();
+        }
+    }
+});
+
+function addActive(x) {
+   
+    $('#sec-auto').removeAttr("style");
+    if (!x) return false;
+
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+   
+    x[currentFocus].classList.add("autocomplete-active");
+}
+
+function removeActive(x) {
+    for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+    }
+}
+
+function closeAllLists(elmnt) {
+
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+        }
+    }
+}
+
+document.addEventListener("click", function(e) {
+    closeAllLists(e.target);
+});
+}
+                </script>
+        <style>
+        .CartList {
+    list-style: none;
+    margin-left: -20px;
+    margin-top: 10px;
+}
+.CartItem {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+.serviceTitle {
+    font-weight: 600;
+    font-size: 14px;
+    float: left;
+    width: 65%;
+    color: #2d2d2d;
+}
+img {
+    vertical-align: middle;
+}
+.CartDelete {
+    margin-right: 10px;
+    color: #e8500e !important;
+    float: right;
+}
+.cartComment {
+    float: left;
+}
+.CartFooter {
+    padding-left: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+.summary {
+    float: left;
+    width: 100%;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    padding-right: 15px;
+}
+        </style>

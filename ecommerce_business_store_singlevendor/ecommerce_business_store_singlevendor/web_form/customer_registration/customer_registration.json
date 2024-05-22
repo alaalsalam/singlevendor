@@ -1,0 +1,143 @@
+{
+ "accept_payment": 0, 
+ "allow_comments": 0, 
+ "allow_delete": 0, 
+ "allow_edit": 0, 
+ "allow_incomplete": 0, 
+ "allow_multiple": 0, 
+ "allow_print": 0, 
+ "amount": 0.0, 
+ "amount_based_on_field": 0, 
+ "creation": "2019-04-10 12:58:25.814185", 
+ "doc_type": "Customers", 
+ "docstatus": 0, 
+ "doctype": "Web Form", 
+ "idx": 0, 
+ "introduction_text": "", 
+ "is_standard": 1, 
+ "login_required": 0, 
+ "max_attachment_size": 0, 
+ "modified": "2019-11-01 16:43:51.001772", 
+ "modified_by": "Administrator", 
+ "module": "Ecommerce Business Store SingleVendor", 
+ "name": "customer-registration", 
+ "owner": "Administrator", 
+ "payment_button_label": "Buy Now", 
+ "published": 1, 
+ "route": "register", 
+ "show_sidebar": 0, 
+ "sidebar_items": [], 
+ "success_url": "/customer-registration", 
+ "title": "Customer Registration", 
+ "web_form_fields": [
+  {
+   "fieldname": "first_name", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "First name", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 1
+  }, 
+  {
+   "fieldname": "email", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Email", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Email", 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "last_name", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Last Name", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "phone", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Phone", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Password Update", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "set_new_password", 
+   "fieldtype": "Data", 
+   "hidden": 0, 
+   "label": "Set New Password", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "new_password", 
+   "fieldtype": "Data", 
+   "hidden": 1, 
+   "label": "Set New Password", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Column Break", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "", 
+   "fieldtype": "Section Break", 
+   "hidden": 0, 
+   "label": "Address", 
+   "max_length": 0, 
+   "max_value": 0, 
+   "read_only": 0, 
+   "reqd": 0
+  }, 
+  {
+   "fieldname": "table_6", 
+   "fieldtype": "Table", 
+   "hidden": 0, 
+   "max_length": 0, 
+   "max_value": 0, 
+   "options": "Customer Address", 
+   "read_only": 0, 
+   "reqd": 0
+  }
+ ]
+}

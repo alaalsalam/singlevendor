@@ -1,0 +1,95 @@
+<link rel="stylesheet" type="text/css" href="/assets/ecommerce_business_store_singlevendor/js/frappe-datatable.min.css">
+<div class="maindiv">
+	<div id="listing" ></div>
+	<!-- <div class="row">
+		<div class="col-md-12" style="margin-top:-50px ">
+			<a class="btn btn-primary update-btn" onclick="updatemenuitems()">Update</a>
+			<div id="listing" ></div>
+		</div>
+	</div> -->
+</div>
+
+<script type="text/javascript" src="/assets/ecommerce_business_store_singlevendor/js/frappe-datatable.min.js"></script>
+<script type="text/javascript" src="/assets/ecommerce_business_store_singlevendor/js/jquery-sortable.js"></script>
+<script src="/assets/js/clusterize.min.js"></script>
+
+
+
+<style type="text/css">
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc !important;
+  color: #666666;
+}
+.dt-cell--focus .dt-cell__content {
+    border-color: transparent !important;
+    }
+.dt-scrollable {
+    height: 28vw !important;
+    }
+    .dt-row-header .dt-cell--header{
+    	background: rgb(247, 247, 247);
+    }
+.dt-row:last-child:not(.dt-row-filter)
+{
+	border-bottom:none !important;
+}
+.dt-row-filter{
+	display: flex !important;
+} 
+	.table thead tr{
+		background: #e2e2e2;
+	}
+	.table thead tr th{
+		border-bottom: 0;
+		text-transform: capitalize;
+	}
+	#listing .row{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.dt-cell__content{
+		padding: 7px !important;
+	}
+	.dt-row:last-child:not(.dt-row-filter) .dt-cell__content{
+		height: 35px;
+		padding: 6px !important;
+		border-bottom: 1px solid #d1d8dd;
+	}
+	.dt-row-header .dt-cell__content {
+		text-transform: capitalize;
+	}
+	.dt-row-header{
+		border-bottom: 0 !important;
+	}
+	.dt-cell__content .btn-primary{
+		margin-left: 24px;
+		border: none;
+	    padding: 6px 60px;
+	    margin-top: -4px;
+	    font-size: 12px;
+	}
+#listing
+{
+
+    float: left;
+    width: calc(100% - 25px);
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+.update-btn
+{
+	float: right;
+	 margin-bottom: 15px;
+    margin-right: 15px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+</style>

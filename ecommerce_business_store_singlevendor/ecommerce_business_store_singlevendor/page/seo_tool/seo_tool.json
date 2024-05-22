@@ -1,0 +1,29 @@
+{
+ "content": null,
+ "creation": "2020-10-20 07:03:20.607679",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2020-12-17 05:23:56.276924",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "seo-tool",
+ "owner": "Administrator",
+ "page_name": "SEO Tool",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Admin"
+  },
+  {
+   "role": "Vendor"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "SEO Tool"
+}

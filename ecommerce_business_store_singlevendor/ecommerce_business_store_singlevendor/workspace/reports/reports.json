@@ -1,0 +1,98 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"4OrvDsORSs\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"zry7yxSooJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Report\",\"col\":3}},{\"id\":\"e5pDQtGROO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Report\",\"col\":3}},{\"id\":\"lWtTs4ybV4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Daily Sales Report\",\"col\":3}},{\"id\":\"EDaH-sQVrv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Monthly Sales Report\",\"col\":3}},{\"id\":\"hQKHPxQKab\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Yearly Sales Report\",\"col\":3}},{\"id\":\"os5QhaMIqP\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Wise Sales Report\",\"col\":3}},{\"id\":\"SgqcFZ3ADb\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Best Selling Items By Amount\",\"col\":3}},{\"id\":\"qyZ5aTroJL\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Commission Report\",\"col\":3}},{\"id\":\"jzMzbQ_Zgq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customer Report\",\"col\":3}},{\"id\":\"3hM8vrbNQa\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product Variant Report\",\"col\":3}}]",
+ "creation": "2023-04-15 14:44:37.900203",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "chart",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Reports",
+ "links": [],
+ "modified": "2023-07-07 18:30:30.159941",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Reports",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "Go1 Commerce",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 10.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Sales Report",
+   "link_to": "Customer Order",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Product Variant Report",
+   "link_to": "Product Variant Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Vendor Report",
+   "link_to": "Vendor Orders Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Daily Sales Report",
+   "link_to": "Daily Sales Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Commission Report",
+   "link_to": "Commission Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Monthly Sales Report",
+   "link_to": "Monthly Sales Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Yearly Sales Report",
+   "link_to": "Yearly Sales Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Customer Report",
+   "link_to": "Customer Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Item Wise Sales Report",
+   "link_to": "Item Wise Sales Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Best Selling Items By Amount",
+   "link_to": "Best Selling Items By Amount",
+   "type": "Report"
+  }
+ ],
+ "title": "Reports"
+}

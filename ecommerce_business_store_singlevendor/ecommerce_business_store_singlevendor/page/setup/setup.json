@@ -1,0 +1,30 @@
+{
+ "content": null,
+ "creation": "2020-12-02 22:58:16.776011",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "fa fa-cog",
+ "idx": 0,
+ "modified": "2020-12-02 22:58:16.776011",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "setup",
+ "owner": "Administrator",
+ "page_name": "Setup",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Vendor"
+  },
+  {
+   "role": "Admin"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Setup"
+}

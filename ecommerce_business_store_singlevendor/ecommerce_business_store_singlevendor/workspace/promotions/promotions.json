@@ -1,0 +1,71 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"ADIcGgvmGV\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Promotions</b></span>\",\"col\":12}},{\"id\":\"-1Kzr7-KV-\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Wallets\",\"col\":4}},{\"id\":\"yg8QweUTyg\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Approved Wallet Transactions\",\"col\":4}},{\"id\":\"yFbS1bCuea\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Wallet Transactions\",\"col\":4}},{\"id\":\"XPnzH5ox20\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"8w66jG5GS2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Links</b></span>\",\"col\":12}},{\"id\":\"h3cXdPq7iZ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Discounts\",\"col\":3}},{\"id\":\"KLBMMXeDbM\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Email Group\",\"col\":3}},{\"id\":\"T55AtE59YR\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Email Group Members\",\"col\":3}},{\"id\":\"PZKGET54-8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Newsletters\",\"col\":3}},{\"id\":\"byKh-vL_V5\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Wallet</span>\",\"col\":12}},{\"id\":\"Z9uY7VMYsG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wallet Transactions\",\"col\":3}},{\"id\":\"YOou4V9_UX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wallet\",\"col\":3}},{\"id\":\"DWtEHOy3C-\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
+ "creation": "2023-04-15 14:41:42.117541",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "tag",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Promotions",
+ "links": [],
+ "modified": "2024-01-23 18:57:49.220457",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Promotions",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "Go1 Commerce",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 6.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Discounts",
+   "link_to": "Discounts",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Wallet Transactions",
+   "link_to": "Wallet Transaction",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Email Group",
+   "link_to": "Email Group",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Wallet",
+   "link_to": "Wallet",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Email Group Members",
+   "link_to": "Email Group Member",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Newsletters",
+   "link_to": "Newsletter",
+   "type": "DocType"
+  }
+ ],
+ "title": "Promotions"
+}

@@ -1,0 +1,48 @@
+
+
+	
+		<div class="list-item-table pos-items-wrapper">
+			<div class="pos-items image-view-container">
+				
+				<div class="image-view-row">
+		{% if content %}			
+{% for item in content %}
+<div class="pos-item-wrapper image-view-item col-md-3" data-item-code="{{item.item_code}}" onclick="bind_events(this)">
+	<div class="image-view-header doclist-row">
+		<div class="list-value">
+			<a class="grey list-id" data-name="{{item.item_code}}" title="{{ item.item_name }}">{{ item.item_name }}</a>
+		</div>
+	</div>
+	<div class="image-view-body">
+		<a  data-item-code="{{ item.item_code }}"
+			title="{{ item.item_name }}"
+		>
+			<div class="image-field"
+				style="
+				{% if (!item.item_image) { %}
+					background-color: #fafbfc;
+				{% } %}
+				border: 0px;"
+			>
+				{% if (!item.item_image) { %}
+				<span class="placeholder-text">
+					{%= frappe.get_abbr(item.item_name || item.item_code) %}
+				</span>
+				{% } %}
+				{% if (item.item_image) { %}
+				<img src="{{ item.item_image }}" alt="{{item.item_name || item.item_code}}">
+				{% } %}
+			</div>
+			<span class="price-info">
+				{{item.price}}
+			</span>
+		</a>
+	</div>
+</div>
+{% endfor %}
+{% else %}
+	<div style="padding: 20px;text-align: center;font-weight: 600;">No Records Found.</div>
+{% endif %}
+</div>
+			</div>
+		</div>

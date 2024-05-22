@@ -1,0 +1,23 @@
+{
+ "content": null, 
+ "creation": "2019-11-02 16:50:26.453709", 
+ "docstatus": 0, 
+ "doctype": "Page", 
+ "idx": 0, 
+ "modified": "2019-11-02 18:21:12.438647", 
+ "modified_by": "Administrator", 
+ "module": "Ecommerce Business Store SingleVendor", 
+ "name": "product-bulk-update", 
+ "owner": "Administrator", 
+ "page_name": "Product Bulk Update", 
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ], 
+ "script": null, 
+ "standard": "Yes", 
+ "style": null, 
+ "system_page": 0, 
+ "title": "Product Bulk Update"
+}

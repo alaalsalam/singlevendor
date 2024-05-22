@@ -1,0 +1,450 @@
+[
+	{ 
+		"doctype": "Product Category", "category_name": "Electronics", "is_active": 1, 
+		"is_group": 1, "meta_title": "Electronics", "meta_description": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Grocery", "is_active": 1,
+		"is_group": 1, "meta_title": "Grocery", "meta_description": "Grocery"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Home & Kitchen", "is_active": 1,
+		"is_group": 1, "meta_title": "Home & Kitchen", "meta_description": "Home & Kitchen"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Fashion", "is_active": 1,
+		"is_group": 1, "meta_title": "Fashion", "meta_description": "Fashion"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Phone & Tablets", "is_active": 1,
+		"is_group": 1, "meta_title": "Phone & Tablets", "meta_description": "Phone & Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Cameras", "is_active": 1, "is_group": 1,
+		"meta_title": "Cameras", "meta_description": "Cameras", "parent_product_category": "Electronics",
+		"display_on_home_page": 1
+	},
+	{
+		"doctype": "Product Category", "category_name": "Televisions", "is_active": 1, "is_group": 1,
+		"meta_title": "Televisions", "meta_description": "Televisions", "parent_product_category": "Electronics",
+		"display_on_home_page": 1
+	},
+	{
+		"doctype": "Product Category", "category_name": "Games Consoles", "is_active": 1, "is_group": 1,
+		"meta_title": "Games Consoles", "meta_description": "Games Consoles", "parent_product_category": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Mens Wear", "is_active": 1, "is_group": 1,
+		"meta_title": "Mens Wear", "meta_description": "Mens Wear", "parent_product_category": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Womens Wear", "is_active": 1, "is_group": 1,
+		"meta_title": "Womens Wear", "meta_description": "Womens Wear", "parent_product_category": "Fashion"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Mens Shoes", "is_active": 1, "is_group": 1,
+		"meta_title": "Mens Shoes", "meta_description": "Mens Shoes", "parent_product_category": "Fashion"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Womens Accessories", "is_active": 1, "is_group": 1,
+		"meta_title": "Womens Accessories", "meta_description": "Womens Accessories", "parent_product_category": "Fashion"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Electronics Top Brands", "is_active": 1, "is_group": 1,
+		"meta_title": "Electronics Top Brands", "meta_description": "Electronics Top Brands", "parent_product_category": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "CCTV Cameras", "is_active": 1, "is_group": 0,
+		"meta_title": "CCTV Cameras", "meta_description": "CCTV Cameras", "parent_product_category": "Cameras"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Camera Lenses & Accessories", "is_active": 1, "is_group": 0,
+		"meta_title": "Camera Lenses & Accessories", "meta_description": "Camera Lenses & Accessories", "parent_product_category": "Cameras"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Professional SLR Cameras", "is_active": 1, "is_group": 0,
+		"meta_title": "Professional SLR Cameras", "meta_description": "Professional SLR Cameras", "parent_product_category": "Cameras"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Curved TVs", "is_active": 1, "is_group": 0,
+		"meta_title": "Curved TVs", "meta_description": "Curved TVs", "parent_product_category": "Televisions"
+	},
+	{
+		"doctype": "Product Category", "category_name": "OLED TVs", "is_active": 1, "is_group": 0,
+		"meta_title": "OLED TVs", "meta_description": "OLED TVs", "parent_product_category": "Televisions"
+	},
+	{
+		"doctype": "Product Category", "category_name": "LED TVs", "is_active": 1, "is_group": 0,
+		"meta_title": "LED TVs", "meta_description": "LED TVs", "parent_product_category": "Televisions"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Plasma TVs", "is_active": 1, "is_group": 0,
+		"meta_title": "Plasma TVs", "meta_description": "Plasma TVs", "parent_product_category": "Televisions"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Smart TVs", "is_active": 1, "is_group": 0,
+		"meta_title": "Smart TVs", "meta_description": "Smart TVs", "parent_product_category": "Televisions"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Television Accessories", "is_active": 1, "is_group": 0,
+		"meta_title": "Television Accessories", "meta_description": "Television Accessories", "parent_product_category": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Gaming Accessories", "is_active": 1, "is_group": 0,
+		"meta_title": "Gaming Accessories", "meta_description": "Gaming Accessories", "parent_product_category": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "TV Audio", "is_active": 1, "is_group": 0,
+		"meta_title": "TV Audio", "meta_description": "TV Audio", "parent_product_category": "Electronics"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Headphones", "is_active": 1, "is_group": 0,
+		"meta_title": "Headphones", "meta_description": "Headphones", "parent_product_category": "Phone & Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "PS3", "is_active": 1, "is_group": 0,
+		"meta_title": "PS3", "meta_description": "PS3", "parent_product_category": "Games Consoles"
+	},
+	{
+		"doctype": "Product Category", "category_name": "PS4", "is_active": 1, "is_group": 0,
+		"meta_title": "PS4", "meta_description": "PS4", "parent_product_category": "Games Consoles"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Xbox", "is_active": 1, "is_group": 0,
+		"meta_title": "Xbox", "meta_description": "Xbox", "parent_product_category": "Games Consoles"
+	},
+	{
+		"doctype": "Product Category", "category_name": "PS Vista", "is_active": 1, "is_group": 0,
+		"meta_title": "PS Vista", "meta_description": "PS Vista", "parent_product_category": "Games Consoles"
+	},
+	{
+		"doctype": "Product Category", "category_name": "TCL", "is_active": 1, "is_group": 0,
+		"meta_title": "TCL", "meta_description": "TCL", "parent_product_category": "Electronics Top Brands"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Nikon", "is_active": 1, "is_group": 0,
+		"meta_title": "Nikon", "meta_description": "Nikon", "parent_product_category": "Electronics Top Brands"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Scanfrost", "is_active": 1, "is_group": 0,
+		"meta_title": "Scanfrost", "meta_description": "Scanfrost", "parent_product_category": "Electronics Top Brands"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Jeans", "is_active": 1, "is_group": 0,
+		"meta_title": "Jeans", "meta_description": "Jeans", "parent_product_category": "Mens Wear"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Shirts", "is_active": 1, "is_group": 0,
+		"meta_title": "Shirts", "meta_description": "Shirts", "parent_product_category": "Mens Wear"
+	},
+	{
+		"doctype": "Product Category", "category_name": "T-Shirts", "is_active": 1, "is_group": 0,
+		"meta_title": "T-Shirts", "meta_description": "T-Shirts", "parent_product_category": "Mens Wear"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Womens Tops", "is_active": 1, "is_group": 0,
+		"meta_title": "Womens Tops", "meta_description": "Womens Tops", "parent_product_category": "Womens Wear"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Womens Skirts", "is_active": 1, "is_group": 0,
+		"meta_title": "Womens Skirts", "meta_description": "Womens Skirts", "parent_product_category": "Womens Wear"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Womens Jeans", "is_active": 1, "is_group": 0,
+		"meta_title": "Womens Jeans", "meta_description": "Womens Jeans", "parent_product_category": "Womens Wear"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Jewellery", "is_active": 1, "is_group": 0,
+		"meta_title": "Jewellery", "meta_description": "Jewellery", "parent_product_category": "Womens Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Bags", "is_active": 1, "is_group": 0,
+		"meta_title": "Bags", "meta_description": "Bags", "parent_product_category": "Womens Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Watches", "is_active": 1, "is_group": 0,
+		"meta_title": "Watches", "meta_description": "Watches", "parent_product_category": "Womens Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Furniture", "is_active": 1, "is_group": 1,
+		"meta_title": "Furniture", "meta_description": "Furniture", "parent_product_category": "Home & Kitchen"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Kitchen & Dining", "is_active": 1, "is_group": 1,
+		"meta_title": "Kitchen & Dining", "meta_description": "Kitchen & Dining", "parent_product_category": "Home & Kitchen"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Home Furnishings", "is_active": 1, "is_group": 1,
+		"meta_title": "Home Furnishings", "meta_description": "Home Furnishings", "parent_product_category": "Home & Kitchen"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Large Appliances", "is_active": 1, "is_group": 1,
+		"meta_title": "Large Appliances", "meta_description": "Large Appliances", "parent_product_category": "Home & Kitchen"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Small Appliances", "is_active": 1, "is_group": 1,
+		"meta_title": "Small Appliances", "meta_description": "Small Appliances", "parent_product_category": "Home & Kitchen"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Office Furniture", "is_active": 1, "is_group": 0,
+		"meta_title": "Office Furniture", "meta_description": "Office Furniture", "parent_product_category": "Furniture"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Bedroom Furniture", "is_active": 1, "is_group": 0,
+		"meta_title": "Bedroom Furniture", "meta_description": "Bedroom Furniture", "parent_product_category": "Furniture"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Living Room Furniture", "is_active": 1, "is_group": 0,
+		"meta_title": "Living Room Furniture", "meta_description": "Living Room Furniture", "parent_product_category": "Furniture"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Wall Decor", "is_active": 1, "is_group": 0,
+		"meta_title": "Wall Decor", "meta_description": "Wall Decor", "parent_product_category": "Home Furnishings"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Curtains & Blinds", "is_active": 1, "is_group": 0,
+		"meta_title": "Curtains & Blinds", "meta_description": "Curtains & Blinds", "parent_product_category": "Home Furnishings"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Bed & Bathroom Furnishings", "is_active": 1, "is_group": 0,
+		"meta_title": "Bed & Bathroom Furnishings", "meta_description": "Bed & Bathroom Furnishings", "parent_product_category": "Home Furnishings"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Fans", "is_active": 1, "is_group": 0,
+		"meta_title": "Fans", "meta_description": "Fans", "parent_product_category": "Large Appliances"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Refrigerators", "is_active": 1, "is_group": 0,
+		"meta_title": "Refrigerators", "meta_description": "Refrigerators", "parent_product_category": "Large Appliances"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Freezers", "is_active": 1, "is_group": 0,
+		"meta_title": "Freezers", "meta_description": "Freezers", "parent_product_category": "Large Appliances"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Microwaves", "is_active": 1, "is_group": 0,
+		"meta_title": "Microwaves", "meta_description": "Microwaves", "parent_product_category": "Small Appliances"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Toasters & Sandwich Makers", "is_active": 1, "is_group": 0,
+		"meta_title": "Toasters & Sandwich Makers", "meta_description": "Toasters & Sandwich Makers", "parent_product_category": "Small Appliances"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Blenders, Juicers & Mixers", "is_active": 1, "is_group": 0,
+		"meta_title": "Blenders, Juicers & Mixers", "meta_description": "Blenders, Juicers & Mixers", "parent_product_category": "Small Appliances"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Mobile Phones", "is_active": 1, "is_group": 1,
+		"meta_title": "Mobile Phones", "meta_description": "Mobile Phones", "parent_product_category": "Phone & Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Mobile Accessories", "is_active": 1, "is_group": 1,
+		"meta_title": "Mobile Accessories", "meta_description": "Mobile Accessories", "parent_product_category": "Phone & Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Tablets", "is_active": 1, "is_group": 1,
+		"meta_title": "Tablets", "meta_description": "Tablets", "parent_product_category": "Phone & Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Smart Phones", "is_active": 1, "is_group": 0,
+		"meta_title": "Smart Phones", "meta_description": "Smart Phones", "parent_product_category": "Mobile Phones"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Featured Phones Phones", "is_active": 1, "is_group": 0,
+		"meta_title": "Featured Phones Phones", "meta_description": "Featured Phones Phones", "parent_product_category": "Mobile Phones"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Cables", "is_active": 1, "is_group": 0,
+		"meta_title": "Cables", "meta_description": "Cables", "parent_product_category": "Mobile Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Batteries", "is_active": 1, "is_group": 0,
+		"meta_title": "Batteries", "meta_description": "Batteries", "parent_product_category": "Mobile Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Cases & Covers", "is_active": 1, "is_group": 0,
+		"meta_title": "Cases & Covers", "meta_description": "Cases & Covers", "parent_product_category": "Mobile Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Chargers & Power Banks", "is_active": 1, "is_group": 0,
+		"meta_title": "Chargers & Power Banks", "meta_description": "Chargers & Power Banks", "parent_product_category": "Mobile Accessories"
+	},
+	{
+		"doctype": "Product Category", "category_name": "iOS", "is_active": 1, "is_group": 0,
+		"meta_title": "iOS", "meta_description": "iOS", "parent_product_category": "Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Windows", "is_active": 1, "is_group": 0,
+		"meta_title": "Windows", "meta_description": "Windows", "parent_product_category": "Tablets"
+	},
+	{
+		"doctype": "Product Category", "category_name": "Android", "is_active": 1, "is_group": 0,
+		"meta_title": "Android", "meta_description": "Android", "parent_product_category": "Tablets"
+	},
+	{
+		"name": "ITEM-00001", "doctype": "Product", "item": "Canon PowerShot SX430 IS  (20 MP, 45x Optical Zoom, 4x Digital Zoom, Black)",
+		"price": 12999, "old_price": 13999, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Cameras"}], "meta_title": "Canon PowerShot SX430 IS  (20 MP, 45x Optical Zoom, 4x Digital Zoom, Black)",
+		"meta_description": "Canon PowerShot SX430 IS  (20 MP, 45x Optical Zoom, 4x Digital Zoom, Black)", "is_active": 1, "display_home_page": 1
+	},
+	{
+		"name": "ITEM-00002", "doctype": "Product", "item": "Vu Pixelight 108cm (43 inch) Ultra HD (4K) LED Smart TV with Cricket Mode",
+		"meta_title": "Vu Pixelight 108cm (43 inch) Ultra HD (4K) LED Smart TV with Cricket Mode", "display_home_page": 1,
+		"meta_description": "Vu Pixelight 108cm (43 inch) Ultra HD (4K) LED Smart TV with Cricket Mode",
+		"price": 21999, "old_price": 25999, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Televisions"}]
+	},
+	{
+		"name": "ITEM-00003", "doctype": "Product", "item": "Vivo V17 Pro (Glacier Ice, 8GB RAM, 128GB Storage)",
+		"meta_title": "Vivo V17 Pro (Glacier Ice, 8GB RAM, 128GB Storage)",
+		"meta_description": "Vivo V17 Pro (Glacier Ice, 8GB RAM, 128GB Storage)",
+		"price": 25400, "old_price": 28900, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Mobile Phones"}]
+	},
+	{
+		"name": "ITEM-00004", "doctype": "Product", "item": "Nokia 6.1 Plus (White, 64 GB) (4 GB RAM)",
+		"meta_title": "Nokia 6.1 Plus (White, 64 GB) (4 GB RAM)",
+		"meta_description": "Nokia 6.1 Plus (White, 64 GB) (4 GB RAM)",
+		"price": 15999, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Mobile Phones"}]
+	},
+	{
+		"name": "ITEM-00005", "doctype": "Product", "item": "Apple IPad (Wi-Fi + Cellular, 32GB) - Space Grey",
+		"meta_title": "Apple IPad (Wi-Fi + Cellular, 32GB) - Space Grey", "display_home_page": 1,
+		"meta_description": "Apple IPad (Wi-Fi + Cellular, 32GB) - Space Grey",
+		"price": 36999, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "iOS"}]
+	},
+	{
+		"name": "ITEM-00006", "doctype": "Product", "item": "HUAWEI MediaPad T5 Tablet (10.1 Inch, 32GB, Wi-Fi + 4G LTE) Black",
+		"meta_title": "HUAWEI MediaPad T5 Tablet (10.1 Inch, 32GB, Wi-Fi + 4G LTE) Black",
+		"meta_description": "HUAWEI MediaPad T5 Tablet (10.1 Inch, 32GB, Wi-Fi + 4G LTE) Black",
+		"price": 35999, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Android"}]
+	},
+	{
+		"name": "ITEM-00007", "doctype": "Product", "item": "Redmi Note 7 Pro (Neptune Blue, 64 GB) (4 GB RAM)",
+		"meta_title": "Redmi Note 7 Pro (Neptune Blue, 64 GB) (4 GB RAM)", "display_home_page": 1,
+		"meta_description": "Redmi Note 7 Pro (Neptune Blue, 64 GB) (4 GB RAM)",
+		"price": 11999, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Mobile Phones"}]
+	},
+	{
+		"name": "ITEM-00008", "doctype": "Product", "item": "NikonCamera",
+		"price": 79999, "old_price": 82999, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Cameras"}], "meta_title": "NikonCamera",
+		"meta_description": "NikonCamera", "is_active": 1
+	},
+	{
+		"name": "ITEM-00009", "doctype": "Product", "item": "Apple TV Remote",
+		"meta_title": "Apple TV Remote",
+		"meta_description": "Apple TV Remote",
+		"price": 30, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Mobile Accessories"}]
+	},
+	{
+		"name": "ITEM-00010", "doctype": "Product", "item": "8 Camera Channel Cctv Kit",
+		"meta_title": "8 Camera Channel Cctv Kit",
+		"meta_description": "8 Camera Channel Cctv Kit",
+		"price": 90000, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "CCTV Cameras"}]
+	},
+	{
+		"name": "ITEM-00011", "doctype": "Product", "item": "Women Maxi Red Dress",
+		"meta_title": "Women Maxi Red Dress",
+		"meta_description": "Women Maxi Red Dress",
+		"price": 799, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Womens Wear"}]
+	},
+	{
+		"name": "ITEM-00012", "doctype": "Product", "item": "Printed Stitched Lehenga Choli (Yellow)",
+		"meta_title": "Printed Stitched Lehenga Choli (Yellow)",
+		"meta_description": "Printed Stitched Lehenga Choli (Yellow)",
+		"price": 1999, "old_price": 3000, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Womens Wear"}]
+	},
+	{
+		"name": "ITEM-00013", "doctype": "Product", "item": "Ajanta Plastic Wall Clock (28 Cm X 28 Cm X 3.4 Cm, White)",
+		"meta_title": "Ajanta Plastic Wall Clock (28 Cm X 28 Cm X 3.4 Cm, White)",
+		"meta_description": "Ajanta Plastic Wall Clock (28 Cm X 28 Cm X 3.4 Cm, White)",
+		"price": 250, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Home Furnishings"}], "display_home_page": 1
+	},
+	{
+		"name": "ITEM-00014", "doctype": "Product", "item": "PARENTBLESS OLEG Steel Stools Office Chair",
+		"meta_title": "PARENTBLESS OLEG Steel Stools Office Chair",
+		"meta_description": "PARENTBLESS OLEG Steel Stools Office Chair",
+		"price": 1999, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Home Furnishings"}]
+	},
+	{
+		"name": "ITEM-00015", "doctype": "Product", "item": "RUSSIN Handmade Wooden Desk Organizer, Wooden Tea Coaster/Coasters Set of 6, Pen Stand, Business Card Holder with Brass Work Office Table Ac",
+		"meta_title": "RUSSIN Handmade Wooden Desk Organizer, Wooden Tea Coaster/Coasters Set of 6, Pen Stand, Business Card Holder with Brass Work Office Table Ac",
+		"meta_description": "RUSSIN Handmade Wooden Desk Organizer, Wooden Tea Coaster/Coasters Set of 6, Pen Stand, Business Card Holder with Brass Work Office Table Ac",
+		"price": 350, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Home Furnishings"}]
+	},
+	{
+		"name": "ITEM-00016", "doctype": "Product", "item": "Coroid Iron and Fabric Multi-Purpose Shoe Rack, 6 Layer, Organiser - Navy (Make in India)(Shoes Racks for Home)",
+		"meta_title": "Coroid Iron and Fabric Multi-Purpose Shoe Rack, 6 Layer, Organiser - Navy (Make in India)(Shoes Racks for Home)",
+		"meta_description": "Coroid Iron and Fabric Multi-Purpose Shoe Rack, 6 Layer, Organiser - Navy (Make in India)(Shoes Racks for Home)",
+		"price": 1000, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Home Furnishings"}]
+	},
+	{
+		"name": "ITEM-00017", "doctype": "Product", "item": "Mesh Casual Stylish Partywear Casaul Shoes",
+		"meta_title": "Mesh Casual Stylish Partywear Casaul Shoes",
+		"meta_description": "Mesh Casual Stylish Partywear Casaul Shoes",
+		"price": 500, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Mens Shoes"}], "display_home_page": 1
+	},
+	{
+		"name": "ITEM-00018", "doctype": "Product", "item": "Men Blue Jeans",
+		"meta_title": "Men Blue Jeans",
+		"meta_description": "Men Blue Jeans",
+		"price": 1500, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Jeans"}]
+	},
+	{
+		"name": "ITEM-00019", "doctype": "Product", "item": "Doblepiel Executive High Back Brown Chair",
+		"meta_title": "Doblepiel Executive High Back Brown Chair",
+		"meta_description": "Doblepiel Executive High Back Brown Chair",
+		"price": 5759, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Office Furniture"}]
+	},
+	{
+		"name": "ITEM-00020", "doctype": "Product", "item": "Channa Dal",
+		"meta_title": "Channa Dal",
+		"meta_description": "Channa Dal",
+		"price": 100, "old_price": 150, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Office Furniture"}]
+	},
+	{
+		"name": "ITEM-00021", "doctype": "Product", "item": "Pepper",
+		"meta_title": "Pepper",
+		"meta_description": "Pepper",
+		"price": 100, "old_price": 130, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Office Furniture"}]
+	},
+	{
+		"name": "ITEM-00022", "doctype": "Product", "item": "Urad Dal",
+		"meta_title": "Urad Dal",
+		"meta_description": "Urad Dal",
+		"price": 100, "old_price": 150, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Grocery"}], "display_home_page": 1
+	},
+	{
+		"name": "ITEM-00023", "doctype": "Product", "item": "Aashirvaad Atta",
+		"meta_title": "Aashirvaad Atta",
+		"meta_description": "Aashirvaad Atta",
+		"price": 75, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Grocery"}]
+	},
+	{
+		"name": "ITEM-00024", "doctype": "Product", "item": "Maida",
+		"meta_title": "Maida",
+		"meta_description": "Maida",
+		"price": 55, "old_price": 0, "is_active": 1, "status": "Approved", "inventory_method": "Dont Track Inventory",
+		"product_categories": [{"category": "Grocery"}]
+	}
+]

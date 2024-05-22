@@ -1,0 +1,73 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"e0SW5o-yWo\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Users</b></span>\",\"col\":12}},{\"id\":\"cwWwKVtOBF\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Active Customers\",\"col\":3}},{\"id\":\"yhv1beSMDT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Unverified Customers\",\"col\":3}},{\"id\":\"4gC4cub-iJ\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Customers\",\"col\":3}},{\"id\":\"NTEFdCEpNH\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Employees\",\"col\":3}},{\"id\":\"ByRWAqRuAO\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"2fk7jNJzGr\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Links</b></span>\",\"col\":12}},{\"id\":\"QETeC-32u6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":3}},{\"id\":\"CeGIexTzgQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Shop Users\",\"col\":3}},{\"id\":\"G0txqJKa2P\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employees\",\"col\":3}},{\"id\":\"KCd1gYNCCD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Role\",\"col\":3}},{\"id\":\"LgHr5vn_x4\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
+ "creation": "2023-04-15 15:16:46.036175",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "users",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Users",
+ "links": [],
+ "modified": "2023-05-23 18:56:58.481348",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Users",
+ "number_cards": [
+  {
+   "label": "Total Customers",
+   "number_card_name": "Total Customers"
+  },
+  {
+   "label": "Active Customers",
+   "number_card_name": "Active Customers"
+  },
+  {
+   "label": "Unverified Customers",
+   "number_card_name": "Unverified Customers"
+  },
+  {
+   "label": "Employees",
+   "number_card_name": "Employees"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "Go1 Commerce",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 13.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Role",
+   "link_to": "Role",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Customers",
+   "link_to": "Customers",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Shop Users",
+   "link_to": "Shop User",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employees",
+   "link_to": "Employee",
+   "type": "DocType"
+  }
+ ],
+ "title": "Users"
+}

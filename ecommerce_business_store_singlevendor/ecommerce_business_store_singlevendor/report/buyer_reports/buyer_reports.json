@@ -1,0 +1,37 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-06-06 15:34:26.897576",
+ "disabled": 1,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-06-07 18:02:20.960339",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Buyer Reports",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Customers",
+ "report_name": "Buyer Reports",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Guest"
+  },
+  {
+   "role": "Admin"
+  },
+  {
+   "role": "Vendor"
+  },
+  {
+   "role": "Sales Team"
+  }
+ ]
+}

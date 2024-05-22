@@ -1,0 +1,3177 @@
+{% extends "templates/layout/custombase.html" %}
+<!-- {% block loader %} -->
+<!-- {% include "/templates/pages/defaultpageloader.html" %} -->
+<!-- {% endblock %} -->
+
+{% block content %}
+<section class="dashboard">
+	<div class="maindiv"> 
+   <!--  <div id="ToggleCart">
+        <button class="ToggleCartBtn"><i class="fa fa-cart-arrow-down " aria-hidden="true" onclick="ToggleCartView()"></i></button>
+    </div> -->
+
+    <div class="custom_head">
+        <div class="col-md-6">
+        
+            <div class="header_title">Tridots</div>
+
+            <div class="header_right web-hide">
+            {% if order_settings.enable_returns_system == 1 %}
+                <a onclick="returnRequest()"><i class="lni-circle-minus" aria-hidden="true" style="padding: 0px 10px;color: {{pos_settings.primary_color}};"></i></a>
+            {% endif %}
+            {% if pos_settings.enable_holdorder == 1 %}
+                <a onclick="holdedOrdersModel()" style="position: relative;"><i class="lni-hand cart-s" aria-hidden="true" style="padding: 0px 10px;color: {{pos_settings.primary_color}};"></i><span class="label hold_label">0</span></a>
+            {% endif %}
+            <a class="admin_icon"><i class="lni-user" aria-hidden="true"></i></a>
+            </div>
+        </div>
+     <div class="col-md-6">
+ 
+        <div class="header_right mobile-hide" style="position: relative;">
+            <a style="color:#fff;padding-right: 10px" onclick="gotodashboard()"><i class="lni-dashboard" aria-hidden="true" style="padding-right: 10px"></i>Dashboard</a>
+            {% if order_settings.enable_returns_system == 1 %}
+            <button type="button" class="btn custom-btn" onclick="returnRequest()" ><i class="lni-circle-minus custom-btn" aria-hidden="true"></i>Return</button>
+            {% endif %}
+            {% if pos_settings.enable_holdorder == 1 %}
+            <button type="button" class="btn custom-btn cart-s"  onclick="holdedOrdersModel()" ><i class="lni-hand " aria-hidden="true"></i>Hold<span class="hold_label">0</span></button>
+            {% endif %}
+            <!-- {% if domains_list %}
+            {% if "Restaurant" in domains_list %}
+            <button type="button" class="btn order_type_btn" id="type_DineIn" onclick="order_type('DineIn')" ><i class="fa fa-table" aria-hidden="true" style="padding-right: 5px;"></i><span id="DineIn_table">Dine In</span></button>
+            <button type="button" class="btn order_type_btn" id="type_Pickup" onclick="order_type('Pickup')" ><i class="fa fa-shopping-bag" aria-hidden="true" style="padding-right: 5px;"></i>Takeaway</button>
+            <button type="button" class="btn order_type_btn" id="type_Delivery" onclick="order_type('Delivery')" ><i class="fa fa-truck" aria-hidden="true" style="padding-right: 5px;"></i>Delivery</button>
+            {% endif %}
+            {% endif %} -->
+            <a class="admin_icon" style="color:#fff"><i class="lni-user user-i" aria-hidden="true" ></i>Hai Admin</a>
+        </div>   
+    </div>
+
+    </div>
+    <div class="leftCart">
+        <div style="position: relative;height: 100%;">
+            <div class="leftitem">
+
+   
+
+<!---------------------------Old Search----------------------------------->
+  <!-- <div class="nullpadding">
+
+<div class="dropdown customer_select" style="display: -webkit-inline-box;width: 100%">
+    <div class="col-md-12 nullpadding " style="width: 100%">
+        <i class="lni-user user-i2" aria-hidden="true"></i>
+        <span id="cust_names" onclick="myFunction()" class="dropbtn" aria-hidden="true" onclick="ToggleCartView()" style="cursor: pointer;">Select Customer</span>
+        <i class="lni-chevron-down user-i3" aria-hidden="true"></i>
+
+      <div id="myDropdown" class="dropdown-content">
+        <span class="customer_email" style="display:none"></span>
+        <input type="text" class="myInput" id="autocomplete" placeholder="Search Customer .." data-fieldname="customers" placeholder="Search.." >
+        
+      </div>
+  </div>
+</div>
+</div> -->
+<!------------------------End of Old Search-------------------------------->
+
+<!-------------------------New customer search----------------------------->
+<div class="nullpadding">
+
+    <div class="dropdown customer_select" style="display: -webkit-inline-box;width: 100%">
+ <!--  <button onclick="myFunction()" class="dropbtn" aria-hidden="true" onclick="ToggleCartView()">Dropdown</button> -->
+
+<div class="col-md-12 nullpadding popover__wrapper" style="width: 100%;    display: flex;padding: 10px 0px;background: #f2f2f2;cursor: pointer;" onclick="customersModel()">
+  <div class="col-md-3">
+    <img class="avatar" src="assets/ecommerce_business_store/images/people.png">
+</div>
+  <div class="col-md-9" style="padding: 1px 0px;color: #393E40 !important;padding-left: -30px;margin-left: -10px;font-size: 16px;">
+      <a title="Add customer" style="color: #393E40 " ><span id="cust_names">Add Customer</span><i class="lni-plus" style="float: right;padding-right: 30px;font-size: 18px;"></i></a>
+  </div>
+  <span class="customer_email" style="display:none"></span>
+  <span class="customer_id" style="display:none"></span>
+  <span class="customer_phone" style="display:none"></span>
+  <!-- <div class="popover__content" >
+    <div class="md-form mt-0">
+      <input class="form-control myInput" type="text" id="autocomplete" placeholder="Search Customer .." aria-label="Search" style="margin-bottom: 5px" data-fieldname="customers">
+    </div>
+    <ul class="cart-ul1" id="sec-auto" style="height: 90%;overflow-y: scroll;overflow-x: hidden;padding-left: 5px"> -->
+        <!-- <li class="cart-li2">
+           <p>Cust-0001</p>
+           <p><i class="lni-user" style="padding-right: 10px"></i>nixson
+            <span style="float: right;">nixson@valiantsystems.com</span></p>
+        </li> -->
+   <!--  </ul>
+  </div> -->
+
+
+
+  </div>
+  </div>
+</div>
+<!----------------------End ofNew customer search-------------------------->
+
+
+       <!-- <div  class="customer_select">
+                        <span class="customer_email" style="display:none"></span>
+                        <input type="text" id="autocomplete" data-fieldname="customers" style="margin-left: 15px;">
+                        <input type="text" id="cust_names" data-fieldname="customer_name" disabled>
+                    
+                        
+                    </div> -->
+
+
+
+
+<!-- <span class="span"><i class="fa fa-th-large web-hide" style=" float: right; padding: 1px 14px; font-size: 18px;color: {{pos_settings.primary_color}}" aria-hidden="true" onclick="ToggleCartView()"></i></span>
+<span class="web-hide"></span> -->
+
+
+<!-- <div class="">
+    <div class=""> -->
+        <div class="cartitems nullpadding">
+             <input class="hide" id="hdnTaxSetting" value={{general.included_tax}}>
+                    <!-- <div class="" style="position: relative; overflow: hidden; width: auto; height: 113px;"> -->
+<ul class="CartList clearfix cart-ul" style="{% if pos_settings.enable_discounts %}height: calc(95% - 307px){% else %}height: calc(95% - 268px){% endif %}">
+          </ul>
+                    <!-- </div>                   -->
+        </div>
+    <!-- </div>
+</div> -->
+<!-- <div class="card" style="margin-top: 62%;">
+    <div class="card-body">
+
+ <div id="left-bottom" style="width: 100%;">
+                <table id="totalTable" style="width:100%; float:right; padding:5px; color:#393E40; background: #FFF;margin-top: 0px;">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 5px 10px;border-top: 1px solid #DDD;border-bottom: 1px solid #DDD;">Items</td>
+                            <td class="text-right" style="border-bottom: 1px solid #DDD;padding: 5px 10px;font-size: 14px; font-weight:bold;border-top: 1px solid #DDD;">
+                                <span id="titems" class="price1">0</span>
+                            </td>
+                            <td style="padding: 5px 10px;border-top: 1px solid #DDD;border-bottom: 1px solid #DDD;">Total</td>
+                            <td class="text-right" style="border-bottom: 1px solid #DDD;padding: 5px 10px;font-size: 14px; font-weight:bold;border-top: 1px solid #DDD;">
+                                <span id="total" class="price1">0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px 10px; border-top: 1px solid #F2F2F2; border-bottom: 1px solid #DDD;" colspan="2">
+                                Tax
+                                <span id="tax" ></span>
+                            </td>
+                            <td class="text-right" align="right" style="padding:5px 10px 5px 10px; font-size: 14px;border-top: 1px solid #F2F2F2; border-bottom: 1px solid #DDD; font-weight:bold;" colspan="2">
+                                <span id="tax" class="price1">0</span>
+                                <input type="hidden" id="hdnCustomerBalance" value="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px 10px; border-top: 1px solid #F2F2F2; border-bottom: 1px solid #F2F2F2; font-weight:bold;" colspan="2">
+                                O/B
+                                <span id="tship"></span>
+                            </td>
+                            <td class="text-right" align="right" style="padding:5px 10px 5px 10px; font-size: 14px;border-top: 1px solid #F2F2F2; border-bottom: 1px solid #F2F2F2; font-weight:bold;" colspan="2">
+                                <span id="AvailBalance" class="price1">0</span>
+                                <input type="hidden" id="hdnCustomerBalance" value="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px 10px; border-top: 1px solid #F2F2F2; border-bottom: 1px solid #F2F2F2; font-weight:bold; background:#393E40; color:#FFF;" colspan="2">
+                                Total Payable
+                                <span id="tship"></span>
+                            </td>
+                            <td class="text-right" align="right" style="padding:5px 10px 5px 10px; font-size: 14px;border-top: 1px solid #F2F2F2; border-bottom: 1px solid #F2F2F2; font-weight:bold; background:#393E40; color:#FFF;" colspan="2">
+                                <span id="gtotal" class="price1">0</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+
+            </div>
+            </div> -->
+
+
+                
+                <!-- <div class="select2-container" id="s2id_Customer">    
+                    <a href="#" onclick="return false;" class="select2-choice" tabindex="-1">   
+                        <span>test customer</span>
+                        <abbr class="select2-search-choice-close" style="display:none;"></abbr>   
+                        <div><b></b></div>
+                    </a>
+                    <div class="select2-drop select2-with-searchbox select2-drop-active select2-offscreen" style="display: block;">   
+                        <div class="select2-search">       
+                            <input type="text" autocomplete="off" class="select2-input" tabindex="-1">   
+                        </div>   
+                        <ul class="select2-results"></ul>
+                    </div>    
+                </div> -->
+                <!-- <select id="Customer" name="Customer" onchange="GetCustomerBalance()"> -->
+             
+                   
+                <!-- </select> -->
+            <!-- </div> -->
+            <!-- <div class="leftitem">
+                <span class="span">Product</span>
+                
+                <div class="input-append" style="position: relative;float: left;width: 100%;margin-bottom: 15px;"> 
+
+                    <input type="search" id="instantsearch" placeholder="Search Products" data-minlength="3" data-showthumbs="false" class="form-control" autocomplete="off" name="q" onkeyup="searchkeyup()" style="height:30px;width: Calc(100% - 30px);margin-left: 15px;margin-right: 15px;" />
+
+                </div>                
+            </div> -->
+                   <!--  <div class="leftitem" style="    position: relative; overflow-x: scroll; overflow-y: hidden; height: 59px;">
+                        <ul id="myTab" class="nav nav-tabs" role="tablist" style="display: inline-flex;height: 43px;white-space: nowrap; position: absolute; top: 5px; left: 0px;">
+                            <li id="li1" class="active" style="display: inline;"><a href="#tab1" role="tab" data-toggle="tab">Tab 1</a></li>
+                            <li id="last" style="display: inline;"><a href="#addTab"><span class="glyphicon glyphicon-plus"></span> Add Tab</a></li>
+                        </ul>
+                    </div> -->
+
+                    <!-- <div id="p">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1"> -->
+
+          
+                        <!-- </div>
+                    </div>
+                </div> -->
+           
+            <!-- <div class="col-md-12" style="/* padding: 0 0 0 1px; */position: absolute;bottom: 0;float: left;padding: 0;width: 100%;height: 10%;">
+                <div>
+                    {% if pos_settings.enable_holdorder == 1 %}
+
+                    {% if domains_list %}
+                    {% if "Restaurant" in domains_list %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-primary col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="holdOrdername()"><i class="lni-hand" aria-hidden="true" style="padding: 0px 10px;"></i>Hold</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="SendToKitchen()"><i class="fa fa-cutlery" aria-hidden="true" style="padding: 0px 10px;"></i>To Kitchen</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Bill</a>
+                    {% else %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="holdOrder()"><i class="lni-hand" aria-hidden="true" style="padding: 0px 10px;"></i>Hold</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 34%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Insert Order</a>
+                    {% endif %}
+                    {% endif %}
+
+                    {% else %}
+
+                    {% if domains_list %}
+                    {% if "Restaurant" in domains_list %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 533%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="SendToKitchen()"><i class="fa fa-cutlery" aria-hidden="true" style="padding: 0px 10px;"></i>To Kitchen</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 34%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Bill</a>
+                    {% else %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Insert Order</a>
+                    {% endif %}
+                    {% endif %}
+
+                    {% endif %}
+                </div>
+            </div> -->
+            <div class="nullpadding fixed-bottom" style="/* padding: 0 0 0 1px; */position: absolute;bottom: 5%;float: left;padding: 0;width: 100%;{% if pos_settings.enable_discounts %}height: 262px;{% else %}height: 223px;{% endif %}">
+    <ul class="cart-ul2" >
+        {% if pos_settings.enable_discounts %}
+        {% if pos_settings.enable_discounts == 1 %}
+        <li class="cart-li1" style="border-top: 1px dashed #ddd;padding: 10px 0px;"  onclick="discountsModel()">
+            <div class="col-md-6" style="color: #f23d3d;">Add Discount </div>
+            <div class="col-md-6" style="text-align: right;">
+                <strong class="price1" style="color: #f23d3d;"><i class="lni-plus"></i></strong>
+            </div>
+        </li>
+        {% endif %}
+        {% endif %}
+
+        <li class="cart-li1" style="border-top: 1px dashed #ddd;">
+            <div class="col-md-3">Items </div>
+            <div class="col-md-3" style="text-align: right;">
+                <strong id="titems" class="price1">0</strong>
+            </div>
+            <div class="col-md-3">Total</div>
+            <div class="col-md-3" style="text-align: right;">
+                <strong id="total" class="price1">{{symbol}}0.00</strong>
+            </div>
+           
+        </li>
+        <li class="cart-li1{%if general.included_tax==1%} hide {%endif%}" >
+            <div class="col-md-6">Tax</div>
+            <div class="col-md-6" style="text-align: right;">
+                <strong id="tax" class="price1">{{symbol}}0.00</strong>
+            </div>
+         
+           
+        </li>
+        <li class="cart-li1" style="border-bottom: 1px dashed #ddd;">
+            <div class="col-md-6">O/B</div>
+            <div class="col-md-6" style="text-align: right;">
+               <strong id="AvailBalance" class="price1">{{symbol}}0.00</strong>
+            </div>
+         
+           
+        </li>
+         <li class="cart-li1" style="display: none;">
+            <div class="col-md-6">Order Total     </div>
+            <div class="col-md-6" style="text-align: right;">
+               <strong id="gtotal" class="price1">{{symbol}}0.00</strong>
+            </div>
+         
+           
+        </li>
+        <li class="cart-li1">
+            <div class="col-md-6">Total Payable     </div>
+            <div class="col-md-6" style="text-align: right;">
+               <strong id="grosstotal" class="price1">{{symbol}}0.00</strong>
+            </div>
+         
+           
+        </li>
+    
+    </ul>
+      <div class="col-md-12" >
+                <div>
+                    <!-- {% if pos_settings.enable_holdorder == 1 %}
+
+                    {% if domains_list %}
+                    {% if "Restaurant" in domains_list %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding-right:10px;"></i>Cancel</a>
+                    <a class="btn btn-primary col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="holdOrdername()"><i class="lni-hand" aria-hidden="true" style="padding-right:10px;"></i>Hold</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="SendToKitchen()"><i class="fa fa-cutlery" aria-hidden="true" style="padding-right:10px;"></i>To Kitchen</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding-right:10px;"></i>Bill</a>
+                    <div class="row">
+                    <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-right: 0.8px solid #ddd;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding-right:10px;"></i>Balance</a>
+                    </div>
+                    {% else %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding-right:10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="holdOrder()"><i class="lni-hand" aria-hidden="true" style="padding-right:10px;"></i>Hold</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding-right:10px;"></i>Bill</a>
+                    <div class="row">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-right: 0.8px solid #ddd;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding-right:10px;"></i>Balance</a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                    {% else %}
+
+                    {% if domains_list %}
+                    {% if "Restaurant" in domains_list %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 533%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="SendToKitchen()"><i class="fa fa-cutlery" aria-hidden="true" style="padding: 0px 10px;"></i>To Kitchen</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 34%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Bill</a>
+                    <div class="row">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-right: 0.8px solid #ddd;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding-right:10px;"></i>Balance</a>
+                    </div>
+                    {% else %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Insert Order</a>
+                    {% endif %}
+                    {% endif %}
+
+                    {% endif %}
+ -->
+                    {% if pos_settings.enable_holdorder == 1 %}
+
+                    {% if domains_list %}
+                    {% if "Restaurant" in domains_list %}
+                    <!-- <a class="btn btn-danger col-md-3" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding-right:10px;"></i>Cancel</a>
+                    <a class="btn btn-danger col-md-3" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="holdOrdername()"><i class="lni-hand " aria-hidden="true" style="padding-right:10px;"></i>Hold</a>
+                    <a class="btn btn-warning col-md-3" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%;border-right: 0.8px solid #ddd;height: 100%" onclick="SendToKitchen()"><i class="fa fa-cutlery" aria-hidden="true" style="padding-right:10px;"></i>To Kitchen</a>
+                    <a class="btn btn-primary col-md-3" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 25%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="billOrder()"><i class="lni-printer" aria-hidden="true" style="padding-right:10px;"></i>Bill</a>
+                    <div class="row" style="padding-left: 15px;padding-right: 15px">
+                    <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-right: 0.8px solid #ddd;height: 100%;    text-align: left;padding-left: 10px;" onclick="movetoPayment()"><i class="lni-wallet" aria-hidden="true" style="padding-right:10px;"></i>Charge<span class="price3" style="padding-right: 10px" id="totalCharge">{{symbol}}0.00</span></a>
+                    </div> -->
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px;margin-bottom: 5px" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding-right:10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="holdOrder()"><i class="lni-hand " aria-hidden="true" style="margin-right:10px;"></i>Hold</a>
+                    <a class="btn btn-primary col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="billOrder()"><i class="lni-printer" aria-hidden="true" style="margin-right:10px;"></i>Bill</a>
+                    <div class="row" style="padding-right: 15px;padding-left: 15px;">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-top: 0.8px solid #ddd;height: 100%;    text-align: left;padding-left: 10px;" onclick="movetoPayment()"><i class="lni-wallet" aria-hidden="true" style="padding-right:10px;"></i>Charge<span class="price3" style="padding-right: 10px" id="totalCharge">{{symbol}}0.00</span></a>
+                    </div>
+                    {% else %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px;margin-bottom: 5px" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding-right:10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="holdOrder()"><i class="lni-hand " aria-hidden="true" style="margin-right:10px;"></i>Hold</a>
+                    <a class="btn btn-primary col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33.33333%;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="billOrder()"><i class="lni-printer" aria-hidden="true" style="margin-right:10px;"></i>Bill</a>
+                    <div class="row" style="padding-right: 15px;padding-left: 15px;">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-top: 0.8px solid #ddd;height: 100%;    text-align: left;padding-left: 10px;" onclick="movetoPayment()"><i class="lni-wallet" aria-hidden="true" style="padding-right:10px;"></i>Charge<span class="price3" style="padding-right: 10px" id="totalCharge">{{symbol}}0.00</span></a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                    {% else %}
+
+                    {% if domains_list %}
+                    {% if "Restaurant" in domains_list %}
+                    <!-- <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33%; float: left;border-right: 0.8px solid #ddd;height: 100%;margin-bottom: 5px" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-warning col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 33%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="SendToKitchen()"><i class="fa fa-cutlery" aria-hidden="true" style="padding: 0px 10px;"></i>To Kitchen</a>
+                    <a class="btn btn-primary col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 34%; float: left;height: 100%;margin-bottom: 5px" onclick="billOrder()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Bill</a>
+                    <div class="row">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-top: 0.8px solid #ddd;height: 100%;text-align: left;padding-left: 10px;" onclick="movetoPayment()"><i class="lni-wallet" aria-hidden="true" style="padding-right:10px;"></i>Charge<span class="price3" style="padding-right: 10px" id="totalCharge">{{symbol}}0.00</span></a>
+                    </div> -->
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Insert Order</a>
+                    <div class="row">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-top: 0.8px solid #ddd;height: 100%;text-align: left;padding-left: 10px;" onclick="movetoPayment()"><i class="lni-wallet" aria-hidden="true" style="padding-right:10px;"></i>Charge<span class="price3" style="padding-right: 10px" id="totalCharge">{{symbol}}0.00</span></a>
+                    </div>
+                    
+                    {% else %}
+                    <a class="btn btn-danger col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;border-right: 0.8px solid #ddd;height: 100%" onclick="cancelOrder()"><i class="lni-ban" aria-hidden="true" style="padding: 0px 10px;"></i>Cancel</a>
+                    <a class="btn btn-success col-md-4" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 50%; float: left;height: 100%" onclick="movetoPayment()"><i class="lni-printer" aria-hidden="true" style="padding: 0px 10px;"></i>Insert Order</a>
+                    <div class="row">
+                     <a class="btn btn-success col-md-12" style="border-radius:0;padding: 0px;line-height: 5.5vh ;font-size: 2vh; width: 100%;border-top: 0.8px solid #ddd;height: 100%;text-align: left;padding-left: 10px;" onclick="movetoPayment()"><i class="lni-wallet" aria-hidden="true" style="padding-right:10px;"></i>Charge<span class="price3" style="padding-right: 10px" id="totalCharge">{{symbol}}0.00</span></a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                    {% endif %}
+                </div>
+            </div>
+</div>
+        </div>
+    </div>
+<!-------------------------------------End of Left cart div--------------------------------------->
+
+<!-------------------------------------Start of main content-------------------------------------->
+<!-- <div class="maintop" style="padding-top:0;padding-left: 0;padding-right: 0;border: none;margin-top:-34px"> -->
+	<div id="side_panel" class="panel-heading pannel-heading-side" style="height: calc(100% - 54px);background: #fff;    border-right: 1px solid #ddd;">
+            <ul class="nav1 nav1-tabs1" style="margin: 0;border: none;white-space: normal;">
+                <li class="cat-t" style="border-bottom: 1px solid #f2f2f2;">
+                    <a href="#" style="border-bottom: 1px solid transparent;padding: 10px 15px !important;line-height: 24px;">
+                        Categories 
+                    </a>
+                </li>
+                <li class="active" id="allitemstab">
+                    <a href="#AllProducts" data-id="0" data-toggle="tab" onclick="ClearFields()">
+                        All<i class="lni-chevron-right r-a"></i>
+                    </a>
+                </li>
+
+            {% if categories %}
+                {% for item in categories %}
+                    <li class="categoriestab">
+                        <a data-id="{{item._index}}" href="#{{item.name}}" data-toggle="tab" onclick="ClearFields()">
+                            {{item.category_name}}
+                            <i class="lni-chevron-right r-a"></i>
+                        </a>
+                    </li>
+                {% endfor %}
+            {% endif %}
+
+            </ul>
+</div>
+<div class="panel with-nav1-tabs1 panel-default">
+        <div class="panel-body-header">
+           <!--  <div class="col-md-2 col-sm-4" style="height: 30px;padding: 0px;">
+                <span class="span" style="text-align: right;float: right;padding: 3px">Product:</span>
+            </div> -->
+
+            <!-------------------------------------old search----------------------------------->
+            <!-- <div class="col-md-12 col-sm-12" style="height: 40px; padding: 2px 0px;    background: #F2F2F2;"> -->
+
+                <!-- <div class="input-append" style="position: relative;float: left;width: 100%;height: 0px;padding: 0px 3px;"> 
+                    <input type="search" id="instantsearch" placeholder="Search for Products" data-minlength="3" data-showthumbs="false" class="form-control" autocomplete="off" name="q" onkeyup="searchkeyup()" style="height:36px;width: 100%;" />
+                </div> -->
+
+                <!-- <div class="form-group has-search product-search"> -->
+
+                    <!-- <span class="lni-search form-control-feedback"></span>
+                    <input type="text" class="form-control" id="instantsearch" placeholder="Search for Products" data-minlength="3" autocomplete="off" name="q" onkeyup="searchkeyup()" style="height:36px;"> -->
+
+                    <!-- <input type="text" class="form-control" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="basic-addon2" id="instantsearch" data-minlength="3" autocomplete="off" name="q" onkeyup="searchkeyup()">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
+                </div>
+                <div class="web-hide" style=" float: right; padding: 3px 4px; font-size: 22px;width: 15%; text-align: center;position: relative;"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="color: {{pos_settings.primary_color}};" onclick="ToggleCartView()"></i>
+                    <span class="label cart_label">0</span>
+                </div>
+            </div> -->
+            <!-------------------------------------End of old search----------------------------------->
+            <!----------------------------------------New search----------------------------------->
+            <div class="col-md-12 col-sm-12" style="height: 40px; padding: 2px 0px;    background: #fff;">
+                <!-- <div class="input-append" style="position: relative;float: left;width: 100%;height: 0px;padding: 0px 3px;"> 
+                    <input type="search" id="instantsearch" placeholder="Search for Products" data-minlength="3" data-showthumbs="false" class="form-control" autocomplete="off" name="q" onkeyup="searchkeyup()" style="height:36px;width: 100%;" />
+                </div> -->
+               
+    
+
+                <div class="input-group has-search product-search">
+                    
+<input type="text" class="form-control" placeholder="Search for Products" aria-label="Search for Products" aria-describedby="basic-addon2" id="instantsearch" data-minlength="3" autocomplete="off" name="q" onkeyup="searchkeyup()" style="height: 35px;">
+      <span class="input-group-btn">
+        <button class="btn btn-search btn-default" type="button" onclick="ClearFields()" style="line-height: 19px"><i class="lni-close" style="    font-size: 12px;padding-right: 5px;"></i> Clear</button>
+      </span>
+      
+              <!--       <input type="text" class="form-control " placeholder="Search for Products" aria-label="Search for Products" aria-describedby="basic-addon2" id="instantsearch" data-minlength="3" autocomplete="off" name="q" onkeyup="searchkeyup()">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div> -->
+                </div>
+                <div class="web-hide" style=" float: right; padding: 3px 4px; font-size: 22px;width: 15%; text-align: center;position: relative;"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="color: {{pos_settings.primary_color}};" onclick="ToggleCartView()"></i>
+                    <span class="label cart_label">0</span>
+                </div>
+            </div> 
+            <!----------------------------------------End of New search----------------------------------->
+
+
+
+
+        </div>
+        <div class="panel-body">
+            <div class="tab-content">
+                
+
+                    <div class="tab-pane fade active in " id="AllProducts">
+
+                    	<div class="rightCart" id="CategoryDiv-14">
+					    {% if allproducts %}
+					    {% for items in allproducts %}
+					    <div id="ProductDiv" class="col-md-3 col-sm-4 col-xs-6 nullpadding">
+                      
+					        <div class="productitem" onclick="addtoCart(this)">
+                                <!-- <a class="wish-btn btn" onclick="addtowishlist(this)"><span class="fa fa-heart"></span></a> -->
+                                
+					            <a class="cartincr" data-attr="{{items.name}}" style="cursor:pointer" data-title="{{items.item}}" data-price="{{items.price}}" data-stock="{{items.stock}}" data-tax="{{items.tax_category}}" data-inventory="{{items.inventory_method}}" data-maxcount="{{items.maximum_order_qty}}" data-mincount="{{items.minimum_order_qty}}">
+					                <div class="itemImage">
+					                    {% if items.images %}
+                                                <img src="{{items.images[0].product_image}}" style="width: 100%;height: 150px;object-fit: contain;padding: 5px;">
+                                                {% else %}
+                                                <img src="/assets/cmswebsite/images/no-image-800x511.png" style="width: 100%;height: 150px;object-fit: contain;padding:5px">
+                                                {% endif %}
+					                </div>
+					                <div class="producttitle"><span class="producttitle_overflow">{{items.item}}</span><br><span class="price">{{symbol}} {{"%0.2f" % items.price | float}}</span></div>
+                                    {% if items.inventory_method != "Dont Track Inventory" %}
+                                    <!-- <span class="itemprice">Out of STOCK:{{items.stock}}</span> -->
+					                {% if items.stock <= 0 %}
+                                    <span class="itemprice">Out of STOCK</span>
+                                    {% endif %}
+                                    {% endif %}
+                                    <!-- <span class="addicon"><i class="fa fa-plus-circle" aria-hidden="true"></i> --></span>
+                                </a>
+                                  
+                                {% if items.addons %}
+                                        <div class="addons" data-addon="true">
+                                            {% for addon in items.addons %}
+                                                <div>
+                                                    <h4 style="margin: 10px 0px;"><strong>{{addon.attribute_unique_name}}:</strong></h4>
+                                                </div>
+                                                <div style="padding-left: 15px" class="form_group" data-addonid="{{addon.product_attribute}}" data-controltype="{{addon.control_type}}" data-item_id="{{items.name}}">
+                                                {% if addon.options %}
+                                                    {% if addon.control_type == "Radio Button List" %}
+                                                        {% for options in addon.options %}
+                                                            <input type="radio" name="{{addon.product_attribute}}" value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}<br>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {% if addon.control_type == "Checkbox List" %}
+                                                        {% for options in addon.options %}
+                                                            <input type="checkbox" name="{{addon.product_attribute}}" value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}<br>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {% if addon.control_type == "Dropdown List" %}
+                                                    <select id="DL-{{items.name}}-{{addon.product_attribute}}" style="margin-left: 0px;width: 90%;">
+                                                        {% for options in addon.options %}
+                                                            <option value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    {% endif %}
+                                                {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        <div class="addons" data-addon="false">
+                                        </div>
+                                        {% endif %}
+					        </div>
+					    </div>
+					    {% endfor %}
+					    {% endif %}
+					    </div>
+                        
+
+                    </div>
+
+
+                        {% if categories %}
+                		{% for item in categories %}
+                        	<div class="tab-pane fade" id="{{item.name}}">
+                                <div class="rightCart" id="CategoryDiv-14">
+                                {% if item.products %}                               
+                                {% for items in item.products %}
+                                <div id="DivProduct" class="col-md-3 col-sm-4 col-xs-6 nullpadding">
+                                  
+                                    <div class="productitem" onclick="addtoCart(this)">
+
+                                        <a class="cartincr" data-attr="{{items.name}}" style="cursor:pointer" data-title="{{items.item}}" data-price="{{items.price}}" data-stock="{{items.stock}}" data-tax="{{items.tax_category}}" data-inventory="{{items.inventory_method}}" data-maxcount="{{items.maximum_order_qty}}" data-mincount="{{items.minimum_order_qty}}">
+                                            <div class="itemImage">
+                                                {% if items.images %}
+                                                <img src="{{items.images[0].product_image}}" style="width: 100%;height: 150px;object-fit: contain;padding:5px">
+                                                {% else %}
+                                                <img src="/assets/cmswebsite/images/no-image-800x511.png" style="width: 100%;height: 150px;object-fit: contain;">
+                                                {% endif %}
+                                            </div>
+                                                <div class="producttitle"><span class="producttitle_overflow">{{items.item}}</span><br><span class="price">{{symbol}} {{"%0.2f" % items.price | float}}</span></div>
+                                                {% if items.inventory_method != "Dont Track Inventory" %}
+                                                {% if items.stock == 0 %}
+                                                <span class="itemprice">Out of STOCK</span>
+                                                {% endif %}
+                                                {% endif %}
+                                        </a>
+                                        {% if items.addons %}
+                                        <div class="addons" data-addon="true">
+                                            {% for addon in items.addons %}
+                                                <div>
+                                                    <h4 style="margin: 10px 0px;"><strong>{{addon.attribute_unique_name}}:</strong></h4>
+                                                </div>
+                                                <!-- <div style="padding-left: 15px" class="form_group" data-addonid="{{addon.product_attribute}}" data-item_id="{{items.name}}">
+                                                {% if addon.options %}
+                                                {% for options in addon.options %}
+                                                    <input type="radio" name="{{addon.product_attribute}}" value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}<br>
+                                                {% endfor %}
+                                                {% endif %}
+                                                </div> -->
+                                                <div style="padding-left: 15px" class="form_group" data-addonid="{{addon.product_attribute}}" data-controltype="{{addon.control_type}}" data-item_id="{{items.name}}">
+                                                {% if addon.options %}
+                                                    {% if addon.control_type == "Radio Button List" %}
+                                                        {% for options in addon.options %}
+                                                            <input type="radio" name="{{addon.product_attribute}}" value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}<br>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {% if addon.control_type == "Checkbox List" %}
+                                                        {% for options in addon.options %}
+                                                            <input type="checkbox" name="{{addon.product_attribute}}" value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}<br>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                    {% if addon.control_type == "Dropdown List" %}
+                                                    <select id="DL-{{items.name}}-{{addon.product_attribute}}" style="margin-left: 0px;width: 90%;">
+                                                        {% for options in addon.options %}
+                                                            <option value="{{options.name}}" data-optionval="{{options.option_value}}" data-optionprice="{{options.price_adjustment}}">{{options.option_value}} - {{symbol}}{{options.price_adjustment}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    {% endif %}
+                                                {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        <div class="addons" data-addon="false">
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                   
+                                </div>
+                                {% endfor %}
+            					{% endif %}
+                            	</div>
+                            </div>
+                        {% endfor %} 
+            			{% endif %}
+                                              
+                </div>
+            </div>
+        </div>
+  
+<!-- </div> -->
+
+<!--------------------------------------End of main content-------------------------------------->
+
+</div>
+
+<!-----------------------------------------Payment Modal----------------------------------------->
+
+<div id="paymentModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;padding-left: 0px !important;">
+    <div class="modal-dialog modal-lg" style="width:80%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    Finalize Sale
+                </h4>
+            </div>
+            <div class="modal-body pad-0" style="float:left;width: 100%;overflow: hidden;max-height: initial;">
+                <div>
+                    <label style="padding: 0px 5px"><input type="radio" name="colorRadio" class="ordertype" value="Pickup" checked> Take Away</label>
+                    <label style="padding: 0px 5px"><input type="radio" name="colorRadio" class="ordertype" value="Delivery"> Delivery</label>
+                </div>
+                <div class="immediateSaleDiv" style="height: 55vh">
+                    <div class="col-md-2 col-sm-3  col-xs-12 text-center mobile_quickpay_btns web_quickpay_btns">
+                        <span style="font-size: 1.2em; font-weight: bold;">Quick Cash</span>
+                        <div class="mob-overflow-x">
+                            <div class="btn-group btn-group-vertical mob-inline-flex" id="quickpay-btns">
+                                <button type="button" class="btn btn-lg btn-success quick-cash font-smaller price1" id="quick-payable" data-value="0" tabindex="-1">0</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="10">10</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="20">20</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="50">50</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="100">100</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="500">500</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="1000">1000</button>
+                                <button type="button" class="btn btn-lg btn-warning quick-cash font-smaller" tabindex="-1" data-value="2000">2000</button>
+                                <button type="button" class="btn btn-lg btn-danger font-smaller" id="clear-cash-notes" tabindex="-1">Clear</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-10 col-sm-9 col-xs-12 mobile_quickpay_details web_quickpay_details">
+                        <div id="payments">
+                            <div class="well well-sm well_1 pad-5 margin-0" style="padding:10px 30px; float: left;width: 100%;">
+                                <div class="payment col-md-4">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <label for="amount" class="font-smaller">Amount</label>
+
+                                                <input name="amount[]" type="text" style="height:35px;color: black;" id="amount_1" class="pa form-control kb-pad1 amount ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox" onkeypress="return validateFloatKeyPress(this,event);" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12">
+                                             <!-- col-sm-offset-1 -->
+                                            <label for="paid_by_1" class="font-smaller">Paying by</label>
+
+                                            <!-- @*@Html.DropDownList("PaymentMethod", new SelectList(ViewBag.PaymentMethods, "PaymentMethodSystemName", "Name"))*@ -->
+                                            <select id="PaymentMethod" style="margin-left: 0px; width: 100%;" class="form-group">
+                                                {% if modeof_pay %}
+                                                {% for n in modeof_pay %}
+                                                <option value="{{n.name}}">{{n.name}}</option>
+                                                {% endfor %}
+                                                {% endif %}
+                                                <!-- <option value="Cash">Cash</option>
+                                                <option value="Card">Card</option>
+                                                <option value="Cheque">Cheque</option> -->
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 box" style="display: none; padding: 0px 15px;">
+                                            <label>Delivery Date & Time:</label><br>
+                                            <div class="col-md-7" style="padding: 5px 0px" class="form-group">
+                                                <input type="date" name="bookingday" id="bookingdate" style="line-height: 24px; width: 95%">
+                                            </div>
+                                            <div class="col-md-5" style="padding: 5px 0px" class="form-group">
+                                                <input type="time" name="bookingtime" id="bookingtime" style="line-height: 24px; width: 95%">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- <div class="form-group gc_1" style="display: none;">
+                                                <label for="gift_card_no_1">Gift Card No</label>                                                <input name="paying_gift_card_no[]" type="text" id="gift_card_no_1" class="pa form-control kb-pad gift_card_no ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox">
+
+                                                <div id="gc_details_1"></div>
+                                            </div> -->
+                                            <!-- <div class="pcc_1" style="display:none;">
+                                                <div class="form-group">
+                                                    <input type="text" id="swipe_1" class="form-control swipe" placeholder="Swipe">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input name="cc_no[]" type="text" id="pcc_no_1" class="form-control" placeholder="Credit Card No">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+
+                                                            <input name="cc_holer[]" type="text" id="pcc_holder_1" class="form-control" placeholder="Holder Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <div class="select2-container form-control pcc_type" id="s2id_pcc_type_1" title="" style="display: block;"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-12">Visa</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen12" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-12" id="s2id_autogen12"><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <label for="s2id_autogen12_search" class="select2-offscreen"></label>       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-12" id="s2id_autogen12_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-12">   </ul></div></div><select name="cc_type[]" id="pcc_type_1" class="form-control pcc_type" placeholder="Card Type" title="" style="display: none;" tabindex="-1">
+                                                                <option value="Visa">Visa</option>
+                                                                <option value="MasterCard">MasterCard</option>
+                                                                <option value="Amex">Amex</option>
+                                                                <option value="Discover">Discover</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <input name="cc_month[]" type="text" id="pcc_month_1" class="form-control" placeholder="Month">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+
+                                                            <input name="cc_year" type="text" id="pcc_year_1" class="form-control" placeholder="Year">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+
+                                                            <input name="cc_cvv2" type="text" id="pcc_cvv2_1" class="form-control" placeholder="Security Code">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="pcheque_1" style="display:none;">
+                                                <div class="form-group">
+                                                    <label for="cheque_no_1">Cheque No</label>                                                    <input name="cheque_no[]" type="text" id="cheque_no_1" class="form-control cheque_no">
+                                                </div>
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label for="payment_note" class="font-smaller">Payment Note</label>                                                <textarea name="payment_note[]" id="payment_note_1" class="pa form-control kb-text payment_note ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment col-md-8">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="name[]" class="font-smaller">Customer Name</label>
+
+                                                <input name="name[]" type="text" style="height:35px;background: #fff;" id="name_1" class="pa form-control kb-pad1 amount ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="phone[]" class="font-smaller">Customer Phone</label>
+
+                                                <input name="phone[]" type="number" style="height:35px;background: #fff;" id="phone_1" class="pa form-control kb-pad1 amount ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="email[]" class="font-smaller">Customer Email</label>
+
+                                                <input name="email[]" type="text" style="height:35px;background: #fff;" id="email_1" class="pa form-control kb-pad1 amount ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 box" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="address[]" class="font-smaller">Delivery Address</label>
+                                                    <div id="delivery_address" style="padding-left: 16px;">
+                                                        <!-- <label class="radio-container">
+                                                            <input type="radio" name="customer_shipping_address" value="977fe19b05" data-text="porur,Chennai,Tamil Nadu, India -600015" checked="checked"> porur,Chennai,  Tamil Nadu,India -600015
+                                                            <span class="checkmark"></span>
+                                                        </label> -->
+                                                        
+                                                    </div>
+                                                    <button type="button" class="buy-now-btn-desktop width-45" onclick="showAddrPopup()"><i class="fa fa-plus" style="margin-right:5px"></i>Add New Address</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="font16">
+                            <table class="table table-bordered table-condensed table-striped" style="margin-bottom: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" style="font-weight:600;text-align:right" class="font-smaller" align="right"><span id="pendingBalance" class="price1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" style="font-weight:600" class="font-smaller">Total Items</td>
+                                        <td width="25%" style="font-weight:600" class="text-right font-smaller"><span id="item_count">1</span></td>
+                                        <td width="25%" style="font-weight:600" class="font-smaller">Total Payable</td>
+                                        <td width="25%" style="font-weight:600" class="text-right font-smaller price1"><span id="twt">2,500.00</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:600" class="font-smaller">Total Paying</td>
+                                        <td style="font-weight:600" class="text-right font-smaller"><span id="total_paying" class="price1">0.00</span></td>
+                                        <td style="font-weight:600" class="font-smaller">Balance</td>
+                                        <td style="font-weight:600" class="text-right font-smaller"><span id="balance" class="price1">0.00</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="bookingsDiv box" style="display: none; height: 55vh">
+                    <div class="col-md-6">
+                        <div style="padding: 10px 0px">
+                            <label>Delivery Date & Time:</label><br>
+                            <div class="col-md-8" style="padding: 5px 0px">
+                                <input type="date" name="bookingday" id="bookingdate" style="line-height: 24px; width: 95%">
+                            </div>
+                            <div class="col-md-4" style="padding: 5px 0px">
+                                <input type="time" name="bookingtime" id="bookingtime" style="line-height: 24px; width: 95%">
+                            </div>
+                        </div>
+                        <div style="padding: 10px 0px">
+                            <input type="checkbox" name="isDelivery" value="delivery"> Is delivery ?
+                        </div>
+                        <div style="padding: 10px 0px">
+                            <label>Booking Notes:</label>
+                            <textarea rows="5" style="width: 98%" name="booking_notes" id="booking_notes"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="padding: 10px 0px">
+                            <label>Customer Phone:</label>
+                            <input type="number" name="booking_cusphone" id="booking_cusphone" style="line-height: 24px; width: 95%" placeholder="Enter customer phone number">
+                        </div>
+                        <div style="padding: 10px 0px">
+                            <label>Customer Name:</label>
+                            <input type="text" name="booking_cusname" id="booking_cusname" style="line-height: 24px; width: 95%" placeholder="Enter customer name">
+                        </div>
+                        <div style="padding: 10px 0px">
+                            <label>Customer Email:</label>
+                            <input type="text" name="booking_cusemail" id="booking_cusemail" style="line-height: 24px; width: 95%" placeholder="customer@example.com">
+                        </div>
+                        <div style="padding: 10px 0px">
+                            <label>Customer Address:</label>
+                            <textarea rows="2" style="width: 98%" name="booking_address" id="booking_address"></textarea>
+                        </div>
+                    </div>
+                </div> -->
+                
+            </div>
+            <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;">
+                <button type="button" class="btn btn-danger payment_btn" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success payment_btn" onclick="insertOrder()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--------------------------------------End of Payment Modal---------------------------------------->
+
+<!-----------------------------------------Customers Modal------------------------------------------->
+
+<div id="CustomersModal" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:60%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header" style="background: #e53a3b; color: white">
+                <button type="button" class="close" data-dismiss="modal" style="color: white; opacity: 0.8;">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Add Customer</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+                <div class="input-group has-search customer-search">
+                    
+                    <input type="text" class="form-control" placeholder="Search for Customers" aria-label="Search for Products" aria-describedby="basic-addon2" id="customerssearch" data-minlength="3" autocomplete="off" name="c" onkeyup="customersearchkeyup()"  style="height: 35px;" autofocus>
+                          <span class="input-group-btn">
+                            <button class="btn btn-search btn-default" type="button" style="line-height: 19px" onclick="clearCustomerSearch()"><i class="lni-close" style="    font-size: 12px;padding-right: 5px;"></i> Clear</button>
+                          </span>
+                </div>
+
+            <div class="col-md-12 col-sm-12" style="padding: 0px;height: calc(100vh - 250px);" id="Customerslist">
+                <ul class="cus-cart-ul1" id="cus-sec-auto" style="height: 100%;overflow-y: scroll;overflow-x: hidden;padding-left: 5px">
+                    <!-- <li class="cus-cart-li2">
+                       <p>Cust-0001</p>
+                       <p><i class="lni-user" style="padding-right: 10px"></i>nixson
+                        <span style="float: right;">nixson@valiantsystems.com</span></p>
+                    </li> -->
+                </ul>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--------------------------------------End of Customers Modal--------------------------------------->
+
+<!-----------------------------------------New Address Modal------------------------------------------->
+
+<div id="address_modal" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:60%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header" style="background: #e53a3b; color: white">
+                <button type="button" class="close" data-dismiss="modal" style="color: white; opacity: 0.8;">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>New Address</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 15px">
+                <form>
+                        <div class="row">
+                          <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="FirstName" style="font-weight:normal;float: left;">First Name <span class="frm-reqd">*</span></label>
+                                        <input id="FirstName" type="text" value="" class="form-control" required="">
+                                        <span class="error first-name-err">Please enter first name.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label for="LastName" style="font-weight:normal;float: left;">Last Name </label>
+                                        <input id="LastName" type="text" value="" class="form-control" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                          <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Addr1" style="font-weight:normal;float: left;">Address Line 1 <span class="frm-reqd">*</span></label>
+                                        <input id="Addr1" type="text" value="" class="form-control" required="">
+                                        <span class="error addr1-err">Please enter address line 1.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Town" style="font-weight:normal;float: left;">City <span class="frm-reqd">*</span></label>
+                                        <input id="City" type="text" value="" class="form-control" required="">
+                                        <span class="error">Please enter city.</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="row">
+                          <div class="col-md-6">
+                                   <div class="form-group">
+                                        <label for="State" style="font-weight:normal;float: left;">State <span class="frm-reqd">*</span></label>
+                                        <select id="State" class="form-control" style="margin-left: 0px;">
+                                            <option value=""></option>
+                                         
+                                            {% if state %}{% for item in state %}
+                                            <option value="{{item.state}}">{{item.state}}</option>
+                                            {% endfor %}{% endif %}
+                                               
+                                        </select>
+                                        <span class="error state-err">Please enter state.</span>
+                                        <span class="error">Please enter state.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                     <div class="form-group">
+                                        <label for="Country" style="font-weight:normal;float: left;">Country <span class="frm-reqd">*</span></label>
+
+                                        <select id="Country" class="form-control" style="margin-left: 0px;">
+                                            <option value=""></option>
+                                            
+                                            {% if country %}{% for item in country %}
+                                            <option value="{{item.name}}">{{item.name}}</option>
+                                            {% endfor %}{% endif %}
+                                          
+                                            
+                                        </select>
+                                        <span class="error">Please select country.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="row">
+                          <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label for="PostalCode" style="font-weight:normal;float: left;">Postal Code <span class="frm-reqd">*</span></label>
+                                        <input id="PostalCode" type="text" value="" class="form-control" required="">
+                                         <!-- <span class="error pin-err">Please enter postal code.</span> -->
+                                        <span class="error">Please enter postal code.</span>
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                               <div class="form-group">
+                                        <label for="Phone" style="font-weight:normal;float: left;">Phone <span class="frm-reqd">*</span></label>
+                                        <input id="Phone" type="number" value="" class="form-control" required="">
+                                        <span class="error">Please enter phone.</span>
+                                    </div>
+                            </div>
+                        </div>
+                              <div class="row">
+                          <div class="col-md-6" style="display: none;">
+                                     <div class="form-group">
+                                        <input type="checkbox" id="is_default" checked="">
+                                        Set as default
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                               <div class="form-group">
+                                        <label for="Landmark" style="font-weight:normal;float: left;">Landmark</label>
+                                        <input id="Landmark" type="text" value="" class="form-control">
+                                        <span class="error">Please enter landmark.</span>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                    <div class="col-md-12">
+                                    <button style="float:right" type="button" class="btn btn-default" onclick="saveAddress()">Submit</button>
+
+                                </div>
+                        </div>
+                        <input type="hidden" name="hdnAddrType" id="hdnAddrType" value="Billing">                      
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--------------------------------------End of New Address Modal--------------------------------------->
+
+<!-----------------------------------------Discount Modal------------------------------------------->
+
+<div id="DiscountsModal" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:60%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Add Discount</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+
+            <div class="col-md-12 col-sm-12" style="padding: 0px;height: calc(100vh - 250px);" id="discountslist">
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--------------------------------------End of Discount Modal--------------------------------------->
+
+<!--------------------------------------Return REquest Modal---------------------------------------->
+
+<div id="ReturnRequestModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="clearReturnRqst()">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Return Request</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;position: relative;padding: 0px;">
+
+                <!-- <div class="input-append" style="position: relative;float: left;width: 100%;margin-bottom: 15px;"> 
+                    <input type="search" id="searchOrder" placeholder="Search Order" data-minlength="3" data-showthumbs="false" class="form-control" autocomplete="off" name="q" style="height:30px;width: Calc(100% - 30px);margin-left: 15px;margin-right: 15px;" />
+                </div> -->
+                <div class="col-md-3 col-sm-3 pad-0 returnList" style="overflow-y: scroll;height: calc(100vh - 120px);border-right: 1px solid #DDD;padding: 0px" id="allorderid">
+                </div>
+                <div class="col-md-9 col-sm-9 pad-0 returnDetail" style="height: calc(100vh - 120px);display: block;">
+                    <!-- <div class="ui-widget" style="padding: 10px;">
+                      <label for="searchOrder">Order Id: </label>
+                      <input id="searchOrder" name="q">
+                    </div> -->
+                    <div style="overflow-y: scroll;overflow-x: hidden;height: 90%">
+                        <h4 style="padding: 0px 5px">Order ID: <b><span id="orderidlabel"></span></b></h4>
+                        <br>
+
+                        <table class="table table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3" style="text-align: left; width: 60%;">Product(s)</th>
+                                                <th style="text-align: center; width: 15%;">Price</th>
+                                                <th style="text-align: center; width: 10%;">Total.Qty</th>                                        
+                                                <th style="text-align: center; width: 15%;">Return.Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="returnitemsbody">
+                                            <tr class="no-data">
+                                                <td colspan="6">No records found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            <br>
+
+                            <div class="col-md-6 col-sm-12">
+                                <label for="returnReason">Reason for Return:</label>
+                                    <select id="returnReason">
+                                            {% if return_reason %}
+                                            {% for n in return_reason %}
+                                            <option value="{{n.name}}">{{n.name}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        <!-- <option value="Wrongly Delivered">Wrong Delivery</option>
+                                        <option value="Product Damaged">Product Damaged</option> -->
+                                    </select>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12">
+                                <label>Comments:</label><br>
+                                <textarea rows="4" cols="50" name="comments" id="comments"></textarea>
+                            </div>
+                        </div>
+                    <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;position: absolute; bottom: 0px; left: 0px; height: 10%;">
+                        <button type="button" class="btn btn-danger rtrn_rqst_btn" onclick="clearReturnRqst()">Cancel</button>
+                        <button type="button" class="btn btn-success rtrn_rqst_btn" onclick="insertReturnRequest()">Submit</button>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;">
+                <button type="button" class="btn btn-danger rtrn_rqst_btn" data-dismiss="modal" onclick="clearReturnRqst()">Cancel</button>
+                <button type="button" class="btn btn-success rtrn_rqst_btn" onclick="insertReturnRequest()">Submit</button>
+            </div> -->
+        </div>
+
+    </div>
+</div>
+
+<!-----------------------------------End ofReturn REquest Modal------------------------------------->
+
+<!--------------------------------------------POS Cart---------------------------------------------->
+
+<div id="HoldOrdersModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="clearHoldordermodel()">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>POS Cart</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+
+            <div class="col-md-3 col-sm-12 PosCartList" style="padding: 0px;height: calc(100vh - 120px);border-right: 1px solid #DDD;overflow-y: hidden;position: relative;">
+                <!-- <div class="ui-widget">
+                  <label for="searchholdOrder">Search: </label>
+                  <input id="searchholdOrder" name="q" onchange="get_holdorder_items()">
+                </div> -->
+                <div style="float:left;width:100%;margin-top: 0;position: absolute; top: 0px; left: 0px; height: 90%;overflow-y: scroll;">
+                    <div id="searchholdOrder">
+                        <!-- <a class="list-group-item" style="margin: 0px; border-radius: 0px; border-width: 0px 0px 1px; border-style: solid; border-bottom-color: rgb(222, 222, 222); border-image: initial; border-top-color: initial; border-right-color: initial; padding-left: 30px; border-left-color: initial;">Delivery - N4SXW9</a> -->
+                    </div>
+                </div>
+                {% if pos_settings.enable_split_merge == 1 %}
+                <div class="modal-footer" style="float:left;width:100%;margin-top: 0;text-align: center;position: absolute; bottom: 0px; left: 0px; height: 10%;">
+                        <button type="button" class="btn btn-success" style="width:47%;" data-dismiss="modal" onclick="mergeOrdersModel()">Merge orders</button>
+                        <button type="button" class="btn btn-primary" style="width:47%;" onclick="splitOrdersModel()">Split order</button>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-9 col-sm-12 PosCartDetail" style="height: calc(100vh - 120px);border-right: 1px solid #DDD; overflow: hidden;position: relative;display: none" id="holdorderdiv">
+                    <div class="order_details">
+                        <h3 class="modal-title" style="text-transform: uppercase;text-align: center;">
+                            <b>Order details</b>
+                        </h3><br>
+                        <div id="hold_OrderDetails">
+                            <div class="col-md-6 col-sm-12 hold_OrderDetails_Left">
+                                <h4 class="modal-title" style="font-size: 14px;">
+                                    <span><b>Customer Name: </b></span><span>Mr.XYZ</span>
+                                </h4>
+                                <h4 class="modal-title" style="font-size: 14px;">
+                                    <span><b>Customer ID: </b></span><span>CUS-00024</span>
+                                </h4>
+                            </div>
+                            <div class="col-md-6 col-sm-12 hold_OrderDetails_Right">
+                                <h4 class="modal-title" style="font-size: 14px;">
+                                    <span><b>Cart ID: </b></span><span>SC-000xx</span>
+                                </h4>
+                                <h4 class="modal-title" style="font-size: 14px;">
+                                    <span><b>Total: </b></span><span>1000</span>
+                                </h4>
+                            </div>
+                        </div>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:70%;">Product</th>
+                                <th style="width:10%;">Price</th>
+                                <th style="width:10%;">Qty</th>
+                                <th style="width:10%;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="holdproductsbody">
+                                    <tr class="no-data">
+                                        <td colspan="6">No records found</td>
+                                    </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="modal-footer" style="float:left;width:100%;margin-top: 0;position: absolute; bottom: 0px; left: 0px; height: 10%;">
+                        <button type="button" class="btn btn-danger order_details_btn" onclick="clearHoldordermodel()">Cancel</button>
+                        <button type="button" class="btn btn-success order_details_btn" data-dismiss="modal" onclick="insert_holdorder_items()">Edit Order</button>
+                    </div>
+            </div>
+
+                
+
+            </div>
+
+            <!-- <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;">
+                <button type="button" class="btn" style="width:20%;" data-dismiss="modal" onclick="clearHoldordermodel()">Cancel</button>
+                <button type="button" class="btn" style="width:20%;" onclick="insert_holdorder_items()">Edit Order</button>
+            </div> -->
+        </div>
+
+    </div>
+</div>
+
+<!----------------------------------------End of POS cart------------------------------------------->
+
+<!--------------------------------------------Merge Order---------------------------------------------->
+
+<div id="MergeOrdersModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="ToggleMergeBtn web-hide" class="close"><i class="fa fa-arrows-h" aria-hidden="true" onclick="ToggleMergeView()"></i></button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Merge Orders</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+            <!-- <div id="ToggleMergeCart" class="web-hide">
+                <button class="ToggleMergeBtn"><i class="fa fa-arrows-h" aria-hidden="true" onclick="ToggleMergeView()"></i></button>
+            </div> -->
+            <div class="col-md-8 col-sm-6 col-xs-12 merge_order_list" style="padding: 0px;height: calc(100vh - 120px);border-right: 1px solid #DDD;overflow-y: scroll;background: #eee;" id="posmergeorders">
+                <!--<div class="col-md-4 col-sm-6" style="padding: 10px">
+                    <div class="card" style="width: 100%;">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style=" border-top-left-radius: 8px !important; border-top-right-radius: 8px !important;"><b>SC-000xx</b></li>
+                        <li class="list-group-item">Name:<span class="merge_card_items">xxxxxxxxxxxxxxxxxx</span></li>
+                        <li class="list-group-item">Cus_Id:<span class="merge_card_items">xxxxxxxxxxx</span></li>
+                        <li class="list-group-item">No.Items:<span class="merge_card_items">xxxxxxxxxxx</span></li>
+                        <li class="list-group-item" style=" border-bottom-left-radius: 8px !important; border-bottom-right-radius: 8px !important;">Total:<span class="merge_card_items">xxxxxxxxxx</span></li>
+                      </ul>
+                    </div>
+                </div>-->
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 merge_order_detail" style="height: calc(100vh - 120px);border-right: 1px solid #DDD; overflow: hidden;position: relative;" id="mergeOrdersDetail" >
+                    <div style="float:left;width:100%;text-align:center;margin-top: 0;position: absolute; top: 0px; left: 0px; height: 90%;overflow-y: scroll;padding: 25px">
+                        <h4 class="modal-title" style="text-transform: uppercase;text-align: center;">
+                            <b>Merging Selected Orders: <span id="MergeNo">0</span></b><br>
+                        </h4>
+                        <h5 style="text-align: left;">Select customer:</h5>
+                            <div  class="customer_select">
+                                {% if customers %}
+                                <select id="mergeCustomer" name="mergeCustomer" style="margin-left: 0px;width: 100%;">
+                                        {% for item in customers %}
+                                            <option value="{{item.name}}">{{item.full_name}}</option>
+                                        {% endfor %}
+                                </select>
+                                {% endif %}                                
+                            </div>
+                        
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:70%;">Product</th>
+                                <th style="width:10%;">Price</th>
+                                <th style="width:10%;">Qty</th>
+                                <th style="width:10%;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mergeOrderItems">
+                                    <tr class="no-data">
+                                        <td colspan="6">No records found</td>
+                                    </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="modal-footer" style="float:left;width:100%;margin-top: 0;position: absolute; bottom: 0px; left: 0px; height: 10%;">
+                        <button type="button" class="btn btn-danger merge_order_btn" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success merge_order_btn" onclick="mergeOrder()">Merge Order</button>
+                    </div>
+            </div>
+
+                
+
+            </div>
+
+            <!-- <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;">
+                <button type="button" class="btn" style="width:20%;" data-dismiss="modal" onclick="clearHoldordermodel()">Cancel</button>
+                <button type="button" class="btn" style="width:20%;" onclick="insert_holdorder_items()">Edit Order</button>
+            </div> -->
+        </div>
+
+    </div>
+</div>
+
+<!----------------------------------------End of Merge Order------------------------------------------->
+
+<!--------------------------------------------Split Order List---------------------------------------------->
+
+<div id="splitOrdersModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Split Orders List</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+
+            <div class="col-md-12 col-sm-12" style="padding: 0px;height: calc(100vh - 120px);border-right: 1px solid #DDD;overflow-y: scroll;background: #eee;" id="possplitorders">
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------------------------------------End of Split Order List------------------------------------------->
+
+<!--------------------------------------------Split Orders---------------------------------------------->
+
+<div id="splitModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="ToggleMergeBtn web-hide" class="close"><i class="fa fa-arrows-h" aria-hidden="true" onclick="ToggleSplitView()"></i></button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Split Order</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+
+            <div class="col-md-3 col-sm-6 col-xs-12 split_order_items" style="padding: 0px;height: calc(100vh - 120px);border-right: 1px solid #DDD;background: #eee;" id="possplit">
+                <div style="height: 89.2%;overflow-y: scroll;">
+                    <h4 class="modal-title" style="text-transform: uppercase;text-align: center;">
+                        <b>Order ID: <span id="SplitOrderId"></span></b><br>
+                    </h4>
+                    <p style="padding: 0px 10px">Active Split card: <b><span id="active_split_card"></span></b></p>
+                    <p style="padding: 0px 10px">Active split customer: <b><span id="active_split_cus"></span></b></p>
+                    <ul class="list-group splitorderitems" id="SplitOrderItems">
+                      <!-- <li class="list-group-item" style="height: 40px !important;line-height: 20px;"><span style="float: left;">Cras justo odio</span><span style="float: right;text-align: right;width: 10%;"><button type="button" class="btn .btn-link" style="height: 20px;line-height: 10px;text-align: center;padding: 0px 10px 0px 10px;" data-dismiss="modal">+</button></span><span style="float: right;width: 15%;text-align: center;">x2</span></li> -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-6  col-xs-12 split_order_cards" style="height: calc(100vh - 120px);border-right: 1px solid #DDD; overflow: hidden;position: relative; padding: 0px;" id="splitOrdersDetail">
+                <div style="height: 90%;">
+                    <div style="height: 40px; background: #eee;position: absolute;top: 0px; left: 0px;width: 100% !important">
+                        <div class="col-md-2 col-sm-4 col-xs-5" style="text-align: right; padding: 0px">
+                           <h4 class="modal-title" style="line-height: 40px !important;">
+                                No.of splits:
+                            </h4> 
+                        </div>
+                        <div class="col-md-10 col-sm-8 col-xs-7" style="padding: 0px">
+                            <select id="Noofsplits" name="Noofsplits" style="width: 90%; margin: 5px !important;" onchange="no_of_splits()">
+                                        
+                            </select>
+                        </div>
+                    </div>
+                    <div style="position: absolute; top:40px; left: 0px; height: calc( 89.2% - 40px);overflow-y: scroll;overflow-x: hidden;width: 100%" id="splitOrdermain">
+                        <div class="col-md-5 col-sm-12  col-xs-12" style="min-height: 200px;border: 1px solid #DDD;border-radius: 8px; overflow: hidden;position: relative;display: block;margin: 20px" id="splitCard" >
+                                <div style="float:left;width:100%;text-align:center;margin-top: 0;position: absolute; top: 0px; left: 0px;">
+                                    <h5 style="text-align: left;margin: 0px 10px">Select customer:</h5>
+                                        <div  class="customer_select" style="text-align: left">
+                                            {% if customers %}
+                                            <select id="splitCustomer" name="mergeCustomer" style="margin-left: 0px;width: 100%;margin: 10px;width: 60%">
+                                                    {% for item in customers %}
+                                                        <option value="{{item.name}}">{{item.full_name}}</option>
+                                                    {% endfor %}
+                                            </select>
+                                            {% endif %}                                
+                                        </div>
+                                    
+                                <table class="table table-striped table-bordered">
+                                    <tbody id="splitItems">
+                                                <tr class="no-data">
+                                                    <td colspan="6">No records found</td>
+                                                </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer" style="float:left;width:100%;margin-top: 0;position: absolute; bottom: 0px; left: 0px; height: 10%;background: white;">
+                        <button type="button" class="btn btn-danger split_order_btn" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary split_order_btn" onclick="check_splitOrder()">Split Order</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<!----------------------------------------End of Split Orders------------------------------------------->
+
+<!--------------------------------------------Item Addons----------------------------------------------->
+
+<div id="AddonModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;padding-left: 0px !important;">
+    <div class="modal-dialog modal-lg" style="width:40%; top:15%;">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="variantTitle" style="font-size: 14px;text-transform: uppercase;">
+                    Add-on's
+                </h4>
+            </div>
+            <div class="modal-body pad-0" id="variantBody" style="float:left;width: 100%;overflow: hidden;max-height: initial;">
+
+            </div>
+            <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;padding: 0px;">
+                <!-- <button type="button" class="btn btn-danger payment_btn" data-dismiss="modal">Cancel</button> -->
+                <button type="button" class="btn btn-default" onclick="get_Addon_values()" data-dismiss="modal" style="width: 100%;padding: 15px; font-size: 18px;">Add to Cart</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-----------------------------------------End of Item Addons------------------------------------------->
+
+<!--------------------------------------------Shipping Address----------------------------------------------->
+
+<div id="ShippingAddressModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:60%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Shipping</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;position: relative;padding: 30px;">
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Shipping Charge:</span>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Shipping Charge" aria-describedby="inputGroup-sizing-default" id="shipping_manual_charge"/>
+                </div>
+                
+            </div>
+
+            <div class="modal-footer" style="float:left;width:100%;text-align:center;margin-top: 0;">
+                <button type="button" class="btn btn-danger rtrn_rqst_btn" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success rtrn_rqst_btn" data-dismiss="modal" onclick="shipping_charges()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-----------------------------------------End of Shipping Address------------------------------------------->
+
+<!--------------------------------------------Table reservation----------------------------------------------->
+
+<div id="TableReservationModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="cancelTableReservation()">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Table Reservation</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+
+                <div class="col-md-3 col-sm-12 PosCartList" style="padding: 0px;height: calc(100vh - 120px);border-right: 1px solid #DDD;overflow-y: scroll;position: relative;">
+                    <h4 class="modal-title" style="text-transform: uppercase;text-align: center;">
+                                <b>Select Location</b>
+                            </h4><br>
+                    <div style="float:left;width:100%;margin-top: 0;position: absolute; top: 0px; left: 0px; height: 90%;overflow-y: scroll;">
+                        <div id="FloorList">
+                            <!-- <a class="list-group-item" style="margin: 0px; border-radius: 0px; border-width: 0px 0px 1px; border-style: solid; border-bottom-color: rgb(222, 222, 222); border-image: initial; border-top-color: initial; border-right-color: initial; padding-left: 30px; border-left-color: initial;">Delivery - N4SXW9</a> -->
+                        </div>
+                </div>
+
+                <div class="col-md-9 col-sm-12 PosCartDetail" style="height: calc(100vh - 120px);border-right: 1px solid #DDD; overflow: hidden;position: relative;" id="TableListDiv">
+                        <div class="table_details" style="display: none">
+                            <h4 class="modal-title" style="text-transform: uppercase;text-align: center;">
+                                <b>Select Table</b>
+                            </h4><br>
+                            <div id="TableList" class="tablelist">
+                                <!-- <div class="col-md-4 col-sm-3 col-xs-6">
+                                    <div class="card" style="width: 100%;">
+                                        <img class="card-img-top" src="/assets/frappe/images/Sorry-Image-Not-Available.png" alt="Table image" />
+                                        <div class="card-body">
+                                            <h4 class="card-text">'+name+'</h4>
+                                            <p class="card-body">'+table_html+'</p>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----------------------------------------End Of Table Reservation------------------------------------------->
+
+<!----------------------------------------------Table Details------------------------------------------------->
+
+<div id="TableDetailsModel" class="modal fade" role="dialog" style="background: transparent;height: auto;border: none;overflow: hidden;box-shadow: none;position: fixed;z-index: 999;">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="float:left; width: 100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="font-size: 14px;text-transform: uppercase;">
+                    <b>Table Reservation</b>
+                </h4>
+            </div>
+
+            <div class="modal-body" style="float:left;width: 100%;overflow: hidden;max-height: initial;padding: 0px">
+
+                <div class="col-md-4 col-sm-12 PosCartList" style="padding: 0px;height: calc(100vh - 120px);border-right: 1px solid #DDD;overflow-y: hidden;position: relative;">
+                    <h3 class="modal-title" style="text-transform: uppercase;text-align: center;" id="tabletitle">
+
+                            </h3><br>
+                    <div style="float:left;width:100%;padding: 0px 25px;">
+                        <div id="tableSeatingDetails">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <h4><b>Maximum Seats: </b><span id="max_seats"></span></h4>
+                                    <h4><b>Status: </b><span id="table_status"></span></h4>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <h4><b>Seats Occupied: </b><span id="seats_occupied"></span></h4>
+                                </div>
+                            </div>
+                            <div id="seating_count">
+                                <!-- <input style="width: 45px; height: 28px; margin: 5px;" type="number" min="0" max="'+tot_qty+'" onKeyUp="maxSeatCapacity($(this))" id="'+table_list[i].name+'" value="' + seating_nos + '"/> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-sm-12 PosCartDetail" style="height: calc(100vh - 120px);border-right: 1px solid #DDD; overflow: hidden;position: relative;" id="TableOrderDiv">
+                        <div class="table_details" style="display: none">
+                            <h3 class="modal-title" style="text-transform: uppercase;text-align: center;">
+                                Table Orders
+                            </h3><br>
+                            <div id="TableOrderList" class="tablelist">
+
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-------------------------------------------End ofTable Details---------------------------------------------->
+
+</section>
+
+<style type="text/css">
+/* a.wish-btn.btn {
+    border-radius: 50%;
+}
+a.wish-btn.btn {
+    float:right;
+    background: #fff;
+    color: #c2c2c2;
+    padding:3px 5px 0px 5px;
+    border: 1px solid;
+} */
+.CartList {
+        /*list-style: none;
+        margin-left: -30px;
+        margin-top: 10px;
+        overflow: scroll;
+        min-height: 300px !important;
+        position: fixed;
+        overflow: scroll !important;*/
+
+}
+.CartItem {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+.CartDelete {
+    margin-right: 10px;
+    color: #e8500e !important;
+/*    float: right;*/
+}
+.CartItem>a {
+    text-decoration: none;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+.productaddon-cart{
+    white-space: pre-wrap;
+    font-size: 10px;
+    color: #aaa;
+    font-family: 'Open Sans', sans-serif;
+}
+.serviceTitle {
+    font-weight: 400;
+    font-size: 12px;
+    float: left;
+    width: 65%;
+    color: #393E40;
+}
+.product-search{
+    width: 60%;
+    margin: 2px 5px;
+}
+.customer-search{
+    width: 98%;
+    margin: 2px 5px;
+}
+/*ul.horizontal {
+  list-style-type: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-color: #333333 !important;
+}
+
+li.horizontal {
+  float: left !important;
+}
+
+li a.horizontal  {
+  display: block !important;
+  color: white !important;
+  text-align: center !important;
+  padding: 16px !important;
+  text-decoration: none !important;
+}
+
+li a.horizontal :hover {
+  background-color: #111111 !important;
+}*/
+
+/*.btn {
+    background: #62757f;
+    color: #fff;
+    }
+
+.btn:hover {
+    background: #c1d5e0;
+    }*/
+    body{
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #393E40;
+            font-family: 'Poppins', sans-serif;
+
+    }
+    .cart-s span{
+            background: #f3f4f5;
+            width: 20px;
+            height: 20px;
+            border-radius: 50px;
+            color: #f23d3d;
+            margin: 0px;
+            padding-left: 0px;
+            margin-left: 5px;
+            padding: 0px;
+    }
+    .dropbtn {
+        display: block;
+        width: 100%;
+        /*height: calc(1.5em + .75rem + 2px);*/
+        padding: 0.975rem;
+        font-size: 14;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #393E40;
+        background-color:transparent;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius:0;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        margin: 0px;
+        padding-left: 12%;
+        border: none;
+        box-shadow: unset;
+        border-bottom: 1px solid #ced4da;
+        font-weight: 400;
+}
+.error{
+            display: none;
+            color: red;
+        }
+
+#ProductDiv{
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+}
+#DivProduct{
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+}
+.r-a{
+        position: absolute;
+        top: 31%;
+        right: 6%;
+    }
+.cart-ul1{
+    padding-inline-start: 0px;
+    
+   
+}
+.cart-ul2{
+      padding-inline-start: 0px;  
+}
+.cart-li{
+    padding: 5px 0px;
+    border-bottom: 1px solid #ddd;
+    display: flow-root;
+}
+.cart-li1{
+    padding: 5px 0px;
+    
+    display: flow-root;
+}
+.cart-li2{
+    padding: 5px 0px;
+    border-bottom: 1px solid #ddd;
+    display: flow-root;
+}
+
+.cart-ul{
+        padding-inline-start: 0px;
+        height: 350px;
+        overflow-y: scroll;
+        margin-bottom: 80px; 
+        position: absolute;
+        left: 0px;
+        width: 100%;
+        top: 45px;
+        height: calc(95% - 307px);
+        {% if pos_settings.enable_discounts %}
+            {% if pos_settings.enable_discounts == 1 %}
+                height: calc(95% - 307px);
+            {% else%}
+                height: calc(95% - 346px);
+            {% endif %}
+        {% endif %}
+}
+.cus-cart-ul1{
+    padding-inline-start: 0px;
+    
+   
+}
+.cus-cart-li2{
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+    display: flow-root;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color:  #f3f4f5;
+}
+
+.popover__title {
+  font-size: 16px;
+/*  line-height: 36px;*/
+  text-decoration: none;
+  color: #393E40;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.popover__wrapper {
+  position: relative;
+ /* margin-top: 1.5rem;*/
+  display: inline-block;
+}
+.popover__content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  /*left: -150px;*/
+  transform: translate(0, 10px);
+  background-color: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: 100%;
+  height: 500px;
+  top: 65px !important;
+}
+.popover__content:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  right: calc(50% - 10px);
+  top: -8px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #bfbfbf transparent;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+.popover__wrapper:hover .popover__content {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -20px);
+  transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+.popover__message {
+  text-align: center;
+}
+.buy-now-btn-desktop {
+    color: #ffffff;
+    display: block;
+    font-size: 14px;
+    padding-top: 12px;
+    width: auto;
+    font-family: inherit;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #e53a3b;
+    background: #e53a3b;
+}
+
+/* The search field */
+.myInput {
+  /*box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 49px 12px 81px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+      margin: 5px 0px 0px 5px;
+    width: 100% !important;*/
+}
+}
+
+/* The search field when it gets focus/clicked on */
+.myInput:focus {
+    /*outline: 3px solid #ddd;*/
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+    .btn {
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: .65rem 1rem;
+ 
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    .card{
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: transparent;
+            background-clip: border-box;
+            /*border: 1px solid rgba(0,0,0,.125);*/
+            border-radius: .25rem;
+            margin:5px;
+            border-radius: 12px !important
+    }
+    .card-title{
+            margin-bottom: .75rem;
+    }
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+.form-control{
+        color: #BFBFBF;
+        border: 1px solid #F2F2F2;
+        box-shadow: 0 0 13px 0 rgba(82,63,105,.05);
+
+}
+.addons{
+    display: none;
+}
+.avatar {
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+.user-i{
+        padding: 0px 10px;
+        color: #fff !important;
+    }
+.user-i2{
+    color: #BFBFBF !important;
+    font-size: 24px;
+    position: absolute;
+    top: 8px;
+    left: 9px;
+
+}
+.user-i3{
+    color: #BFBFBF !important;
+    font-size: 18px;
+    position: absolute;
+    top: 14px;
+    right: 10px;
+    vertical-align: middle;
+
+}
+
+.order_type_btn{
+    background: transparent;border: 1px solid {{pos_settings.primary_color}};margin-right: 5px;position: relative;
+}
+
+.order_type_btn_active{
+    color: white !important;    
+    margin-right: 5px;
+    position: relative;
+    background: {{pos_settings.primary_color}} !important;
+    border: 1px solid {{pos_settings.primary_color}};
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    left: 5px;
+    top: 8px;
+}
+.not-active { 
+    pointer-events: none; 
+    cursor: default; 
+}
+.custom-btn{
+    background: #fff;
+    border: 1px solid #fff;
+    /* margin-right: 5px; */
+    color: #F26B6B;
+}
+.custom-btn i{
+        padding-right: 5px;
+}
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-success:hover {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.btn-warning:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+.btn-default {
+    color: #fff;
+    background-color: #f23d3d;
+    border-color: #f23d3d;
+}
+.btn-default:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-dark {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+.btn-dark:hover {
+    color: #fff;
+    background-color: #23272b;
+    border-color: #1d2124;
+}
+.btn-light {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.btn-light:hover {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+.btn-link {
+    font-weight: 400;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.merge_card_items{
+    float: right; width:60%; overflow: hidden;text-overflow: ellipsis;text-align: right;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #DDD;
+}
+a.list-group-item, button.list-group-item {
+    color: #555;
+}
+.ui-autocomplete {
+    background: white;
+    z-index: 999;
+    width: 200px !important;
+    border: 1px solid black;
+}
+
+.modal-backdrop.in{
+    opacity: 0.3;
+    height: 100% !important;
+    z-index: unset;
+    position: fixed;
+}
+.header_title{
+   /* position: absolute;*/
+   /* top: 0px;
+    left: 12%;*/
+    /*line-height: 51px;*/
+    padding: 10px 0px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+}
+.header_right{
+    float: right;
+    padding: 10px 0px;
+   
+}
+.logo-mini {
+    background: {{pos_settings.primary_color}} url(/assets/school_theme/images/bp-ico-32.png) center no-repeat;
+    background-size: auto 32px;
+    text-indent: -99em;
+    height: 54px;
+    margin-top: 0px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 12%;
+}
+.custom_head{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 54px;
+    width: 100%;
+    /*border-bottom: 1px solid #F2F2F2;*/
+    background: #F23D3D;
+}
+.nav1bar-right{
+    display: none;
+/*    position: fixed;
+    top: 0px;
+    right: 6%;
+    float: right;
+    height: 41px;
+    padding: 11px;
+    padding: 0px;
+*/}
+.nav1bar-brand {
+    position: fixed;
+    top: 0px;
+    left: 3%;
+    float: left;
+    height: 41px;
+    padding: 11px;
+    font-size: 20px;
+    line-height: 20px;
+}
+.nav1bar {
+    display: none;
+    position: fixed;
+    height: 41px !important;
+    min-height: 41px;
+    margin-bottom: 0px;
+    border: 1px solid #DDD;
+    width: 100%;
+}
+.ui-autocomplete{
+        background: white;
+    }
+    .table{
+        margin: 0px !important;
+    }
+    @media (min-width: 1200px){
+    .container .page-content {
+        width: 100% !important;
+        /* padding-left: 290px !important; */
+        padding-left: 77px !important;
+    }
+    }
+    .page-content{
+        margin-top: 0px !important;
+    }
+    .page-title h1{
+        display: none;
+    }
+    .page-head{
+        position: unset;
+        height: 0px;
+        border: none;
+    }
+    ul.nav1.nav1-tabs1{
+        padding: 0px !important;
+    }
+
+/* ------------------------------Left Cart css------------------------------- */
+    .leftCart {
+        width: 25%;
+        /* max-width: 35%; */
+        padding: 0;
+        background: #fff;
+        float: left;
+        margin: 0;
+        position: fixed;
+        top: 54px;
+        left: 75%;
+        right: 0px;
+        height: calc(100% - 34px);
+        border-right: 1px solid #DDD;
+        border-left: 1px solid #DDD;
+        -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .leftitem {
+        float: left;
+        width: 100%;
+        border-top: 1px solid #DDD;
+        height: 80px;
+    }
+    .leftitem .span {
+        float: left;
+        width: 100%;
+        font-size: 15px;
+        font-weight: 600;
+        margin-left: 0;
+        margin-bottom: 10px;
+        padding-left: 15px;
+        padding-top: 10px;
+    }
+    .select2-container:not(.autowidth) {
+        min-width: 100% !important;
+    }
+    .select2-container {
+        position: relative;
+        display: inline-block;
+        zoom: 1;
+        display: inline;
+        vertical-align: middle;
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+        /*box-sizing: border-box;
+        width: 100%;*/
+        left: 0;
+        right: 0;
+        /*min-width: 100%;*/
+        max-width: 100%;
+        margin: 0;
+    }
+    select, input[type="file"] {
+        height: 30px;
+        line-height: 30px;
+    }
+    select {
+        width: 93%;
+        min-width: 120px;
+        border: 1px solid #cccccc;
+        background-color: #ffffff;
+        margin-left: 15px;
+        margin-bottom: 20px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .input-append, .input-prepend {
+        margin-bottom: 5px;
+        font-size: 0;
+        white-space: nowrap;
+    }
+    .ajax-loader-small {
+        display: inline-block;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        margin: 0;
+        /*background: transparent url(/Administration/Content/images/ajax_loader_small.gif) 50% 50% no-repeat;*/
+    }
+    .table-bordered {
+        border: 1px solid #DDDDDD;
+        border-collapse: separate;
+        /**border-collapse: collapse;*/
+        border-left: 0;
+        border-radius: 2px;
+    }
+    .table > thead:first-child > tr:first-child > th{
+        background-color: {{pos_settings.primary_color}};
+        color: #fff;
+        border-color: {{pos_settings.primary_color_dark}};
+        border-top: 1px solid {{pos_settings.primary_color_dark}};
+        text-align: center;
+        font-weight: 600;
+    }
+/* --------------------------- End of Left Cart Css ---------------------------- */
+
+/*--------------------------------------start of main content css--------------------------------------*/
+    .maintop {
+        float: left;
+        width: 71%;
+        /*margin-left: 29%;*/
+        margin-left: 0;
+        padding: 10px 3%;
+        border-bottom: 1px solid #DDD;
+        padding-bottom: 0;
+    }
+    .panel-default {
+        border-color: #DDDDDD;
+    }
+
+    .panel {
+        margin-bottom: 20px;
+        background-color: #ffffff;
+        border: 1px solid transparent;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-top: none;
+    }
+
+    .panel-default > .panel-heading {
+        color: #393E40;
+        background-color: #f5f5f5;
+        border-color: #DDDDDD;
+    }
+
+    .panel-heading {
+        padding: 10px 15px;
+        border-bottom: 1px solid transparent;
+        /*border-top-right-radius: 3px;*/
+        /*border-top-left-radius: 3px;*/
+    }
+
+    .nav1-tabs1 > li {
+        margin-bottom: -1px;
+    }
+
+    .nav1-tabs1 > li, .nav1-pills > li {
+        float: left;
+    }
+
+    .nav1 > li {
+        position: relative;
+        display: block;
+        text-align: center;
+        width: 100%;
+        border-right: 1px solid #F2F2F2;
+    }
+    li {
+        line-height: 18px;
+        display: block;
+    }
+    .nav1-tabs1 > li > a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        line-height: 18px;
+        
+        /*border-radius: 4px 4px 0 0;*/
+        margin-right: 2px;
+        font-size: 14px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+       /* background: #fff !important;*/
+       border-bottom: 1px solid #f2f2f2 !important;
+    }
+    .nav1 > li > a {
+        text-align: left;
+            display: block;
+            position: relative;
+            width: 115px;
+            color: #393E40;
+            word-break: break-word;
+            text-overflow: clip;
+            width: 100%;
+            /*border-left: 3px solid transparent !important;
+            border-bottom: 1px solid #F2F2F2 !important;*/
+    }
+    .nav1>li>a:hover, .nav1>li>a:focus{
+            color: #393E40;
+            /*background: #F2F2F2 !important;*/
+            text-decoration: none;
+    }
+    .nav1-tabs1>li.active>a {
+            color: #393E40 !important;
+            background-color: #f3f4f5 !important;
+            width: 100%;
+    }
+    .panel-body {
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        position: fixed;
+        top: 98px;
+        left: 16.666667%;
+        width: 58.333333% !important;
+        height: calc(100% - 98px)!important;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: #fefefe;
+        -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+         border-top: 1px solid #ddd;
+    }
+    .panel-body-header {
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        position: fixed;
+        top: 54px;
+        left: 16.666667%;
+        width: 56%;
+        height: 40;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        background: #fefefe;
+        width: 58.333333%;
+    }
+    .producttitle_overflow{
+        color: #393E40;
+        font-weight: 500;
+     /*   -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;*/
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 15px !important;
+        height: 15px !important;
+    }
+    .price{
+            color: #F23D3D;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+    }
+     .price1{
+            
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+    }
+    .producttitle span + span{
+            color: #393E40;
+    }
+    .tab-content {
+        overflow: visible;
+    }
+    .rightCart {
+        width: 100% !important;
+        float: left;
+        background: #fff;
+       
+        min-height: 500px;
+    
+    }
+    .order_details{
+        float:left;width:100%;text-align:center;margin-top: 0;position: absolute; top: 0px; left: 0px; height: 90%;overflow-y: scroll;padding: 25px;
+    }
+    .order_details_btn{
+        width: 25%;
+    }
+    .nullpadding{
+        padding: 0;
+    }
+    .productitem {
+        background: #fff;
+ 
+      
+        /*padding: 10px;*/
+      
+        width: 100%;
+     
+/*        border-left: none;
+        border-top: none;*/
+        min-height: 150px;
+        /*border-right: 1px solid #F2F2F2;
+        border-top: 1px solid #F2F2F2;*/
+   
+   
+    }
+    .itemImage {
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        padding: 5px;
+        /*margin-top: 10px;*/
+    }
+    .producttitle {
+        padding: 5px 10px;
+        color: #393E40;
+        max-height: 46px;
+        float: left;
+        font-size: 12px;
+        font-weight: 600;
+        width: 100%;
+        text-align: left;
+        background: #fff;
+
+      
+    
+    }
+
+    .producttitle-cart {
+  
+        color: #393E40;
+     
+      
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        text-align: left;
+        background: #fff;
+        white-space: pre-line;
+        
+      
+    
+    }
+    .price2{
+             color: #F23D3D;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+    }
+    .price3{
+            color: #fff;
+            font-weight: 700;
+            font-family: 'Open Sans', sans-serif;
+            float: right;
+
+    }
+    .price4{
+        font-size:10px; color:#666; font-family: 'Open Sans', sans-serif; white-space: pre-line;
+    }
+    a {
+        color: #f23d3d;
+        text-decoration: none;
+    }
+    /*.producttitle_overflow{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100%;
+            display: inline-block;
+    }
+    span.producttitle_overflow:hover{
+        white-space: normal;
+    }*/
+    .itemprice {
+        background: #F25C78;
+        color: #fff;
+       /* opacity: 0.5;*/
+        padding: 1px 5px;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 12px;
+        min-width: 40%;
+        text-align: center;
+    }
+    .addicon{
+        position: absolute;
+        bottom: 5px;
+        right: 8px;
+        color: white;
+    }
+
+/*---------------------------------------End of main content css---------------------------------------*/
+
+
+
+    .maindiv{
+        margin-right: 10px;
+    }
+    .layout-main-section-wrapper{       
+        margin-bottom: 25px;
+    }
+    #counters{
+        padding: 10px;
+    }
+    .table thead tr{
+        background: #e2e2e2;
+    }
+    .table thead tr th{
+        border-bottom: 0;
+        text-transform: capitalize;
+    }
+    #listing .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .dt-cell__content{
+        padding: 7px !important;
+    }
+    .dt-row:last-child:not(.dt-row-filter) .dt-cell__content{
+        padding: 6px !important;
+    }
+    .dt-row-header .dt-cell__content {
+        text-transform: capitalize;
+    }
+    .dt-row-header{
+        border-bottom: 0 !important;
+    }
+    .box{
+        padding: 10px 15px;
+        margin-bottom: 10px;
+    }
+    .box h5{
+        font-size: 25px;
+    }
+    #charts .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .fcharts{       
+        padding-left: 0;
+        padding-right: 0;
+        padding: 10px;
+    }
+    .fcharts .chart_box{
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    .list{
+        margin-bottom: 10px;
+    }
+    ul {
+   white-space:nowrap;
+}
+
+li {
+   display:inline;
+}
+	.panel-heading {
+        padding: 10px 15px;
+        border-bottom: 1px solid transparent;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+
+    .nav1-tabs1 > li {
+        margin-bottom: -1px;
+    }
+
+    .nav1-tabs1 > li, .nav1-pills > li {
+        float: left;
+    }
+
+    .nav1 > li {
+        position: relative;
+        display: block;
+        /*height: 50px;*/
+    }
+    li {
+        line-height: 18px;
+    }
+    .nav1-tabs1 > li > a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        line-height: 18px;
+        border: 1px solid transparent;
+        /*border-radius: 4px 4px 0 0;*/
+        margin-right: 2px;
+        font-size: 14px;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .nav1 > li > a {
+        display: block;
+        position: relative;
+        /*min-height: 50px;*/
+        line-height: 20px;
+    }
+    .pannel-heading-side{
+        position: fixed;
+        left: 0px;
+        background: #f2f2f2;
+       
+        padding-top: 0;
+        padding-bottom: 0;
+        min-height: 500px;
+     
+        overflow-y: scroll;
+        overflow-x: hidden;
+        top: 54px;
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding: 0px;
+    }
+    .ToggleCartBtn {
+      background-color : #90a4ae;
+      color: white;
+      padding: 10px 10px;
+      border-radius: 50%;
+      border-color: #46b8da;
+    }
+    .ToggleMergeBtn {
+      /*background-color : black;
+      opacity: 0.5;
+      color: white;
+      padding: 10px 10px;
+      border-radius: 50%;
+      border-color: transparent;*/
+        float: right;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 1;
+        color: #393E40;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .3;
+        /* padding: 5px; */
+        margin: 0px 10px;
+        background: transparent;
+        border: none;
+}
+    }
+    .product-search{
+            position: relative;float: left;width: 100%;height: 0px;padding: 0px 3px;
+        }
+    .hold_OrderDetails_Left{
+        text-align: left; padding: 0px;
+    }
+    .hold_OrderDetails_Right{
+        text-align: right; padding: 0px;
+    }
+    .rtrn_rqst_btn{
+        width: 20%
+    }
+    .merge_order_btn{
+        width: 30%;
+    }
+    .split_product_title{
+        
+    }
+
+    @media (max-width: 768px){
+        .mobile_quickpay_details{
+            float: right !important;
+        }
+        .mobile_quickpay_btns{
+            float: left !important;
+            margin-bottom: 10px;
+        }
+        .panel-body {
+        display: block;
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        position: fixed;
+        top: 94px;
+        left: 16.666667%;
+        width: 75% !important;
+        height: calc(100% - 94px)!important;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: #fefefe;
+    }
+    .nav1 > li > a{
+        font-size: smaller;
+    }
+    .panel-body-header {
+        display: block;
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        padding: 0;
+        border: none;
+        padding-top: 0;
+        position: fixed;
+        top: 54px;
+        left: 16.666667%;
+        width: 75%;
+        height: 40;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        background: #fefefe;
+        -ms-flex: 0 0 58.333333%;
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+    }
+    .pannel-heading-side{
+        display: block;
+        position: fixed;
+        left: 0px;
+        background: {{pos_settings.primary_color}};
+        border: none;
+        color: white;
+        padding-top: 0;
+        padding-bottom: 0;
+        min-height: 500px;
+        width: 25% !important;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        top: 54px;
+    }
+    .header_title{
+       
+       
+        /*line-height: 51px;*/
+        padding: 10px 10px;
+        font-size: 24px;
+        color: {{pos_settings.primary_color}};
+    }
+    .header_right{
+        position: absolute;
+        top: 0px;
+        right: 3%;
+        line-height: 51px;
+        padding: 0px 0px;
+        font-size: 20px;
+        color: {{pos_settings.primary_color}};
+    }
+    .logo-mini {
+        background: {{pos_settings.primary_color}} url(/assets/school_theme/images/bp-ico-32.png) center no-repeat;
+        background-size: auto 32px;
+        text-indent: -99em;
+        height: 52px;
+        margin-top: 0px;
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 25%;
+    }
+    .rtrn_rqst_btn{
+        width: 48%
+    }
+    .leftCart {
+        display: none;
+        width: 100%;
+        /* max-width: 35%; */
+        padding: 0;
+        background: #fff;
+        float: left;
+        margin: 0;
+        position: fixed;
+        top: 54px;
+        /*left: 78px;*/
+        right: 0px;
+        height: calc(100% - 34px);
+        border-right: 1px solid #DDD;
+        border-left: 1px solid #DDD;
+    }
+    #ToggleCart {
+      display: block !important;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 999;
+    }
+    .categoriestab a:after{
+        content:"EA46";
+    }
+    #ToggleMergeCart {
+      display: block !important;
+      position: absolute;
+      bottom: 20px;
+      right: 15px;
+      z-index: 999;
+    }
+    .web-hide{
+        display: block !important;
+    }
+    .product-search{
+            position: relative;float: left;width: 85%;height: 0px;padding: 0px 3px;
+        }
+    .PosCartList{
+        display: block;
+    }
+    .PosCartDetail{
+        display: none;
+    }
+    .returnList{
+        display: block;
+    }
+    .returnDetail{
+        display: none;
+    }
+    .modal-footer{
+            padding: 7px !important;
+        }
+    .modal.in .modal-dialog{
+        margin-top: 8%;
+        width: 95% !important;
+    }
+    .order_details{
+        float:left;width:100%;text-align:center;margin-top: 0;position: absolute; top: 0px; left: 0px; height: 90%;overflow-y: scroll;padding: 5px;
+    }
+    .order_details_btn{
+        width: 48%;
+    }
+    .hold_OrderDetails_Right{
+        text-align: left; padding: 0px;
+    }
+    .payment_btn{
+        width: 48%;
+    }
+
+    .pad-0{
+        padding: 0;
+    }
+    .pad-5{
+        padding: 5px !important;
+    }
+    .margin-0{
+        margin: 0px;
+    }
+    .font-smaller{
+        font-size: smaller;
+    }
+    textarea {
+        width: 100%
+    }
+    .merge_order_btn{
+        width: 47%;
+    }
+    .merge_order_list{
+        display: block;
+    }
+    .merge_order_detail{
+        display: none;
+    }
+    .cart_label{
+        position: absolute;
+        top: 4px;
+        right: 2px;
+        padding: 3px;
+        font-size: 9px;
+        border-radius: 50%;
+        color: #fff;
+        opacity: 0.7;
+        background: #393E40;
+    }
+    .hold_label{
+        position: absolute;
+        top: 4px;
+        right: 2px;
+        padding: 3px;
+        font-size: 9px;
+        border: 1px solid {{pos_settings.primary_color}};
+        border-radius: 50%;
+        color: #fff;
+        opacity: 0.7;
+        background: #393E40;
+    }
+    .split_order_items{
+            display: block;
+    }
+    .split_order_cards{
+            display:none;
+    }
+    .split_order_btn{
+        width: 48%
+    }
+    .mobile-hide{
+        display: none !important;
+    }
+    .mob-overflow-x{
+        overflow-x: scroll !important;
+    }
+    .mob-inline-flex{
+        display: inline-flex !important;
+    }
+    }
+    @media (min-width: 768px){
+        .web_quickpay_details{
+            float: left !important;
+        }
+        .web_quickpay_btns{
+            float: right !important;
+        }
+        .web-hide{
+            display: none !important;
+        }
+        .panel-body{
+            display: block !important;
+        }
+        .leftCart{
+            display: block !important;
+        }
+        .panel-body-header {
+            display: block !important;
+        }
+        .pannel-heading-side{
+            display: block !important;
+        }
+        #ToggleCart {
+          display: none;
+          position: fixed;
+          bottom: -4px;
+          right: 10px;
+          z-index: 999;
+        }
+        .PosCartList{
+            display: block !important;
+        }
+        .PosCartDetail{
+            /*display: block !important;*/
+        }
+        .returnList{
+            display: block !important;
+        }
+        .merge_order_list{
+            display: block !important;
+        }
+        .merge_order_detail{
+            display: block !important;
+        }
+        .split_order_items{
+            display: block !important;
+        }
+        .split_order_cards{
+            display: block !important;
+        }
+        .split_order_btn{
+            width: 20%;
+        }
+        .payment_btn{
+            width: 20%;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    function myFunction() {
+  document.getElementById("sec-auto").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementByClass("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("sec-auto");
+  // a = div.getElementsByTagName("a");
+  a = document.getElementsByClassName("cart-li2");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+
+{% endblock %}
+
+

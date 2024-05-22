@@ -1,0 +1,943 @@
+<div class="order-detail">
+   <div class="row">
+   	
+      <div class="col-md-12">
+         <div class="col-md-9" style="width: calc(100% - 315px);padding-right: 0;">
+
+            <div class="order-left-panel">
+              {%if order_settings.show_flow_chart == 1%}
+              {%if not restaurant%}
+            	<div class="costeps row no-gutters">
+            		<div class="order-progress-bar">
+              
+		<div class="col-md-3 costep active" data-step="cart">
+			<a class="costep-link" href="/cart">
+				<i class="costep-icon"></i>
+				<span class="costep-label">Placed</span>
+			</a>
+		</div>
+    {%if check_process_status == 0%}
+		<div class="col-md-3 costep {%if order_details.status == 'Packed' or order_details.status == 'Shipped' or order_details.status == 'Delivered' or order_details.status == 'Completed'%}active{%endif%}" data-step="address">
+			<a class="costep-link" href="javascript:void(0)">
+				<i class="costep-icon"></i>
+				<span class="costep-label">Packed</span>
+			</a>
+		</div>
+    {%else%}
+    <div class="col-md-3 costep {%if order_details.status == 'In Process' or order_details.status == 'Shipped' or order_details.status == 'Delivered' or order_details.status == 'Ready' or order_details.status == 'Completed'%}active{%endif%}" data-step="address">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">In Process</span>
+      </a>
+    </div>
+
+    {%endif%}
+    {%if allow_shipment == 1%}
+		<div class="col-md-3 costep {%if order_details.status == 'Shipped' or order_details.status == 'Delivered' or order_details.status == 'Completed'%}active{%endif%}" data-step="shipping">
+			<a class="costep-link" href="javascript:void(0)">
+				<i class="costep-icon"></i>
+				<span class="costep-label">Shipped</span>
+			</a>
+		</div>
+    {%else%}
+      <div class="col-md-3 costep {%if order_details.status == 'Ready' or order_details.status == 'Delivered' or order_details.status == 'Completed'%}active{%endif%}" data-step="shipping">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Ready</span>
+      </a>
+    </div>
+    {%endif%}
+		<div class="col-md-3 costep {%if order_details.status == 'Delivered' or order_details.status == 'Completed'%}active{%endif%}" data-step="payment">
+			<a class="costep-link" href="javascript:void(0)">
+				<i class="costep-icon"></i>
+				<span class="costep-label">Delivered</span>
+			</a>
+		</div>
+		<div class="col-md-3 costep {%if order_details.status == 'Completed' or (order_details.status == 'Delivered' and order_details.payment_status == 'Paid')%}active{%endif%}" data-step="confirm">
+			<a class="costep-link" href="javascript:void(0)">
+				<i class="costep-icon"></i>
+				<span class="costep-label">Completed</span>
+			</a>
+		</div>
+		</div>
+		</div>
+    {%else%}
+    {%if order_details.shipping_method_name == 'Pickup'%}
+      <div class="costeps row no-gutters restaurant-chart">
+                <div class="order-progress-bar">
+              
+    <div class="col-md-3 costep active" data-step="cart">
+      <a class="costep-link" href="/cart">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Placed</span>
+      </a>
+    </div>
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Restaurant Accepted ' or order_details.workflow_state == 'Order Picked' or order_details.workflow_state == 'Order Completed' %}active{%endif%}" data-step="address">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Restaurant Accepted</span>
+      </a>
+    </div>
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Order Picked' or order_details.workflow_state == 'Order Completed'%}active{%endif%}" data-step="shipping">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Order Picked</span>
+      </a>
+    </div>
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Order Completed'%}active{%endif%}" data-step="confirm">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Order Completed</span>
+      </a>
+    </div>
+    </div>
+    </div>
+    {%else%}
+    <div class="costeps row no-gutters restaurant-chart">
+                <div class="order-progress-bar">
+              
+    <div class="col-md-3 costep active" data-step="cart">
+      <a class="costep-link" href="/cart">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Placed</span>
+      </a>
+    </div>
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Restaurant Accepted' or order_details.workflow_state == 'Driver Accepted' or order_details.workflow_state == 'Out For Delivery' or order_details.workflow_state == 'Order Completed' or  order_details.workflow_state == 'Delivered' %}active{%endif%}" data-step="address">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Restaurant Accepted</span>
+      </a>
+    </div>
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Driver Accepted' or order_details.workflow_state == 'Out For Delivery' or order_details.workflow_state == 'Order Completed' or  order_details.workflow_state == 'Delivered' %}active{%endif%}" data-step="shipping">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Driver Accepted</span>
+      </a>
+    </div>
+   
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Order Completed' or  order_details.workflow_state == 'Delivered' %}active{%endif%}" data-step="shipping">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Delivered</span>
+      </a>
+    </div>
+    <div class="col-md-3 costep {%if order_details.workflow_state == 'Order Completed' %}active{%endif%}" data-step="confirm">
+      <a class="costep-link" href="javascript:void(0)">
+        <i class="costep-icon"></i>
+        <span class="costep-label">Order Completed</span>
+      </a>
+    </div>
+    </div>
+    </div>
+    {%endif%}
+    {%endif%}
+
+    {%endif%}
+               <div class="detail-head" style="
+    margin-bottom: 7px;
+    border-bottom: 1px solid #e4e8eb;
+    padding-bottom: 10px;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    padding-left: 15px;
+"><span class="head-text">Order Summary</span>
+<span class="right-list-icon">
+  <i class="fa fa-money"></i>
+  {{order_details.payment_method_name}}
+</span>
+<span class="right-list-icon">
+  <i class="fa fa-truck"></i>
+  {{order_details.shipping_method_name}}
+</span>
+
+</div>
+               <div class="products-table">
+                  <div class="table-head">
+                     <div class="col-md-5">Item</div>
+                     <div class="col-md-7">
+                        {% if not restaurant %}
+                        <div class="col-md-2 meat-column" style="text-align: center;">
+                           SKU
+                        </div>
+                        {%endif%}
+                        
+                        <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: center;">
+                           Quantity
+                        </div>
+                        <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: center;">
+                           Weight
+                        </div>
+                        <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: right">
+                           Base Price
+                        </div>
+                        <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: right">
+                           Total
+                        </div>
+                     </div>
+                  </div>
+                  <div class="products-data">
+                     {% for item in order_details.order_item %}
+                     <div class="item-row">
+			
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                           <div style="padding: 0;float: left;margin-right: 10px;">
+
+                              {% if item.is_free_item==1 %}
+                              <div class="free-item">
+                                 <div class="wrap"><span>Free</span></div>
+                              </div>
+                              {% endif %}                                
+                              <img src="{% if item.item_image %}{{item.item_image}}{% else %}/assets/{% if restaurant %}restaurantcmswebsite{% else %}cmswebsite{% endif %}/images/no-img-120.jpg{% endif %}" class="img-responsive" style="margin: auto;height: auto;border: 1px solid #e4e8eb;padding: 2px;border-radius: 5px;max-width: 40px;" />
+                           </div>
+                           <div style="float: left;width: calc(100% - 50px);" >
+                            <a href="/desk#Form/Product/{{item.item}}" target="_blank">
+                              <h5>{{item.item_name}}</h5>
+                              {%set bundle_items = frappe.db.get_all("Bundle Item",fields=['*'],filters={"parent":item.item})%}
+                              {%for bundle_item in bundle_items%}{% if bundle_item.product_name %}
+                              <div class="attr-desc">
+                                 {{bundle_item.quantity}} x {{bundle_item.product_name}} 
+                              </div>
+                              {% endif %}{%endfor%}
+                              {% if item.attribute_description %}
+                              <div class="attr-list">{{item.attribute_description}}</div>
+                              {% endif %}
+                              {% if item.special_instruction %}
+                              <p>{{item.special_instruction}}</p>
+                              {% endif %}
+                            </a>
+                           </div>
+                        </div>
+                        <div class="col-md-7">
+                           {% if not restaurant %}
+                           <div class="col-md-2 meat-column" style="text-align: center;">
+                              {{item.item_sku}}
+                           </div>
+                           {%endif%}
+                           <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: center;">
+                              {{item.quantity}}
+                           </div>
+                           <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: center;">
+                              {{"%0.2f" % item.weight | float}}
+                           </div>
+                           <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: right">
+                             {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.base_price | float}}
+                           </div>
+                           
+                           <div class="{% if not restaurant %}col-md-2 meat-column{%else%}col-md-4{%endif%}" style="text-align: right">
+                              {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.amount | float }}
+                           </div>
+                        </div>
+                     </div>
+                     {%endfor%}
+                     <div class="order-payment" style="padding-bottom: 5px;border: none;border-radius: 0;box-shadow: none;margin-top: 0;">
+			<div class="right-row">
+                           <span class="right-row-title">{{ _("Total Items") }}</span>
+                           <span class="right-row-value">{{ order_details.order_item | sum(attribute='quantity') }}</span>
+                        </div>
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Item(s) Total") }}</span>
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.order_subtotal | float }}</span>
+                        </div>
+                        {% if order_details.discount %}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Discount") }}</span>
+                           <span class="right-row-value">-{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.discount | float }}</span>
+                        </div>
+                        {%endif%}
+                        {% if order_details.gift_card_amount %}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Gift Card Amount") }}</span>
+                           <span class="right-row-value">-{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.gift_card_amount | float }}</span>
+                        </div>
+                        {%endif%}
+                         {%if order_details.checkout_attributes%}
+                        {%for item in order_details.checkout_attributes%}
+                        {%if  item.price_adjustment | float > 0%}
+                        <div class="right-row">
+                           <span class="right-row-title">{{item.attribute_description}}</span>
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.price_adjustment | float }}</span>
+                        </div>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        {% if restaurant and order_details.tip_amount > 0 %}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Tip Amount") }}:</span>
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.tip_amount | float }}</span>
+                        </div>
+                        {% endif %}
+                        {% if restaurant %}
+                        {% if order_details.shipping_method_name == "Delivery" %}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Shipping Charge") }}</span>
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.shipping_charges | float }}</span>
+                        </div>
+                        {% endif %}
+                        {% if order_details.shipping_method_name == "Pickup" and order_details.pickup_charge > 0 %}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Pickup Charge") }}</span>
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.pickup_charge | float }}</span>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Shipping Charge") }}</span>
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.shipping_charges | float }}</span>
+                        </div>
+                        {% endif %}
+                        {% if order_details.total_tax_amount %}
+                        <div class="right-row">
+                           {% if catalog_settings.included_tax == 1 %}
+                           <span class="right-row-title">{{ _("Tax (Incl. tax)") }}</span>
+                           {% else %}
+                           <span class="right-row-title">{{ _("Tax") }}</span>
+                           {% endif %}
+                           <span class="right-row-value">{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.total_tax_amount | float }}</span>
+                        </div>
+                        {% endif %}
+                        {% set total_amount = (order_details.total_amount | float) %}
+                        <div class="order-total">
+                           <span class="right-row-title"><b>{% if (order_details.paid_using_wallet and order_details.paid_using_wallet > 0) or (order_details.redeem_loyalty_points == 1 and order_details.loyalty_amount > 0) %}{{ _("Sub Total") }}{% else %}{{ _("Order Total")}}{% endif %}</b></span>
+                           <span class="right-row-value"><b>{% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % order_details.total_amount | float }}</b></span>
+                        </div>                       
+                        <div class="order-total" >
+                        {% if order_details.paid_using_wallet %}
+                        {% if order_details.paid_using_wallet > 0 %}
+                        {% set total_amount = total_amount - (order_details.paid_using_wallet | float) %}
+                         <div class="right-row">
+                           <span class="right-row-title">{{ _("Wallet Amount Debited") }}</span>
+                           <span class="right-row-value">{{currency}}{{"%0.2f" % order_details.paid_using_wallet | float }}</span>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                        {% if order_details.redeem_loyalty_points == 1 %}
+                         <div class="right-row" style="display: none;">
+                           <span class="right-row-title">{{ _("Reward / Loyalty points used") }}</span>
+                           <span class="right-row-value">{% if currency %}{% else %}${% endif %}{{"%0.2f" % order_details.loyalty_points | float }}</span>
+                        </div>
+                        {% endif %}
+                          {% if order_details.loyalty_amount > 0 %}
+                          {% set total_amount = total_amount - (order_details.loyalty_amount | float) %}
+                         <div class="right-row">
+                           <span class="right-row-title">{{ _("Reward / Loyalty Amount") }} ({{order_details.loyalty_points | int}} pts)</span>
+                           <span class="right-row-value">{% if currency %}{% else %}${% endif %}{{currency}}{{"%0.2f" % order_details.loyalty_amount | float }}</span>
+                          </div>
+                      
+                        {% endif %}
+                        {% if total_amount < order_details.total_amount %}
+                        <div class="right-row">
+                           <span class="right-row-title"><b>{{ _("Order Total") }}</b></span>
+                           <span class="right-row-value"><b>{% if currency %}{% else %}${% endif %}{{currency}}{{"%0.2f" % total_amount | float }}</b></span>
+                          </div>
+                        {% endif %}
+                        {% set payment_method = frappe.db.get_value("Payment Method", order_details.payment_method, 'payment_type') %}
+                        {% if payment_method and payment_method == "Online Payment" %}
+                        {% if order_details.advance_amount%}
+                        {% if order_details.advance_amount > 0%}
+                        <div class="right-row">
+                           <span class="right-row-title">{{ _("Advance Amount") }}</span>
+                           <span class="right-row-value">{{currency}}{{"%0.2f" % order_details.advance_amount | float }}</span>
+                        </div>
+                        {%endif%}
+                        {%endif%}
+                        
+                         {% if order_details.paid_amount > 0 and not order_details.advance_amount>0 and order_details.outstanding_amount>0%}
+                         <div class="right-row">
+                           <span class="right-row-title">{{ _("Paid Amount") }}</span>
+                           <span class="right-row-value">{{currency}}{{"%0.2f" % order_details.paid_amount | float }}</span>
+                        </div>
+                         {%endif%}
+                        {%endif%}
+                         {%if order_details.total_amount != order_details.outstanding_amount%}
+                       {%if order_details.outstanding_amount | float > 0%}
+                        <div class="right-row">
+                           <span class="right-row-title"><b>{{ _("Outstanding Amount") }}</b></span>
+                           <span class="right-row-value"><b>{% if currency %}{% else %}${% endif %}{{currency}}{{"%0.2f" % order_details.outstanding_amount | float }}</b></span>
+                          </div>
+                          {%endif%}
+                           {%endif%}
+                      </div>
+                        
+                         
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {%if order_details.checkout_attributes%}
+            {%for item in order_details.checkout_attributes%}
+            {%if  item.attribute_description%}
+             <div class="order-left-panel">
+              
+              <span style="
+    font-weight: 500;
+    padding-bottom: 10px;
+    float: left;
+    width: 100%;
+    line-height: 30px;
+">{{item.attribute_description}}</span>
+             </div>
+             {%endif%}
+            {%endfor%}
+            {%endif%}
+            {%if  order_details.delivery_date and order_details.ship_date %}
+             <div class="order-left-panel">
+              <p><span>Ship Date:</span>
+              <span style="
+    font-weight: 500;
+    padding-bottom: 10px;
+    line-height: 30px;
+"> {{order_details.ship_date.strftime('%b %d , %Y') }}</span></p>
+<p><span>Delivery Date: </span>
+              <span style="
+    font-weight: 500;
+    padding-bottom: 10px;
+    line-height: 30px;
+"> {{order_details.delivery_date.strftime('%b %d , %Y') }}</span></p>
+             </div>
+             {%endif%}
+            {%if order_details.tax_breakup%}
+            <div class="order-left-panel">
+              <span class="head-text" style="
+    margin-bottom: 15px;
+    float: left;
+    margin-top: 5px;
+">Tax Breakup</span>
+              <div class="products-table">
+               <div class="table-head">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          Tax
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          Tax Type
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          Tax %
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          Tax Amount
+                        </div>
+                      </div>
+                      {%for item in tax_splitup%}
+                      <div class="item-row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          {{item.type}}
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          {{item.tax_type}}
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          {{"%0.2f" % item.rate | float }}%
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.amount | float }}
+                        </div>
+                      </div>
+                      {%endfor%}
+            </div>
+            </div>
+            {%endif%}
+            {%if shipments %}
+            <div class="order-left-panel">
+              <span class="head-text" style="
+    margin-bottom: 15px;
+    float: left;
+    margin-top: 5px;
+">Shipments</span>
+              <div class="products-table">
+               <div class="table-head">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          Status
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          Date
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          Track & Trace
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          Total Amount
+                        </div>
+                      </div>
+                      {%for item in shipments%}
+                      <div class="item-row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          {{item.status}}
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          {%if item.status == "Delivered"%}
+                          {{ frappe.format(item.delivered_date, {'fieldtype': 'Date'}) }}
+                          {%else%}
+                          {{ frappe.format(item.shipped_date, {'fieldtype': 'Date'}) }}
+                          {%endif%}
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          {%if item.tracking_number%}
+                         <a style="
+    color: #267db9;
+" {%if item.tracking_link%}href="{{item.tracking_link}}"{%endif%} target="_blank">{{item.tracking_number}}</a>
+{%endif%}
+            {%if item.shipment_label%}
+            <a style="
+    color: #267db9;
+          " href="{{item.shipment_label}}" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+            {%endif%}
+                        </div>
+                         <div class="col-md-3 col-sm-6 col-xs-12">
+                          {% if currency %}{{currency}}{% else %}${% endif %}{{"%0.2f" % item.order_total| float }}
+                        </div>
+                      </div>
+                      {%endfor%}
+            </div>
+            </div>
+            {%endif%}
+            {%if status_history %}
+            <div class="order-left-panel">
+              <span class="head-text" style="
+    margin-bottom: 15px;
+    float: left;
+    margin-top: 5px;
+">Timeline</span>
+              <div class="products-table">
+              
+                      {%for item in status_history%}
+                      <div class="item-row">
+                         <div class="col-md-8 col-sm-6 col-xs-12">
+                          {%if not item.notes and item.new_status == 'Placed' %}
+                          Order Placed
+                          {%else%}
+                          {{item.notes}}
+                          {%endif%}
+                          <br/>
+                          <span class="updated-by">By {{item.owner}}</span>
+                        </div>
+                       
+                         <div class="col-md-4 col-sm-6 col-xs-12 text-right" style="padding-top: 10px">
+                         {{item.updated_on.strftime('%b %d , %Y at %I:%M %p') }}
+                        </div>
+                        
+                      </div>
+                      {%endfor%}
+            </div>
+            </div>
+            {%endif%}
+         </div>
+         <div class="col-md-3" style="width: 315px">
+          {%if order_details.discount_coupon%}
+          <div class="order-right-panel">
+   <i class="fa fa-tag" style="
+      background: #28a744;
+      color: #fff;
+      padding: 12px 13px;
+      border-radius: 50%;
+      font-size: 21px;
+      float: left;
+      margin-right: 10px;
+      "></i><span style="
+      float: left;
+      width: calc(100% - 55px);
+      margin-bottom: 5px;
+      font-weight: 500;
+      ">Coupon code used</span><span style="
+      float: left;
+      width: calc(100% - 55px);
+      margin-bottom: 10px;
+      color: #931a19;
+      font-weight: 500;
+      ">
+   {{order_details.discount_coupon}}</span>
+</div>
+{%endif%}
+ {%if order_details.giftcard_coupon_code%}
+          <div class="order-right-panel">
+   <i class="fa fa-gift" style="
+      background: #28a744;
+      color: #fff;
+      padding: 12px 13px;
+      border-radius: 50%;
+      font-size: 21px;
+      float: left;
+      margin-right: 10px;
+      "></i><span style="
+      float: left;
+      width: calc(100% - 55px);
+      margin-bottom: 5px;
+      font-weight: 500;
+      ">Gift Card code used</span><span style="
+      float: left;
+      width: calc(100% - 55px);
+      margin-bottom: 10px;
+      color: #931a19;
+      font-weight: 500;
+      ">
+   {{order_details.giftcard_coupon_code}}</span>
+</div>
+{%endif%}
+            <div class="order-right-panel">
+               <div class="customer-info">
+                  <span class="detail-head" style="margin-bottom: 10px;">Customer</span>
+                  <div class="right-row">
+                     <div class="customer-info-row">
+                        <i class="fa fa-user"></i>
+                        <span>{{customer_fullname}}</span>
+                     </div>
+                  </div>
+                  <div class="right-row">
+                     <div class="customer-info-row">
+                      <a onclick="load_email('Order','{{order_details.customer_email}}')">
+                        <i class="fa fa-envelope"></i>
+                        <span>{{order_details.customer_email}}</span>
+                      </a>
+                     </div>
+                  </div>
+                  <div class="right-row">
+                     <div class="customer-info-row">
+                        <i class="fa fa-phone"></i>
+                        <span>{{order_details.phone}}</span>
+                     </div>
+                  </div>
+                  
+                  
+                  
+               </div>
+            
+               
+           
+            </div>
+               <div class="order-right-panel" style="margin-top: 15px;padding-bottom: 10px;">
+                <span class="detail-head" style="margin-bottom: 10px;">Billing Address</span>
+                  <div class="customer-info-row">
+                     <span>{{order_details.first_name}} {{order_details.last_name}}<br/>{{order_details.address}}<br/>
+                     {{order_details.city}}<br/>
+                     {{order_details.state}}<br/>
+                     {{order_details.country}} - {{order_details.zipcode}}
+                     </span>
+                  </div>
+                  <div class="separator">
+                  </div>
+                  <span class="detail-head" style="margin-bottom: 10px;">Shipping Address</span>
+                  <div class="customer-info-row">
+                     <span>
+                     {{order_details.shipping_first_name}} {{order_details.shipping_last_name}}<br/>
+                     {{order_details.shipping_shipping_address}}<br/>
+                     {{order_details.shipping_city}}<br/>
+                     {{order_details.shipping_state}}<br/>
+                     {{order_details.shipping_country}} - {{order_details.shipping_zipcode}}
+                     </span>
+                  </div>
+                  
+                 
+               </div>
+               {%if customer_notes%}
+                <div class="order-right-panel" style="margin-top: 15px;padding-bottom: 10px;">
+                   <span class="detail-head" style="margin-bottom: 10px;">Customer Notes</span>
+                  <div class="customer-info-row">
+                     <span>
+                     {{customer_notes}}
+                     </span>
+                  </div>
+                </div>
+                {%endif%}
+               {%if farm_share_notes%}
+                <div class="order-right-panel" style="margin-top: 15px;padding-bottom: 10px;">
+                   <span class="detail-head" style="margin-bottom: 10px;">Farm Share Notes</span>
+                  <div class="customer-info-row">
+                     <span>
+                     {{farm_share_notes}}
+                     </span>
+                  </div>
+                </div>
+                {%endif%}
+         </div>
+      </div>
+   </div>
+</div>
+
+<style type="text/css">
+  .col-md-2.meat-column {
+    width: 20%;
+}
+	.order-detail {
+        background-color: #fafbfc;
+   width: calc(100% + 58px);
+    margin-left: -29px;
+    float: left;
+    padding-top: 0px;
+    padding-bottom: 15px;    margin-top: -51px;
+}
+[data-page-route="Form/Order"] .form-layout{
+  margin-top: -36px;
+}
+[data-page-route="Form/Order"]  .form-inner-toolbar{
+  position: absolute;
+    top: 0;
+    width: 100%;padding-right: 30px;
+}
+.order-left-panel,.order-payment,.order-right-panel  {
+  float: left;
+    width: 100%;
+    background: #fff;
+    padding: 10px 15px;
+    box-shadow: 0 0 2px #d1d8dd;
+    border-radius: 5px;
+    padding-bottom: 0;margin-top:15px;
+}
+.customer-info{
+    padding-bottom: 15px;
+}
+.products-table {
+    float: left;
+    width: calc(100% + 30px);
+    margin-top: 0px;
+    margin-left: -15px;
+}
+span.detail-head {
+    float: left;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 500;
+}
+.item-row {
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e4e8eb;
+    padding-top: 10px;
+}
+.table-head {
+    font-weight: 500;
+    border-bottom: 1px solid #e4e8eb;
+    float: left;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.item-row:last-child
+{
+	border-bottom: none;
+}
+.attr-list {
+    color: #919191;
+    font-size: 12px;
+    margin-top: 3px;
+}
+.item-row h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 13px;line-height: 20px;
+}
+.right-row {
+    float: left;
+    width: 100%;
+    margin: 5px 0 10px 0;
+}
+span.right-row-value {
+    text-align: right;
+    float: left;
+    width: 25%;
+}
+span.right-row-title {
+        float: left;
+    width: 75%;
+    text-align: right;
+    font-weight: 500;
+
+}
+.order-total {
+    border-top: none;
+    float: left;
+    width: calc(100% + 30px);
+    padding: 0 10px;
+    margin-left: -15px;
+    margin-top: 10px;
+    font-size: 13px;
+}
+.customer-info-row i {
+    margin-right: 5px;
+}
+.separator {
+       float: left;
+    width: 100%;
+    border-top: 1px solid #e4e8eb;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.customer-info-row {
+    float: left;
+    width: 100%;
+}
+.products-data {
+    font-size: 13px;
+    }
+    span.info-title {
+       float: left;
+    margin-right: 5px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+span.info-value {
+    float: left;
+    /* text-align: right; */
+    width: 50%;
+}
+.order-info .col-xs-12 {
+padding: 0}
+.order-info 
+{
+	    margin-top: 0;
+    padding-bottom: 10px;
+    padding: 0;
+    float: left;
+    width: 100%;font-size: 13px;
+}
+.order-info-item {
+    float: left;
+    width: 100%;
+}
+
+
+.col-2 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.66667%;
+    flex: 0 0 16.66667%;
+    max-width: 16.66667%;
+}
+.costep {
+    text-align: center;
+    z-index: 1;
+}
+.no-gutters>.col, .no-gutters>[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+.costeps {
+    position: relative;
+
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+.costep:before, .costep:after {
+    display: block;
+    content: ' ';
+    position: absolute;
+    height: 2px;
+    background-color: #d3d3d3;
+    z-index: 0;
+    top: 5px;
+}
+.costep:after {
+    left: 50%;
+    right: 0;
+}
+.costep:before, .costep:after {
+    top: 12px;
+}	
+.costep:before {
+    left: 0;
+    right: 50%;
+}
+.costep, .costep-link, .costep-icon {
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.col-md-3.costep {
+    width: 20%;
+}
+.costep-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    display: block;
+    padding: 0.5rem 3px 0 3px;
+    color: #cccccc;
+}
+span.costep-label {
+    width: 100%;
+    float: left;
+}
+i.costep-icon {
+    width: 25px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+}
+.col-md-3.costep.active i.costep-icon {
+	background-color: #28a745;
+}
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    float: left;
+    margin-bottom: 10px;
+    width: calc(100% + 30px);
+    /* max-width: 100%; */
+    margin-left: -15px;
+    border-bottom: 1px solid #e4e8eb;
+    padding-bottom: 15px;
+    margin-top: 5px;
+}
+.order-progress-bar {
+        float: left;
+    width: 100%;
+    /* background: #fff; */
+    max-width: 520px;
+    margin-left: -15px;
+}
+.costep.active:before, .costep.active:after 
+{
+	background-color: #28a745;
+}
+ .costep:last-child:after,.costep:first-child:before{
+ 	content: none;
+ }
+ .col-md-3.costep.active i.costep-icon::before {
+    content: "\f00c";
+    display: inline-block;
+    font: normal normal normal 13px/1 FontAwesome;
+    color: #fff;
+    padding-top: 6px;
+
+}
+.col-md-3.costep.active .costep-label
+{
+	margin-top: 5px;
+    color: #222;
+	
+}
+span.right-list-icon {
+       background: #d1ecf1;
+    float: right;
+    margin-right: 15px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #bee5eb;
+    margin-top: -3px;
+    color: #0c5460;
+}
+.costeps.row.no-gutters.restaurant-chart .order-progress-bar {
+    max-width: 100%;
+}
+span.right-list-icon i {
+    margin-right: 5px;
+}
+span.head-text {
+    font-weight: 500;
+    font-size: 15px;
+}
+span.updated-by {
+    color: #838383;
+    font-size: 13px;
+    margin-top: 5px;
+    float: left;
+    width: 100%;
+}
+</style>
+

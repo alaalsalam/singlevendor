@@ -1,0 +1,59 @@
+{
+ "autoname": "field:name1",
+ "creation": "2019-04-25 13:25:56.055896",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "name1",
+  "subject",
+  "body",
+  "replacement_variables"
+ ],
+ "fields": [
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "body",
+   "fieldtype": "HTML Editor",
+   "ignore_xss_filter": 1,
+   "label": "Message"
+  },
+  {
+   "fieldname": "replacement_variables",
+   "fieldtype": "HTML",
+   "label": "Replacement Variables"
+  }
+ ],
+ "modified": "2020-09-21 23:32:59.990877",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Email Template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

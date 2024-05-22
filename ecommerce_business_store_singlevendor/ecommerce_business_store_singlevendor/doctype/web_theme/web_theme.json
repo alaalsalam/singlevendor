@@ -1,0 +1,1073 @@
+{
+ "autoname": "Prompt",
+ "creation": "2019-11-20 14:05:22.082559",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "is_active",
+  "enable_noindex",
+  "clp",
+  "production_mode",
+  "general",
+  "boxed_layout",
+  "favicon",
+  "column_break_2",
+  "body_bg_image",
+  "cl",
+  "body_bg_color",
+  "body_link_color",
+  "font_family",
+  "heading_text_color",
+  "column_break_4",
+  "body_text_color",
+  "body_link_hover_color",
+  "body_theme_color",
+  "fonts",
+  "google_fonts",
+  "font_sizes",
+  "small",
+  "column_break_23",
+  "medium",
+  "column_break_25",
+  "large",
+  "css",
+  "css_list",
+  "custom_css",
+  "page_css",
+  "js",
+  "js_list",
+  "custom_js",
+  "page_js",
+  "header_and_footer_templates",
+  "header_template",
+  "grid_product_box",
+  "column_break_17",
+  "footer_template",
+  "list_product_box",
+  "top_header",
+  "enable_top_header",
+  "background_color",
+  "column_break_30",
+  "text_color",
+  "column_break_32",
+  "link_hover_color",
+  "section_break_34",
+  "left_side_content",
+  "column_break_36",
+  "right_side_content",
+  "header",
+  "header_bg_color",
+  "header_badge_color",
+  "column_break_10",
+  "header_text_color",
+  "minicart_bg_color",
+  "column_break_12",
+  "header_hover_color",
+  "minicart_text_color",
+  "column_break_14",
+  "header_badge_bg_color",
+  "sec_11",
+  "user_icon",
+  "location_icon",
+  "col_1",
+  "wishlist_icon",
+  "compare_icon",
+  "cb",
+  "cart_icon",
+  "col_12",
+  "list_cart_icon",
+  "column_break_53",
+  "list_cart_hover_icon",
+  "menu",
+  "menu_background",
+  "submenu_background_color",
+  "column_break_19",
+  "menu_text_color",
+  "submenu_text_color",
+  "column_break_21",
+  "menu_hover_color",
+  "submenu_hover_color",
+  "column_break_76",
+  "menu_hover_background_color",
+  "submenu_hover_background_color",
+  "breadcrumb_settings_section",
+  "breadcrumb_background_image",
+  "breadcrumb_text_color",
+  "column_break_86",
+  "breadcrumb_background_color",
+  "column_break_88",
+  "breadcrumb_text_alignment",
+  "column_break_90",
+  "breadcrumb_border_color",
+  "buttons",
+  "primary_button_background_color",
+  "secondary_button_background_color",
+  "warning_button_background_color",
+  "danger_button_background_color",
+  "default_button_background_color",
+  "column_break_69",
+  "primary_button_text_color",
+  "secondary_button_text_color",
+  "warning_button_text_color",
+  "danger_button_text_color",
+  "default_button_text_color",
+  "column_break_27",
+  "primary_button_hover_background_color",
+  "secondary_button_hover_background_color",
+  "warning_button_hover_background_color",
+  "danger_button_hover_background_color",
+  "default_button_hover_background_color",
+  "column_break_29",
+  "primary_button_hover_text_color",
+  "secondary_button_hover_text_color",
+  "warning_button_hover_text_color",
+  "danger_button_hover_text_color",
+  "default_button_hover_text_color",
+  "integrations_section",
+  "enable_google_access",
+  "enable_view_tracking",
+  "enable_google_indexing",
+  "authorize_api_indexing_access",
+  "indexing_refresh_token",
+  "indexing_authorization_code",
+  "column_break_123",
+  "google_analytics_id",
+  "client_id",
+  "client_secret",
+  "social_links",
+  "enable_social_links",
+  "facebook",
+  "twitter",
+  "column_break_91",
+  "youtube",
+  "instagram",
+  "footer",
+  "footer_background_image",
+  "footer_address",
+  "column_break_49",
+  "footer_background_color",
+  "footer_link_color",
+  "footer_heading_color",
+  "footer_email",
+  "column_break_52",
+  "footer_text_color",
+  "footer_link_hover_color",
+  "footer_phone",
+  "copy_rights_and_powered_by",
+  "copy_rights_bg_color",
+  "column_break_57",
+  "copy_right_text",
+  "column_break_59",
+  "copy_right_text_color",
+  "theme_setting",
+  "custom_theme",
+  "file_path",
+  "admin_settings_section",
+  "admin_detail_left_panel",
+  "column_break_155",
+  "admin_list_left_panel",
+  "mobile_view_settings_section",
+  "mobile_logo",
+  "column_break_163",
+  "mobile_user_icon",
+  "column_break_165",
+  "mobile_cart_icon"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "clp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "production_mode",
+   "fieldtype": "Check",
+   "label": "Production Mode"
+  },
+  {
+   "fieldname": "general",
+   "fieldtype": "Section Break",
+   "label": "General"
+  },
+  {
+   "default": "0",
+   "fieldname": "boxed_layout",
+   "fieldtype": "Check",
+   "label": "Boxed Layout"
+  },
+  {
+   "fieldname": "favicon",
+   "fieldtype": "Attach Image",
+   "label": "Favicon"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "body_bg_image",
+   "fieldtype": "Attach Image",
+   "label": "Body Background Image"
+  },
+  {
+   "fieldname": "cl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#f2f3f7",
+   "fieldname": "body_bg_color",
+   "fieldtype": "Data",
+   "label": "Body Background Color"
+  },
+  {
+   "fieldname": "body_link_color",
+   "fieldtype": "Data",
+   "label": "Body Link Color"
+  },
+  {
+   "fieldname": "font_family",
+   "fieldtype": "Data",
+   "label": "Font Family"
+  },
+  {
+   "fieldname": "heading_text_color",
+   "fieldtype": "Data",
+   "label": "Heading Text Color"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#666",
+   "fieldname": "body_text_color",
+   "fieldtype": "Data",
+   "label": "Body Text Color"
+  },
+  {
+   "fieldname": "body_link_hover_color",
+   "fieldtype": "Data",
+   "label": "Body Link Hover Color"
+  },
+  {
+   "fieldname": "body_theme_color",
+   "fieldtype": "Data",
+   "label": "Body Theme Color"
+  },
+  {
+   "fieldname": "fonts",
+   "fieldtype": "Section Break",
+   "label": "Fonts"
+  },
+  {
+   "fieldname": "google_fonts",
+   "fieldtype": "Table",
+   "label": "Google Fonts",
+   "options": "Theme Fonts"
+  },
+  {
+   "fieldname": "font_sizes",
+   "fieldtype": "Section Break",
+   "label": "Font Sizes"
+  },
+  {
+   "fieldname": "small",
+   "fieldtype": "Data",
+   "label": "Small "
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "medium",
+   "fieldtype": "Data",
+   "label": "Medium"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "large",
+   "fieldtype": "Data",
+   "label": "Large"
+  },
+  {
+   "fieldname": "css",
+   "fieldtype": "Section Break",
+   "label": "CSS"
+  },
+  {
+   "fieldname": "css_list",
+   "fieldtype": "Table",
+   "label": "Css List",
+   "options": "Css List"
+  },
+  {
+   "fieldname": "custom_css",
+   "fieldtype": "Section Break",
+   "label": "Custom Css"
+  },
+  {
+   "description": "Maximum Allowed Eight Thousand character only",
+   "fieldname": "page_css",
+   "fieldtype": "Long Text",
+   "label": "Page Css"
+  },
+  {
+   "fieldname": "js",
+   "fieldtype": "Section Break",
+   "label": "JS"
+  },
+  {
+   "fieldname": "js_list",
+   "fieldtype": "Table",
+   "label": "Js List",
+   "options": "Js List"
+  },
+  {
+   "fieldname": "custom_js",
+   "fieldtype": "Section Break",
+   "label": "Custom Js"
+  },
+  {
+   "fieldname": "page_js",
+   "fieldtype": "Long Text",
+   "ignore_xss_filter": 1,
+   "label": "Page Js"
+  },
+  {
+   "fieldname": "header_and_footer_templates",
+   "fieldtype": "Section Break",
+   "label": "Default Templates"
+  },
+  {
+   "fieldname": "header_template",
+   "fieldtype": "Link",
+   "label": "Header Template",
+   "options": "Header Template"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "footer_template",
+   "fieldtype": "Link",
+   "label": "Footer Template",
+   "options": "Footer Template"
+  },
+  {
+   "fieldname": "top_header",
+   "fieldtype": "Section Break",
+   "label": "Top Header"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_top_header",
+   "fieldtype": "Check",
+   "label": "Enable Top Header"
+  },
+  {
+   "fieldname": "background_color",
+   "fieldtype": "Data",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "text_color",
+   "fieldtype": "Data",
+   "label": " Text Color"
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "link_hover_color",
+   "fieldtype": "Data",
+   "label": "Link Hover Color"
+  },
+  {
+   "fieldname": "section_break_34",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "left_side_content",
+   "fieldtype": "Text Editor",
+   "label": "Left Side Content"
+  },
+  {
+   "fieldname": "column_break_36",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "right_side_content",
+   "fieldtype": "Text Editor",
+   "label": "Right Side Content"
+  },
+  {
+   "fieldname": "header",
+   "fieldtype": "Section Break",
+   "label": "Header"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "header_bg_color",
+   "fieldtype": "Data",
+   "label": "Header Background Color"
+  },
+  {
+   "default": "#ff5500",
+   "fieldname": "header_badge_color",
+   "fieldtype": "Data",
+   "label": "Header Badge Text Color"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#222",
+   "fieldname": "header_text_color",
+   "fieldtype": "Data",
+   "label": "Header Text Color"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "minicart_bg_color",
+   "fieldtype": "Data",
+   "label": "MiniCart Background color"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "header_hover_color",
+   "fieldtype": "Data",
+   "label": "Header Hover Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "minicart_text_color",
+   "fieldtype": "Data",
+   "label": "Minicart Text color"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "header_badge_bg_color",
+   "fieldtype": "Data",
+   "label": "Header Badge Background Color"
+  },
+  {
+   "fieldname": "sec_11",
+   "fieldtype": "Section Break",
+   "label": "Header Icons"
+  },
+  {
+   "fieldname": "user_icon",
+   "fieldtype": "Attach",
+   "label": "User Icon"
+  },
+  {
+   "fieldname": "location_icon",
+   "fieldtype": "Attach",
+   "label": "Location Icon"
+  },
+  {
+   "fieldname": "col_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "wishlist_icon",
+   "fieldtype": "Attach",
+   "label": "Wishlist Icon"
+  },
+  {
+   "fieldname": "compare_icon",
+   "fieldtype": "Attach",
+   "label": "Compare Icon"
+  },
+  {
+   "fieldname": "cb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cart_icon",
+   "fieldtype": "Attach",
+   "label": "Cart Icon"
+  },
+  {
+   "fieldname": "col_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "list_cart_icon",
+   "fieldtype": "Attach",
+   "label": "List Cart Icon"
+  },
+  {
+   "fieldname": "column_break_53",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "list_cart_hover_icon",
+   "fieldtype": "Attach",
+   "label": "List Cart Hover Icon"
+  },
+  {
+   "fieldname": "menu",
+   "fieldtype": "Section Break",
+   "label": "Menu"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "menu_background",
+   "fieldtype": "Data",
+   "label": "Menu Background Color"
+  },
+  {
+   "fieldname": "submenu_background_color",
+   "fieldtype": "Data",
+   "label": "Submenu Background Color"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "menu_text_color",
+   "fieldtype": "Data",
+   "label": "Menu Text Color"
+  },
+  {
+   "fieldname": "submenu_text_color",
+   "fieldtype": "Data",
+   "label": "Submenu Text Color"
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#bca31e",
+   "fieldname": "menu_hover_color",
+   "fieldtype": "Data",
+   "label": "Menu Hover Color"
+  },
+  {
+   "default": "#bca31e",
+   "fieldname": "submenu_hover_color",
+   "fieldtype": "Data",
+   "label": "Submenu Hover Color"
+  },
+  {
+   "fieldname": "column_break_76",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "menu_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Menu Hover Background Color"
+  },
+  {
+   "fieldname": "submenu_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Submenu Hover Background Color"
+  },
+  {
+   "fieldname": "breadcrumb_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Breadcrumb Settings"
+  },
+  {
+   "fieldname": "breadcrumb_background_image",
+   "fieldtype": "Attach",
+   "label": "Breadcrumb Background Image"
+  },
+  {
+   "fieldname": "breadcrumb_text_color",
+   "fieldtype": "Data",
+   "label": "Breadcrumb Text Color"
+  },
+  {
+   "fieldname": "column_break_86",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "breadcrumb_background_color",
+   "fieldtype": "Data",
+   "label": "Breadcrumb Background Color"
+  },
+  {
+   "fieldname": "column_break_88",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "breadcrumb_text_alignment",
+   "fieldtype": "Select",
+   "label": "Breadcrumb Text Alignment",
+   "options": "\nleft\nright\ncenter"
+  },
+  {
+   "fieldname": "column_break_90",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "breadcrumb_border_color",
+   "fieldtype": "Data",
+   "label": "Breadcrumb Border Color"
+  },
+  {
+   "fieldname": "buttons",
+   "fieldtype": "Section Break",
+   "label": "Buttons"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "primary_button_background_color",
+   "fieldtype": "Data",
+   "label": "Primary Button Background Color"
+  },
+  {
+   "default": "#bca31e",
+   "fieldname": "secondary_button_background_color",
+   "fieldtype": "Data",
+   "label": "Secondary Button Background Color"
+  },
+  {
+   "default": "#ff6600",
+   "fieldname": "warning_button_background_color",
+   "fieldtype": "Data",
+   "label": "Warning Button Background Color"
+  },
+  {
+   "default": "#f83a3a",
+   "fieldname": "danger_button_background_color",
+   "fieldtype": "Data",
+   "label": "Danger Button Background Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "default_button_background_color",
+   "fieldtype": "Data",
+   "label": "Default Button Background Color"
+  },
+  {
+   "fieldname": "column_break_69",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "primary_button_text_color",
+   "fieldtype": "Data",
+   "label": "Primary Button Text Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "secondary_button_text_color",
+   "fieldtype": "Data",
+   "label": "Secondary Button Text Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "warning_button_text_color",
+   "fieldtype": "Data",
+   "label": "Warning Button Text Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "danger_button_text_color",
+   "fieldtype": "Data",
+   "label": "Danger Button Text Color"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "default_button_text_color",
+   "fieldtype": "Data",
+   "label": "Default Button Text Color"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#bca31e",
+   "fieldname": "primary_button_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Primary Button Hover Background Color"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "secondary_button_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Secondary Button Hover Background Color"
+  },
+  {
+   "default": "#ff6600",
+   "fieldname": "warning_button_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Warning Button Hover Background Color"
+  },
+  {
+   "default": "#ff6600",
+   "fieldname": "danger_button_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Danger Button Hover Background Color"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "default_button_hover_background_color",
+   "fieldtype": "Data",
+   "label": "Default Button Hover Background Color"
+  },
+  {
+   "fieldname": "column_break_29",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "primary_button_hover_text_color",
+   "fieldtype": "Data",
+   "label": "Primary Button Hover Text Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "secondary_button_hover_text_color",
+   "fieldtype": "Data",
+   "label": "Secondary Button Hover Text Color"
+  },
+  {
+   "fieldname": "warning_button_hover_text_color",
+   "fieldtype": "Data",
+   "label": "Warning Button Hover Text Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "danger_button_hover_text_color",
+   "fieldtype": "Data",
+   "label": "Danger Button Hover Text Color"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "default_button_hover_text_color",
+   "fieldtype": "Data",
+   "label": "Default Button Hover Text Color"
+  },
+  {
+   "fieldname": "social_links",
+   "fieldtype": "Section Break",
+   "label": "Social Links"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_social_links",
+   "fieldtype": "Check",
+   "label": "Enable Social Links"
+  },
+  {
+   "depends_on": "eval:doc.enable_social_links==1",
+   "fieldname": "facebook",
+   "fieldtype": "Data",
+   "label": "Facebook"
+  },
+  {
+   "depends_on": "eval:doc.enable_social_links==1",
+   "fieldname": "twitter",
+   "fieldtype": "Data",
+   "label": "Twitter"
+  },
+  {
+   "fieldname": "column_break_91",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.enable_social_links==1",
+   "fieldname": "youtube",
+   "fieldtype": "Data",
+   "label": "Youtube"
+  },
+  {
+   "depends_on": "eval:doc.enable_social_links==1",
+   "fieldname": "instagram",
+   "fieldtype": "Data",
+   "label": "Instagram"
+  },
+  {
+   "fieldname": "footer",
+   "fieldtype": "Section Break",
+   "label": "Footer"
+  },
+  {
+   "fieldname": "footer_background_image",
+   "fieldtype": "Attach Image",
+   "label": "Footer Background Image"
+  },
+  {
+   "fieldname": "footer_address",
+   "fieldtype": "Small Text",
+   "label": "Footer Address"
+  },
+  {
+   "fieldname": "column_break_49",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "footer_background_color",
+   "fieldtype": "Data",
+   "label": "Footer Background Color"
+  },
+  {
+   "default": "#666",
+   "fieldname": "footer_link_color",
+   "fieldtype": "Data",
+   "label": "Footer Link Color"
+  },
+  {
+   "default": "#222",
+   "fieldname": "footer_heading_color",
+   "fieldtype": "Data",
+   "label": "Footer Heading Color"
+  },
+  {
+   "fieldname": "footer_email",
+   "fieldtype": "Small Text",
+   "label": "Footer Email"
+  },
+  {
+   "fieldname": "column_break_52",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "rgba(255, 255, 255, 0.7)",
+   "fieldname": "footer_text_color",
+   "fieldtype": "Data",
+   "label": "Footer Text Color"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "footer_link_hover_color",
+   "fieldtype": "Data",
+   "label": "Footer Link Hover Color"
+  },
+  {
+   "fieldname": "footer_phone",
+   "fieldtype": "Small Text",
+   "label": "Footer Phone"
+  },
+  {
+   "fieldname": "copy_rights_and_powered_by",
+   "fieldtype": "Section Break",
+   "label": "Copy Rights and Powered By"
+  },
+  {
+   "default": "#6bc177",
+   "fieldname": "copy_rights_bg_color",
+   "fieldtype": "Data",
+   "label": "Background Color"
+  },
+  {
+   "fieldname": "column_break_57",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "\u00a9 2019 Tridots. All Rights Reserved.",
+   "fieldname": "copy_right_text",
+   "fieldtype": "Data",
+   "label": "Copy Right Text"
+  },
+  {
+   "fieldname": "column_break_59",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "#fff",
+   "fieldname": "copy_right_text_color",
+   "fieldtype": "Data",
+   "label": "Copy Right Text Color"
+  },
+  {
+   "fieldname": "theme_setting",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Theme Setting"
+  },
+  {
+   "fieldname": "custom_theme",
+   "fieldtype": "Table",
+   "label": "Custom Theme",
+   "options": "Custom Theme"
+  },
+  {
+   "fieldname": "file_path",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "File Path"
+  },
+  {
+   "fieldname": "integrations_section",
+   "fieldtype": "Section Break",
+   "label": "Integrations"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_view_tracking",
+   "fieldtype": "Check",
+   "label": "Enable In App Website Tracking"
+  },
+  {
+   "default": "0",
+   "description": "To use Google Indexing, enable <a href='\\\"#Form/Google'>Google Settings</a>.",
+   "fieldname": "enable_google_indexing",
+   "fieldtype": "Check",
+   "label": "Enable Google Indexing"
+  },
+  {
+   "depends_on": "eval: doc.enable_google_indexing",
+   "fieldname": "authorize_api_indexing_access",
+   "fieldtype": "Button",
+   "label": "Authorize API Indexing  Access"
+  },
+  {
+   "fieldname": "indexing_refresh_token",
+   "fieldtype": "Data",
+   "label": "Indexing Refresh Token",
+   "read_only": 1
+  },
+  {
+   "fieldname": "indexing_authorization_code",
+   "fieldtype": "Data",
+   "label": "Indexing Authorization Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_123",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Add Google Analytics ID: eg. UA-89XXX57-1. Please search help on Google Analytics for more information.",
+   "fieldname": "google_analytics_id",
+   "fieldtype": "Data",
+   "label": "Google Analytics ID"
+  },
+  {
+   "fieldname": "admin_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Admin Settings"
+  },
+  {
+   "default": "0",
+   "fieldname": "admin_detail_left_panel",
+   "fieldtype": "Check",
+   "label": "Enable Left Panel For Detail Page"
+  },
+  {
+   "fieldname": "column_break_155",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "admin_list_left_panel",
+   "fieldtype": "Check",
+   "label": "Enable Left Panel For Detail Page"
+  },
+  {
+   "fieldname": "grid_product_box",
+   "fieldtype": "Link",
+   "label": "Grid View Product Box",
+   "options": "Product Box"
+  },
+  {
+   "fieldname": "list_product_box",
+   "fieldtype": "Link",
+   "label": "List View Product Box",
+   "options": "Product Box"
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "OAuth Client ID"
+  },
+  {
+   "fieldname": "client_secret",
+   "fieldtype": "Password",
+   "label": "OAuth Client Secret"
+  },
+  {
+   "fieldname": "mobile_view_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Mobile View Settings"
+  },
+  {
+   "fieldname": "mobile_logo",
+   "fieldtype": "Attach Image",
+   "label": "Website Logo"
+  },
+  {
+   "fieldname": "column_break_163",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_user_icon",
+   "fieldtype": "Attach",
+   "label": "User Icon"
+  },
+  {
+   "fieldname": "column_break_165",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_cart_icon",
+   "fieldtype": "Attach",
+   "label": "Cart Icon"
+  },
+  {
+   "fieldname": "enable_google_access",
+   "fieldtype": "Button",
+   "label": "Enable Google Access"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_noindex",
+   "fieldtype": "Check",
+   "label": "Enable NoIndex?"
+  }
+ ],
+ "modified": "2021-01-12 05:53:37.849099",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Web Theme",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

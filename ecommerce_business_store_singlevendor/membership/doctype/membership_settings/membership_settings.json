@@ -1,0 +1,121 @@
+{
+ "creation": "2020-09-19 04:23:18.421998",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "membership_vertical",
+  "column_break_3",
+  "default_relation",
+  "membership_expiry_settings_section",
+  "enable_expiry",
+  "expiry_based_on",
+  "expiry_date",
+  "membership_payment_settings_section",
+  "payment_type",
+  "section_break_8",
+  "enable_auto_membership",
+  "create_membership_on",
+  "days_before_or_after"
+ ],
+ "fields": [
+  {
+   "fieldname": "membership_expiry_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Membership Expiry Settings"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_expiry",
+   "fieldtype": "Check",
+   "label": "Enable Membership Expiry?"
+  },
+  {
+   "depends_on": "eval:  doc.enable_expiry == 1 ",
+   "fieldname": "expiry_based_on",
+   "fieldtype": "Select",
+   "label": "Expiry Based On",
+   "options": "Membership Type\nFixed Date"
+  },
+  {
+   "depends_on": "eval:  doc.enable_expiry == 1 && doc.expiry_based_on == \"Fixed Date\" ",
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date"
+  },
+  {
+   "fieldname": "membership_payment_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Membership Payment Settings"
+  },
+  {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "label": "Payment Type",
+   "options": "Date Range\nMonth Range"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "description": "To create membership payment automatically after end of period",
+   "fieldname": "enable_auto_membership",
+   "fieldtype": "Check",
+   "label": "Enable Automatic Creation Of Membership?"
+  },
+  {
+   "depends_on": "eval:  doc.enable_auto_membership == 1 ",
+   "fieldname": "create_membership_on",
+   "fieldtype": "Select",
+   "label": "Create Membership On",
+   "options": "Days Before\nDays After"
+  },
+  {
+   "depends_on": "eval:  doc.enable_auto_membership == 1 ",
+   "fieldname": "days_before_or_after",
+   "fieldtype": "Int",
+   "label": "Days Before Or After"
+  },
+  {
+   "default": "Family",
+   "fieldname": "membership_vertical",
+   "fieldtype": "Select",
+   "label": "Membership Vertical",
+   "options": "Family\nAppartment / Housing"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_relation",
+   "fieldtype": "Link",
+   "label": "Default Relation",
+   "options": "Relation"
+  }
+ ],
+ "modified": "2020-09-22 05:03:09.652972",
+ "modified_by": "Administrator",
+ "module": "Membership",
+ "name": "Membership Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,415 @@
+<link rel="stylesheet" type="text/css" href="/assets/ecommerce_business_store_singlevendor/css/pos.css">
+<div class="container order-container">
+	<div class="maindiv col-md-8" style="padding-left: 0px;">
+		<section class="item-container" style="pointer-events: inherit;padding-left: 0px;">
+			<div class="fields">
+				<div class="search-field">
+				</div>
+				<div class="item-group-field">
+				</div>
+			</div>
+			<div class="items-wrapper container">
+			</div>
+		</section>
+	</div>
+	
+	<div class="cartdiv col-md-4" style="width: 33%;">
+		<div class="pos-cart">
+			<div class="customer-field">
+			</div>
+			<div class="customer-field1" onclick="chooseCustomer()" style="cursor: pointer;">
+				<div class="row" style="margin-right: 0px;margin-left: 0px;">
+					<div class="col-md-6">
+						<span>Customer</span>
+						<p class="customerName">Guest User</p>
+						<input type="hidden" name="customerName" id="customerName" value="">
+					</div>
+					<div class="col-md-6">
+						<i class="fa fa-user" style="margin: auto;line-height: 43px;"></i>
+					</div>
+				</div>
+			</div>
+		<div class="cart-wrapper">
+			<div class="list-item-table">
+				<!-- <div class="list-item list-item--head">
+					<div class="list-item__content list-item__content--flex-1.5 text-muted">Item Name</div>
+					<div class="list-item__content text-muted text-right">Quantity</div>
+					<div class="list-item__content text-muted text-right">Discount</div>
+					<div class="list-item__content text-muted text-right">Rate</div>
+					<div class="list-item__content text-muted text-right"></div>
+				</div> -->
+				<div class="cart-items">
+					<div class="empty-state">
+						<span><img src="/assets/ecommerce_business_store_singlevendor/images/pos-cart.svg"> No Items added to cart</span>
+					</div>
+				</div>
+				<div class="grand-total1 apply_discount" style="border-top: 1px solid #d1d8dd;border-bottom: 0px;" onclick="openDiscount()"> <div class="list-item"> <div class="list-item__content text-muted" style="text-align: center;margin: auto;display: block;"><span class="discount_text">Add Discount</span> <img src="/assets/ecommerce_business_store_singlevendor/images/custom-discount.png" style="width: 1em;
+    font-size: 40px!important;height: 1em;"></div>  </div> </div>
+				<div class="grand-total" style="border-top: 1px solid #d1d8dd;">
+					<div class="list-item">
+						<div class="list-item__content text-muted">Sub Total</div>
+						<span class="set_currency"></span><div class="list-item__content list-item__content--flex-2 grand-total-value">0.00</div>
+					</div>
+				</div>
+				<div class="grand-total">
+					<div class="list-item">
+						<div class="list-item__content text-muted">Tax</div>
+						<input type="hidden" name="hdnTax" id="hdnTax" value="">
+						<span class="set_currency"></span><div class="list-item__content list-item__content--flex-2 grand-tax-value">0.00</div>
+					</div>
+				</div>
+				<div class="grand-total">
+					<div class="list-item">
+						<div class="list-item__content text-muted">Discount</div>
+						<input type="hidden" name="hdnDiscount" id="hdnDiscount" value="">
+						<span class="set_currency"></span><div class="list-item__content list-item__content--flex-2 grand-discount-value">0.00</div><i class="fa fa-trash remove_discount" onclick="removeDiscount()" style="font-size: 17px;
+    margin-right: 10px;color: red;display: none;"></i>
+					</div>
+				</div>
+				<div class="grand-total1">
+					<div class="list-item">
+						<div class="list-item__content text-muted text-muted1">Total Amount</div>
+						<span class="set_currency"></span><div class="list-item__content list-item__content--flex-2 total-value">0.00</div>
+					</div>
+				</div>
+				<!-- <div class="quantity-total1">
+					<div class="list-item">
+						<div class="list-item__content text-muted">Total Qty</div>
+						<div class="list-item__content list-item__content--flex-2 quantity-total">0.00</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<div class="insert_order_items">
+			<button class="btn btn-success" id="insertOrder" onclick="insertOrder()">Insert Order</button>
+		</div>
+	</div>
+	</div>
+	
+</div>
+<div class="page-loader">
+	Loading...
+</div>
+
+<style type="text/css">
+	.page-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 18px;
+}
+	.order-container{display: none;}
+	[data-route="order"] .pos-items-wrapper {
+	    max-height: calc(100vh - 210px);
+	}
+	.item-container {
+	    display: block;
+	    width: 100%;
+	}
+	.image-view-container .image-view-item {
+	    max-height: 190px;
+	    min-height: 190px;
+	}
+	.price-info {
+	    position: absolute;
+	    left: 0;
+	    bottom: 0;
+	    margin: 0 0 15px 15px;
+	    background-color: rgba(141,153,166,.6);
+	    padding: 5px 9px;
+	    border-radius: 3px;
+	    color: #fff;
+	}
+	.image-view-container .image-view-row {
+	    display: block;
+	}
+	[data-route="order"] .item_qty {
+	    min-height: 29px !important;
+	    width: 100%;
+	    height: 29px;
+	    padding: 4px 10px;
+	    background-color: #fff;
+	    background-image: none;
+	    border: 1px solid #d1d8dd;
+	    border-radius: 4px !important;
+	}
+	.ttl_price .input-group-btn button{
+		padding: 0px 10px;
+	}
+	.items-wrapper{
+		padding: 0px;
+	}
+	.cart-items .quantity input {
+	    text-align: right;
+	    height: 22px !important;
+	    font-size: 12px;
+	    min-height: 22px !important;
+	    border: 1px solid #5E64FF;
+	    font-weight: bold;
+	    border-radius: 0px !important;
+	}
+	.insert_order_items .btn{
+		padding: 6px 0px;
+    border-radius: 2px;
+    width: calc(100% - 20px);
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #f53d3d;
+    border-color: #f53d3d;
+    -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    height: 3.6rem;
+    text-transform: uppercase;
+    margin-left: 10px;
+	}
+	/*.insert_order_items{
+		margin: 25px 0px;
+	}*/
+	[data-route="order"] .layout-main-section-wrapper {
+	    margin-bottom: 15px;
+	}
+	[data-route="order"] .layout-main-section {
+	    border: 0px solid #d1d8dd;
+	}
+	.cart-items .list-item{
+		padding-left: 10px !important;
+		border-bottom: 1px solid #ddd;
+    	padding: 10px 0px;
+    	display: block;
+	}
+	.cart-items {
+	    /*height: 210px !important;*/
+	}
+	[data-route="order"] .text-muted1 {
+	    font-weight: 700;
+	    font-size: 14px;
+	}
+	[data-route="order"] .list-item__content--flex-2 {
+	    /*font-weight: 600;*/
+	    font-size: 15px;
+	}
+	.ttl_price{
+		margin-top: 5px;
+	}
+	.cart-list-items .row{
+		margin-right: 0px;
+	}
+	.customer-field1{
+		background: #d1d8dd45;
+	    padding: 15px 5px;
+	    margin-bottom: 0px;
+	    border-radius: 0px;
+	    border-bottom: 1px solid #ddd;
+	}
+	.customer-field1 .fa-user{
+		font-weight: 700;
+	    font-size: 23px;
+	    float: right;
+	}
+	.customer-field1 p{
+		margin: 0;
+	    font-size: 16px;
+	    font-weight: 600;
+	}
+	.insert_order_items{
+		/*position: fixed;*/
+	    bottom: 15px;
+	    /*border-top: 1px solid #ddd;*/
+	    /*margin-left: -15px;*/
+	    /*width: calc(35% + 30px);*/
+	    margin: 0px 5px 12px 5px;
+	    /*padding-left: 15px;*/
+	}
+	.cartdiv{
+		width: 35%;
+	    position: fixed;
+	    right: 0;
+	    /*border-left: 1px solid #ddd;*/
+	    
+	    padding-left: 0px;
+	}
+	.cartdiv .pos-cart{
+		border-right: 1px solid #ddd;
+	    border-left: 1px solid #ddd;
+	    margin-bottom: 5px;
+	    border-bottom: 1px solid #ddd;
+	}
+	.maindiv{
+		width: 65.6667%;
+		/*border-right: 1px solid #ddd;*/
+	}
+	/*.insert_order_items{
+		position: fixed;
+	    bottom: 15px;
+	    border-top: 1px solid #ddd;
+	    margin-left: -15px;
+	    width: calc(35% + 30px);
+	    padding-top: 10px;
+	    padding-left: 15px;
+	}
+	.cartdiv{
+		width: 35%;
+	    position: fixed;
+	    right: 0;
+	    border-left: 1px solid #ddd;
+	}*/
+	.search-field label{
+		display: none;
+	}
+	.search-field input{
+		/*padding: 6px 30px;*/
+	    border-radius: 2px !important;
+	    background-position: left 8px center;
+	    height: auto;
+	    font-size: 14px;
+	    font-weight: 400;
+	    line-height: 3rem;
+	    color: #141414;
+	    background-color: #fff;
+	 /*   -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+	    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);*/
+	    /*font-family: GothamProForWebsite!important;*/
+	}
+	.item-group-field label{
+		display: none;
+	}
+	.item-group-field input{
+	    border-radius: 2px !important;
+	    background-position: left 8px center;
+	    height: auto;
+	    font-size: 14px;
+	    font-weight: 400;
+	    line-height: 3rem;
+	    color: #141414;
+	    background-color: #fff;
+	   /* -webkit-box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+	    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);*/
+	    /*font-family: GothamProForWebsite!important;*/
+	}
+	.item-group-field input::-webkit-input-placeholder {
+	  color: #aeaeae;
+	  font-weight: 300;
+	  font-size: 15px;
+	}
+	.search-field input::-webkit-input-placeholder {
+	  color: #aeaeae;
+	  font-weight: 300;
+	  font-size: 15px;
+	}
+	.empty-state img{
+		width: 1em;
+	    font-size: 40px!important;
+	    height: 1em;
+	    display: block;
+	    margin: 0 auto;
+	}
+	.empty-state span{
+		color: #566074;
+    font-size: 15px;
+	}
+	.cart-wrapper .list-item-table {
+    	border-radius: 0px !important;
+     	border-left: 0px !important; 
+     	border-right: 0px !important; 
+     	border: 0px;
+	}
+	.items-qty .product-qty{
+	border: 1px solid #d3d3d3;
+    float: left;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 3px;
+    height: 35px;
+}
+.items-qty .product-qty .fa-minus{
+	font-size: 14px;
+    color: red;
+    cursor: pointer;
+    width: 33.33%;
+    float: left;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.items-qty .product-qty .qty{
+	float: left;
+    width: 33.333%;
+    text-align: center;
+    padding-top: 7px;
+}
+.items-qty .product-qty .fa-plus{
+	font-size: 14px;
+    color: #0cc579;
+    margin-left: 0;
+    cursor: pointer;
+    width: 33.33%;
+    float: right;
+    text-align: center;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.qtyx{
+	float: left;
+    margin-right: 5px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+.product-price{
+	float: left;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.rate{
+    font-weight: 500;
+    float: right;
+    margin-top: 8px;
+    font-size: 16px;
+}
+.product-delete{
+	float: right;
+}
+.product-delete span{
+	background: transparent;
+	padding: 2px 6px;
+    color: #f53d3d!important;
+    font-size: 20px;
+    border-color: transparent;
+}
+.product-delete .btn-danger:hover{
+	background: transparent;
+    border-color: transparent;
+}
+.grand-total .list-item {
+    height: 28px;
+    min-height: 28px;
+}
+.grand-total1{
+	border-bottom: 1px dashed #dedede;
+    border-top: 1px dashed #dedede;
+    font-weight: 600;
+}
+.grand-total{
+	border-top: 0px;
+}
+.search-field {
+    width: 60%;
+}
+.item-group-field {
+    width: 40%;
+    margin-left: 15px;
+}
+.text-muted {
+    font-size: 14px;
+}
+.set_currency{
+	justify-content: flex-end;
+    display: flex;
+    margin-right: 5px;
+    /*font-weight: 600;*/
+    font-size: 15px;
+}
+.list-item__content--flex-2 {
+    flex: 0;
+}
+</style>
