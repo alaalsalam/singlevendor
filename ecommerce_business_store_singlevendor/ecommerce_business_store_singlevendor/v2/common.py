@@ -27,6 +27,7 @@ def get_all_website_settings():
 def generate_all_website_settings_json_doc(doc,method):
 	try:
 		res_data = get_all_website_settings_data()
+		frappe.log_error("res_data",res_data)
 		path = get_files_path()
 		if not os.path.exists(os.path.join(path,'settings')):
 			frappe.create_folder(os.path.join(path,'settings'))
@@ -38,6 +39,8 @@ def generate_all_website_settings_json_doc(doc,method):
 
 
 def check_app_setting_exist(app_settings):
+	default_footer = None
+	default_header = None
 	if app_settings.default_header:
 		if 'go1_cms' in frappe.get_installed_apps():
 			from go1_cms.go1_cms.api import get_header_info as go1_get_header_info
@@ -76,6 +79,7 @@ def get_all_website_settings_data():
 	media_settings = frappe.get_single('Media Settings')
 	cart_settings = frappe.get_single('Shopping Cart Settings')
 	order_settings = frappe.get_single('Order Settings')
+	frappe.log_error("order_settings",order_settings)
 	app_settings = frappe.get_single('Mobile App Setting')
 	wallet_settings = frappe.get_single('Wallet Settings')
 	res_data = {}
