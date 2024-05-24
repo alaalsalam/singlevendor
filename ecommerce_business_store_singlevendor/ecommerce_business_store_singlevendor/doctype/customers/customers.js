@@ -143,77 +143,10 @@ frappe.ui.form.on('Customers', {
                 }
             };
         });
-        if(frm.doc.is_same_personal_address == 1){
-            frm.set_value("business_address", frm.doc.address);
-            frm.set_value("business_state", frm.doc.state);
-            frm.set_value("business_city", frm.doc.city);
-            frm.set_value("business_country", frm.doc.country);
-            frm.set_value("business_zip", frm.doc.zipcode);
-            frm.set_value("business_landmark", frm.doc.landmark);
-        }
-        else{
-              frm.set_value("business_address", "");
-              frm.set_value("business_state", "");
-              frm.set_value("business_city", "");
-              frm.set_value("business_country", "");
-              frm.set_value("business_zip", "");
-              frm.set_value("business_landmark", "");
-        }
+        
     },
-    city:function(frm){
-        if(frm.doc.is_same_personal_address == 1){
-            frm.set_value("business_address", frm.doc.address);
-            frm.set_value("business_state", frm.doc.state);
-            frm.set_value("business_city", frm.doc.city);
-            frm.set_value("business_country", frm.doc.country);
-            frm.set_value("business_zip", frm.doc.zipcode);
-            frm.set_value("business_landmark", frm.doc.landmark);
-        }
-        else{
-              frm.set_value("business_address", "");
-              frm.set_value("business_state", "");
-              frm.set_value("business_city", "");
-              frm.set_value("business_country", "");
-              frm.set_value("business_zip", "");
-              frm.set_value("business_landmark", "");
-        }
-    },
-    zipcode:function(frm){
-        if(frm.doc.is_same_personal_address == 1){
-            frm.set_value("business_address", frm.doc.address);
-            frm.set_value("business_state", frm.doc.state);
-            frm.set_value("business_city", frm.doc.city);
-            frm.set_value("business_country", frm.doc.country);
-            frm.set_value("business_zip", frm.doc.zipcode);
-            frm.set_value("business_landmark", frm.doc.landmark);
-        }
-        else{
-              frm.set_value("business_address", "");
-              frm.set_value("business_state", "");
-              frm.set_value("business_city", "");
-              frm.set_value("business_country", "");
-              frm.set_value("business_zip", "");
-              frm.set_value("business_landmark", "");
-        }
-    },
-    address:function(frm){
-        if(frm.doc.is_same_personal_address == 1){
-            frm.set_value("business_address", frm.doc.address);
-            frm.set_value("business_state", frm.doc.state);
-            frm.set_value("business_city", frm.doc.city);
-            frm.set_value("business_country", frm.doc.country);
-            frm.set_value("business_zip", frm.doc.zipcode);
-            frm.set_value("business_landmark", frm.doc.landmark);
-        }
-        else{
-              frm.set_value("business_address", "");
-              frm.set_value("business_state", "");
-              frm.set_value("business_city", "");
-              frm.set_value("business_country", "");
-              frm.set_value("business_zip", "");
-              frm.set_value("business_landmark", "");
-        }
-    },
+
+    
     impersonate_customer:function(frm){
         var confirm_result = confirm("Are you sure want to Impersonate the customer?")
         if(confirm_result){

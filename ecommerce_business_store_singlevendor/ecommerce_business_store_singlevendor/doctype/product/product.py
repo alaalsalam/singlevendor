@@ -1797,18 +1797,6 @@ def get_category_attributes(reference_doc, reference_fields, filters=None,page_n
 		searchKey = '"%' + search_txt + '%"'
 		condition += ' and A.{search_field} like {search_txt}'.format(search_field=search_field, 
 																			search_txt=searchKey)
-	if "Vendor" in frappe.get_roles(frappe.session.user):
-		users = frappe.db.sql('''SELECT DISTINCT parent 
-								FROM 
-									`tabHas Role` 
-								WHERE 
-									role="{role}"
-							'''.format(role="Admin"), as_dict=1)
-
-		if users: admin = ','.join(['"' + user.parent + '"' for user in users])
-		if admin:
-			admin = admin+',"'+user+'"'
-		
 
 	query = '''SELECT A.name, A.attribute_name 
 				FROM 
@@ -1825,12 +1813,8 @@ def get_category_attributes(reference_doc, reference_fields, filters=None,page_n
 	list_len = frappe.db.sql('''SELECT A.name, A.attribute_name 
 								FROM 
 									`tabProduct Attribute` A 
-								LEFT JOIN 
-									`tabBusiness Category` C 
-								ON 
-									C.parent = A.name 
 								WHERE 
-									C.name != "" {condition} 
+									A.name != "" {condition} 
 								GROUP BY 
 									A.name, 
 									A.attribute_name 
