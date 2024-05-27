@@ -11,7 +11,7 @@ from ecommerce_business_store_singlevendor.utils.utils import get_auth_token,get
 from ecommerce_business_store_singlevendor.utils.setup import get_settings_value, get_settings
 
 @frappe.whitelist(allow_guest=True)
-def get_all_website_settings(allow_guest = True):
+def get_all_website_settings():
 	try:
 		import os
 		path = get_files_path()
@@ -710,7 +710,6 @@ def validate_route(customer,application_type,page_no,page_size,route,page_type):
 		check_builder = frappe.db.get_all('Web Page Builder', 
 											filters={"route":route}, 
 											fields=['name', 'page_type','w_page_type','route'])
-		frappe.log_error("Web Page builder",check_builder)
 		if check_builder:
 			page_type = check_builder[0].w_page_type
 			if check_builder[0].page_type !="List" and check_builder[0].page_type != "Detail":
@@ -1410,7 +1409,6 @@ def generate_option_unique_names():
 def get_city_based_role():
 	m_settings = frappe.get_single("Market Place Settings")
 	roles = ",".join(['"' + x.role + '"' for x in m_settings.city_based_role])
-	frappe.log_error("roles",roles)
 	return roles
 
 @frappe.whitelist()
