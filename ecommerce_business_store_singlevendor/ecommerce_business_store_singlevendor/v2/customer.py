@@ -91,7 +91,7 @@ def get_customer_dashboard():
 
 
 def check_condition_in_order_list(customer,status,driver,date,shipping_method,
-								  no_subscription_order,order_from,exclude_order_from,allow_draft):
+								  no_subscription_order,order_from,exclude_order_from,allow_draft, language):
 	condition = ''
 	if customer:
 		condition += ' and customer = "{0}"'.format(customer)
@@ -123,7 +123,7 @@ def get_orders_list(page_no=1,page_length=10,no_subscription_order=0,order_from=
 	try:
 		customer = get_customer_from_token()
 		condition = check_condition_in_order_list(customer,status,driver,date,shipping_method,
-								  no_subscription_order,order_from,exclude_order_from,allow_draft)
+								  no_subscription_order,order_from,exclude_order_from,allow_draft, language)
 		query = """	SELECT * FROM `tabOrder` 
 					WHERE total_amount > 0 {condition}
 		    		ORDER BY creation DESC 
@@ -447,10 +447,10 @@ def get_customer_info(user=None, email=None, doctype=None, guest_id=None, phone=
 			Customer = None
 			filters = []
 			if user and user != '':
-				filters.append(['name','=', user])
+				filters.append(['name','=', customer])
 			elif email and email != '':
 				if doctype == 'Customers':
-						filters.append(['user_id','=', email])
+						filters.append(['email','=', email])
 				else:
 					filters.append(['name', '=', email])
 			elif phone and phone != '':
@@ -462,6 +462,7 @@ def get_customer_info(user=None, email=None, doctype=None, guest_id=None, phone=
 				return {'status': 'failed', 
 						'message': frappe._('Missing user details')}
 			Customer = frappe.db.get_all(doctype, fields=['*'], filters=filters)
+
 			if Customer:
 				return set_customer(Customer,doctype,guest_id)
 			else:
@@ -473,11 +474,11 @@ def get_customer_info(user=None, email=None, doctype=None, guest_id=None, phone=
 	except Exception:
 		other_exception("Error in v2.customer.get_customer_info")
 
+
 def set_customer(Customer,doctype,guest_id):
 	Customer[0].address = frappe.db.sql(
 							'''SELECT * FROM `tabCustomer Address` WHERE 
-							parent = %(parent)s ORDER BY field (address_type, 
-							"Home", "Work", "Others")''', 
+							parent = %(parent)s ''', 
 							{'parent': Customer[0].name}, as_dict=1)
 	if doctype == 'Customers':
 		roles_list = frappe.db.sql_list(
@@ -492,6 +493,7 @@ def set_customer(Customer,doctype,guest_id):
 		Customer[0].api_key = token['api_key']
 		Customer[0].api_secret = token['api_secret']
 	return Customer
+
 
 @frappe.whitelist()
 def get_order_info(order_id):
