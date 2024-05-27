@@ -695,6 +695,7 @@ def get_page_content_with_pagination(route=None, user=None, customer=None,
 		frappe.log_error(message=frappe.get_traceback(), title='Error in page_content')			
 
 def validate_route(customer,application_type,page_no,page_size,route,page_type):
+	page_content = None
 	if not route:
 		home_page = frappe.db.get_single_value('Website Settings', 'home_page')
 		home = frappe.db.get_all('Web Page Builder', 
@@ -704,6 +705,8 @@ def validate_route(customer,application_type,page_no,page_size,route,page_type):
 			page_type = home[0]['w_page_type']
 			page_content =  get_page_builder_data_pagination(home[0]["name"], customer,application_type,
 													page_no=page_no,page_size=page_size)
+		else:{	"status":"failed",
+				"message":"Something went wrong"}
 	else:
 		check_builder = frappe.db.get_all('Web Page Builder', 
 											filters={"name":route}, 
