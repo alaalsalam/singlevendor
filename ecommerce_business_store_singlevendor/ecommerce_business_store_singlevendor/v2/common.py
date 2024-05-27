@@ -183,7 +183,8 @@ def get_all_website_settings_data():
 			"enable_recently_viewed_products":catalog_settings.enable_recetly_viewed_products,
 			"enable_best_sellers":catalog_settings.enable_best_sellers,
 			"default_country":frappe.db.get_value("System Settings","System Settings","country"),
-			"currency":frappe.db.get_value("Currency",catalog_settings.default_currency,"symbol"),
+			"currency":catalog_settings.default_currency,
+			"currency_symbol":frappe.db.get_value("Currency",catalog_settings.default_currency,"symbol"),
 			"enable_customers_who_bought":catalog_settings.customers_who_bought,
 			"allow_guest_to_review":catalog_settings.allow_anonymous_users_to_write_product_reviews,
 			"account_settings":{
@@ -235,7 +236,7 @@ def get_all_website_settings_data():
 		}
 	#to store the response data 
 	return res_data
-	
+
 # @frappe.whitelist(allow_guest=True)
 # def get_all_website_settings_data():
 # 	catalog_settings = frappe.get_single('Catalog Settings')

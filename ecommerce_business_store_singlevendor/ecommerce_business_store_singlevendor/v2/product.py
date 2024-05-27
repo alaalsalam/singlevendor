@@ -1716,24 +1716,18 @@ def get_bought_together(customer):
 	list_columns = get_product_list_columns()
 	items = frappe.db.sql(f"""SELECT 
 								{list_columns}
-							FROM 
-								`tabProduct` P
-							INNER JOIN 
-								`tabOrder Item` OI ON P.name = OI.item 
-								AND OI.order_item_type = "Product" 
-							LEFT JOIN 
-								`tabOrder` O ON O.name = OI.parent 
-							WHERE 
-								O.docstatus = 1 
+							FROM `tabProduct` P
+							INNER JOIN `tabOrder Item` OI ON P.name = OI.item 
+							LEFT JOIN `tabOrder` O ON O.name = OI.parent 
+							WHERE O.docstatus = 1 
 								AND O.status <> "Cancelled" 
-								AND O.name IN (SELECT DISTINCT OI1.parent 
-									FROM 
-										`tabOrder Item` OI1 
-									WHERE 
-										OI1.parenttype = "Order") 
+								AND O.name IN (
+												SELECT DISTINCT OI1.parent 
+												FROM `tabOrder Item` OI1 
+												WHERE OI1.parenttype = "Order") 
 								AND OI.is_free_item = 0  
 							GROUP BY P.name 
-							LIMIT 10""", as_dict=1)
+							LIMIT 10""", as_dict = 1)
 	if items:
 		items = get_list_product_details(items,customer=customer)
 	return items
