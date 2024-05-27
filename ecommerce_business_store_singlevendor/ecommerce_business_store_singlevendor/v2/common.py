@@ -11,7 +11,7 @@ from ecommerce_business_store_singlevendor.utils.utils import get_auth_token,get
 from ecommerce_business_store_singlevendor.utils.setup import get_settings_value, get_settings
 
 @frappe.whitelist(allow_guest=True)
-def get_all_website_settings():
+def get_all_website_settings(allow_guest = True):
 	try:
 		import os
 		path = get_files_path()
@@ -509,7 +509,7 @@ def send_login_mail(doc, subject, template, add_args, now=None):
 		delayed=(not now) if now is not None else doc.flags.delay_emails,
 		retry=3) 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest = True)
 def get_page_builder_data_pagination(page, customer=None,application_type="mobile",page_no=1,page_size=4):
 	page = [frappe.get_doc("Web Page Builder",page)]
 	path = frappe.utils.get_files_path()
@@ -1104,7 +1104,7 @@ def get_page_header_info_data(data):
 								menu_label,redirect_url,is_mega_menu,no_of_column 
 							FROM `tabMenus Item` 
 							WHERE parent= '{menu_id}' AND (parent_menu IS NULL OR parent_menu='') 
-							ORDER BY idx"""
+							ORDER BY idx""" 
 				parent_menus = frappe.db.sql(query,as_dict=1)
 				for x in parent_menus:
 					page_header_child_menu(x,menu)
