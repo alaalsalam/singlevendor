@@ -170,7 +170,11 @@
   "selling_price_list",
   "column_break_x0kt9",
   "role_based_pricing",
-  "enable_price_list"
+  "enable_price_list",
+  "otp_tab",
+  "otp_length",
+  "column_break_aaz0",
+  "otp_expiry"
  ],
  "fields": [
   {
@@ -1112,11 +1116,30 @@
    "fieldname": "enable_price_list",
    "fieldtype": "Check",
    "label": "Enable Price List"
+  },
+  {
+   "fieldname": "otp_tab",
+   "fieldtype": "Tab Break",
+   "label": "OTP"
+  },
+  {
+   "fieldname": "otp_length",
+   "fieldtype": "Int",
+   "label": "OTP Length"
+  },
+  {
+   "fieldname": "column_break_aaz0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "otp_expiry",
+   "fieldtype": "Int",
+   "label": "OTP Expiry ( In Seconds)"
   }
  ],
  "issingle": 1,
  "links": [],
- "modified": "2024-02-23 15:49:29.571920",
+ "modified": "2024-05-27 12:00:22.704500",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Order Settings",

@@ -651,8 +651,7 @@ def check_route(route):
 												'sub_header_bg_img','footer_component', 
 												'header_component','enable_sub_header',
 												'edit_header_style','is_transparent_header'])
-	data = validate_page_builder_dt(page_builder_dt,footer_content,theme_settings,header_content,
-							sub_header)
+	data = validate_page_builder_dt(page_builder_dt,theme_settings)
 	sub_header = data[0]
 	header_content = data[1]
 	footer_content = data[2]
@@ -709,8 +708,9 @@ def validate_route(customer,application_type,page_no,page_size,route,page_type):
 				"message":"Something went wrong"}
 	else:
 		check_builder = frappe.db.get_all('Web Page Builder', 
-											filters={"name":route}, 
+											filters={"route":route}, 
 											fields=['name', 'page_type','w_page_type','route'])
+		frappe.log_error("Web Page builder",check_builder)
 		if check_builder:
 			page_type = check_builder[0].w_page_type
 			if check_builder[0].page_type !="List" and check_builder[0].page_type != "Detail":
@@ -819,7 +819,10 @@ def not_enabled_sub_header(page_builder_dt, theme_settings):
 					"enable_breadcrumbs":theme_settings[0].enable_breadcrumbs}
 			return sub_header
 		
-def validate_page_builder_dt(page_builder_dt,footer_content,theme_settings,header_content,sub_header):
+def validate_page_builder_dt(page_builder_dt,theme_settings):
+	footer_content = None
+	header_content = None
+	sub_header = None
 	if page_builder_dt:
 		if page_builder_dt[0].footer_component:
 			footer_content = get_page_footer_info(page_builder_dt[0].footer_component)
@@ -1096,11 +1099,12 @@ def get_page_header_info_data(data):
 									fields=['is_static_menu','name'])
 			if menu:
 				item["is_static_menu"] = menu[0].is_static_menu
+				menu_id = menu[0].name
 				query = f"""SELECT 
 								menu_label,redirect_url,is_mega_menu,no_of_column 
 							FROM `tabMenus Item` 
-							WHERE parent=%(menu_id)s AND (parent_menu IS NULL OR parent_menu='') 
-							ORDER BY idx""",{"menu_id":menu[0].name}
+							WHERE parent= '{menu_id}' AND (parent_menu IS NULL OR parent_menu='') 
+							ORDER BY idx"""
 				parent_menus = frappe.db.sql(query,as_dict=1)
 				for x in parent_menus:
 					page_header_child_menu(x,menu)
@@ -1162,7 +1166,7 @@ def send_otp(mobile_no,doctype="Customer"):
 					"message":"Seller not found associated with this mobile no.."}
 	from frappe.utils.data import add_to_date
 	from frappe.utils import now
-	platform_settings = frappe.get_single('Market Place Settings')
+	platform_settings = frappe.get_single('Order Settings')
 	check_exist = frappe.db.get_all("User OTP Verification",filters={"mobile_number":mobile_no})
 	otp_doc = None
 	if not check_exist:
@@ -1191,25 +1195,25 @@ def validate_otp(mobile_no,otp,doctype):
 				return customer_login_resp
 			else:
 				return customer_registration_login(mobile_no)
-		if doctype == "SE":
-			check_mobile = frappe.db.get_all("Employee",
-										filters={"mobile_no":mobile_no},
-		  								fields=['name','email_id','role','full_name','designation'])
-			if check_mobile:
-				token = get_auth_token(check_mobile[0].email_id)
-				login_response = {}
-				if token:
-					login_response['api_key'] = token['api_key']
-					login_response['api_secret'] = token['api_secret']
-					login_response['status'] = "Success"
-					login_response['role'] = check_mobile[0].role
-					login_response['full_name'] = check_mobile[0].full_name
-					login_response['designation'] = check_mobile[0].designation
-				return login_response
-			else:
-				return {"status":"Failed","message":"Employee not found."}
-		if doctype == "Vendor":
-			return vendor_login(mobile_no)
+		# if doctype == "SE":
+		# 	check_mobile = frappe.db.get_all("Employee",
+		# 								filters={"mobile_no":mobile_no},
+		#   								fields=['name','email_id','role','full_name','designation'])
+		# 	if check_mobile:
+		# 		token = get_auth_token(check_mobile[0].email_id)
+		# 		login_response = {}
+		# 		if token:
+		# 			login_response['api_key'] = token['api_key']
+		# 			login_response['api_secret'] = token['api_secret']
+		# 			login_response['status'] = "Success"
+		# 			login_response['role'] = check_mobile[0].role
+		# 			login_response['full_name'] = check_mobile[0].full_name
+		# 			login_response['designation'] = check_mobile[0].designation
+		# 		return login_response
+		# 	else:
+		# 		return {"status":"Failed","message":"Employee not found."}
+		# if doctype == "Vendor":
+		# 	return vendor_login(mobile_no)
 	else:
 		return {"status":"Failed","message":"Invalid OTP or OTP expired."}
 	

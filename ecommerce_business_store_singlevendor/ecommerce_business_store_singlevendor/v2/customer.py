@@ -539,15 +539,13 @@ def insert_update_customer(**info):
 			doc.update(info)
 			doc.save(ignore_permissions = True)
 		else:
-			if info.get("doctype") == "Business Registration":
-				doc = insert_update_br(info)
-			else:
-				doc = frappe.get_doc(info)
-				doc.insert(ignore_permissions = True)
+			doc = frappe.get_doc(info)
+			doc.insert(ignore_permissions = True)
 		frappe.local.response.status = "Success"
 		frappe.local.response.data = doc
 	except Exception:
 		other_exception("Error in v2.customer.insert_cust_details")
+
 
 def insert_update_br(info):
 	doc = frappe.new_doc(info.get("doctype"))
