@@ -1843,3 +1843,48 @@ def boot_session(bootinfo):
 					bootinfo.sysdefaults[module.module_name] = out
 	except Exception:
 		frappe.log_error('Error in v2.common.boot_session', frappe.get_traceback())
+
+
+@frappe.whitelist(allow_guest=True)
+def update_doc(doc):
+	try:
+		from six import string_types
+		if isinstance(doc, string_types):
+			doc = json.loads(doc)
+		keys = doc.keys()
+		if frappe.db.exists(doc.get('doctype'), doc.get('name')):
+			update_doc = frappe.get_doc(doc.get('doctype'), doc.get('name'))
+			for key in keys:
+				if type(doc.get(key)) != list:
+					setattr(update_doc, key, doc.get(key))
+			update_doc.save(ignore_permissions=True)
+			return update_doc.as_dict()
+	except Exception as e:
+		frappe.log_error("Error in v2.common.update_doc",frappe.get_traceback())
+
+
+@frappe.whitelist(allow_guest=True)
+def razor_pay_settings():
+	try:
+		return frappe.get_single('Razor Pay Settings')
+	except Exception:
+		frappe.log_error("Error in v2.common.razor_pay_settings", frappe.get_traceback())
+
+
+@frappe.whitelist(allow_guest=True)
+def get_country_states(country):
+	try:
+		return frappe.db.sql('''SELECT name AS value,state AS label 
+								FROM `tabState` 
+								WHERE country=%(country)s
+							''', {'country': country}, as_dict = 1)
+	except Exception:
+		frappe.log_error("Error in v2.common.get_country_states",frappe.get_traceback())
+
+
+@frappe.whitelist(allow_guest=True)
+def get_country_list():
+	return frappe.db.sql('''SELECT name AS value,country_name AS label 
+							FROM `tabCountry` 
+							WHERE enabled = 1
+						''', as_dict = 1)

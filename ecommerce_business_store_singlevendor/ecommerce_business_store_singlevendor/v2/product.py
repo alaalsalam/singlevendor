@@ -984,9 +984,9 @@ def get_sub_conditions_sort(ratings,sort_by,min_price,max_price, attributes,cond
 		if int(ratings) > 0:
 			condition += ' AND P.approved_total_reviews>=' + str(ratings)
 	if min_price:
-		condition += ' AND PP.price>=' + min_price
+		condition += ' AND P.price>=' + min_price
 	if max_price:
-		condition += ' AND PP.price<=' + max_price
+		condition += ' AND P.price<=' + max_price
 	attr_condition = sub_conditions_sort_attributes(attributes)
 	condition += attr_condition
 	if sort_by:

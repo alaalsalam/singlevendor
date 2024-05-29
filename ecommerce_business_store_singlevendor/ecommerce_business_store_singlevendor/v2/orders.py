@@ -733,6 +733,8 @@ def not_check_items(check_items):
 @frappe.whitelist()
 # @role_auth(role='Customer',method="POST")
 def insert_order(data):
+    if type(data) == str:
+        data = json.loads(data)
     customer_id = get_customer_from_token()
     catalog_settings = frappe.get_single('Catalog Settings')
     order_settings = frappe.get_single('Order Settings')
@@ -754,11 +756,11 @@ def insert_order(data):
                 }
         if request.get('customer_name'):
             customers = frappe.db.get_all('Customers',
-                                            filters={'name': request.get('customer_name')},
+                                            filters={'name': customers},
                                             fields=['*'])
         else:
             customers = frappe.db.get_all('Customers',
-                        filters={'user_id': frappe.session.user},
+                        filters={'email': frappe.session.user},
                         fields=['*'])
         if not customers or len(customers) == 0:
             return {
@@ -1190,22 +1192,18 @@ def set_discount_amount(order,request,order_total,coupon_code,discount_data):
     order_total = order_total - float(request.get('discount_amount'))
     if request.get('discount'):
         (use_type, percent, amount, max_discount, dis_business,
-        website_type, provided_by, price_or_product_discount) = frappe.db.get_value('Discounts',
+        provided_by, price_or_product_discount) = frappe.db.get_value('Discounts',
                                                 request.get('discount'),['percent_or_amount',
                                                                         'discount_percentage',
                                                                         'discount_amount',
                                                                         'max_discount_amount',
-                                                                        'website_type',
-                                                                        'discount_provided_by',
                                                                         'price_or_product_discount'])
         if price_or_product_discount == "Price":
             discount_data.append({
                                 'use_type': use_type,
                                 'percent': percent,
                                 'amount': amount,
-                                'max_discount': max_discount,
-                                'website_type': website_type,
-                                'discount_provided_by': provided_by
+                                'max_discount': max_discount
                                 })
     if request.get('coupon_code'):
         coupon_code = request.get('coupon_code')
@@ -1214,22 +1212,17 @@ def set_discount_amount(order,request,order_total,coupon_code,discount_data):
     if coupon_code:
         if frappe.db.get_all("Discounts",filters={"name":coupon_code}):
             (use_type_c, percent_c, amount_c,
-            max_discount_c, c_business,
-            c_web_type, c_provided_by) = frappe.db.get_value('Discounts',
+            max_discount_c) = frappe.db.get_value('Discounts',
                                                             coupon_code,
                                                             ['percent_or_amount',
                                                             'discount_percentage',
                                                             'discount_amount',
-                                                            'max_discount_amount',
-                                                            'website_type',
-                                                            'discount_provided_by'])
+                                                            'max_discount_amount'])
             discount_data.append({
                                 'use_type': use_type_c,
                                 'percent': percent_c,
                                 'amount': amount_c,
-                                'max_discount': max_discount_c,
-                                'website_type': c_web_type,
-                                'discount_provided_by': c_provided_by
+                                'max_discount': max_discount_c
                                 })
     return [order_total,discount_data]
 
@@ -1337,9 +1330,6 @@ def get_cart_items_list_insert_order(request,cart_item,order_sub_total,discount,
         if check_d and check_d.get('discount'):
             discount = discount + flt(check_d.get('discount'))
             if check_d.get('discount_name'):
-                web_type = frappe.db.get_value('Discounts',
-                                check_d.get('discount_name'),
-                                ['website_type', 'discount_provided_by'])
                 sp_discount = float(sp_discount) + float(check_d.get('discount'))
     total = total - discount
     insert_order_tax_template(total,cart_item,included_tax,item_tax,tax_splitup,tax_type)
@@ -1425,7 +1415,6 @@ def discount_free_products(request,order_info,item_weight,tax_splitup,tax_type,
                     'parent': order_info.name,
                     'parenttype': 'Order',
                     'parentfield': 'order_item',
-                    'order_item_type': 'Product',
                     'item': free_product.get("product"),
                     'item_name': free_product.get("product_name"),
                     'item_sku':frappe.db.get_value("Product",free_product.get("product"),"sku"),
@@ -1463,7 +1452,6 @@ def insert_order_item(order_info,cart_item,item_sku,item_weight,total,item_tax,d
             'parent': order_info.name,
             'parenttype': 'Order',
             'parentfield': 'order_item',
-            'order_item_type': 'Product',
             'item': cart_item.product,
             'item_name': cart_item.product_name,
             'item_sku':item_sku,
@@ -1617,7 +1605,6 @@ def get_eligible_items(condition, orderid, wherecondition):
                     `tabProduct` P ON P.name = O.item {condition}
                 WHERE
                     O.return_created = 0
-                    AND O.order_item_type = "Product"
                     AND O.parent = "{orderid}"
                     {wherecondition}
                 GROUP BY
@@ -2872,7 +2859,7 @@ def get_product_price(product, qty = 1, rate = None,attribute_id = None, custome
                 cart_items = ','.join('"{0}"'.format(r.product) for r in doc.items)
         from ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.doctype.discounts.\
             discounts import get_product_discount
-        res = get_product_discount(product, qty, rate, customer_id = customer, website_type = web_type,
+        res = get_product_discount(product, qty, rate, customer_id = customer,
                                     attribute_id = attribute_id, product_array = cart_items)
         return res
     except Exception:
@@ -2968,7 +2955,6 @@ def edit_cart_items(cart,order,order_id,customer):
         cart = frappe.new_doc('Shopping Cart')
         cart.customer = customer
         cart.cart_type = "Shopping Cart"
-        cart.website_type = 'Website'
         for x in order.order_item:
             if x.is_free_item != 1:
                 cart.append('items', {  'product':  x.item,
@@ -3178,7 +3164,6 @@ def get_order_itm_list(order_info, cart_item, item_sku, item_weight, total, item
                             'parent': order_info.name,
                             'parenttype': 'Order',
                             'parentfield': 'order_item',
-                            'order_item_type': 'Product',
                             'item': cart_item.product,
                             'item_name': cart_item.product_name,
                             'item_sku':item_sku,
@@ -3665,7 +3650,6 @@ def create_return_shipment(dt, dn, products, driver, status, tracking_number=Non
 			shipment.tracking_link = tracking_link
 			for item in items:
 				shipment.append('items',{
-										'item_type': item["order_item_type"],
 										'item': item["item"],
 										'item_name': item["item_name"],
 										'quantity': item["quantity"],

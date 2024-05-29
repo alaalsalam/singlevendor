@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-05-28 14:44:57.527541",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "order",
+  "posted_on",
+  "ratings",
+  "comments",
+  "naming_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "order",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Order",
+   "reqd": 1
+  },
+  {
+   "fieldname": "posted_on",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posted On",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ratings",
+   "fieldtype": "Rating",
+   "in_list_view": 1,
+   "label": "Ratings",
+   "reqd": 1
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments / Message",
+   "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "ORF-"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-05-28 14:49:47.367399",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Order Feedback",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "role": "Customer",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

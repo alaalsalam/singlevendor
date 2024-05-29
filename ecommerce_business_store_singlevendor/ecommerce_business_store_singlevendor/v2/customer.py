@@ -44,24 +44,35 @@ def login(usr,pwd):
 
 
 def get_list_period_wise(dt,condition,customer_id):
-	week_order_list = frappe.db.sql(''' SELECT name FROM `tab{dt}` S
-											WHERE S.customer = %(customer)s AND YEARWEEK(S.creation, 1) = YEARWEEK(CURDATE(), 1) 
-										AND naming_series != "SUB-ORD-" {cond} 
+	week_order_list = frappe.db.sql(''' SELECT S.name 
+										FROM `tab{dt}` S
+										WHERE S.customer = %(customer)s 
+											AND YEARWEEK(S.creation, 1) = YEARWEEK(CURDATE(), 1) 
+											AND naming_series != "SUB-ORD-" 
+											{cond} 
 									'''.format(dt=dt, cond=condition),{'customer': customer_id},
 										as_dict=1)
-	month_order_list = frappe.db.sql(''' SELECT name FROM `tab{dt}` S
-											WHERE S.customer = %(customer)s AND MONTH(S.creation) = MONTH(CURDATE())
-										AND naming_series != "SUB-ORD-" {cond} 
+	month_order_list = frappe.db.sql('''SELECT S.name 
+										FROM `tab{dt}` S
+										WHERE S.customer = %(customer)s 
+											AND MONTH(S.creation) = MONTH(CURDATE())
+											AND naming_series != "SUB-ORD-" 
+											{cond} 
 									'''.format(dt=dt, cond=condition),{'customer': customer_id},
 										as_dict=1)
-	today_order_list = frappe.db.sql(''' SELECT name FROM `tab{dt}` S
-											WHERE S.customer = %(customer)s AND DATE(S.creation) = CURDATE()
-										AND naming_series != "SUB-ORD-" {cond} 
+	today_order_list = frappe.db.sql('''SELECT S.name 
+										FROM `tab{dt}` S
+										WHERE S.customer = %(customer)s 
+											AND DATE(S.creation) = CURDATE()
+											AND naming_series != "SUB-ORD-" 
+											{cond} 
 									'''.format(dt=dt, cond=condition),{'customer': customer_id},
 										as_dict=1)
-	all_order_list = frappe.db.sql('''  SELECT name FROM `tab{dt}` S
-											WHERE S.customer = %(customer)s 
-										AND naming_series != "SUB-ORD-" {cond} 
+	all_order_list = frappe.db.sql('''  SELECT S.name 
+										FROM `tab{dt}` S
+										WHERE S.customer = %(customer)s 
+											AND naming_series != "SUB-ORD-" 
+											{cond} 
 									'''.format(dt=dt, cond=condition),{'customer': customer_id},
 										as_dict=1)
 	return [week_order_list, month_order_list, today_order_list, all_order_list]
@@ -75,19 +86,27 @@ def get_customer_dashboard():
 			condition = ''
 			dt = 'Order'
 			data = get_list_period_wise(dt,condition,customer_id)
-			week_order_list = data[0]
-			month_order_list = data[1]
-			today_order_list = data[2]
-			all_order_list = data[3]
-			return {"status":"success","data":{"all_count":len(all_order_list),
-					"monthly_count": len(month_order_list),
-					"today_orders_count": len(today_order_list),"recent_orders":recent_orders,
-					"week_orders_count":len(week_order_list)}}
+			return {
+					"status":"success",
+					"data":{
+							"all_count":len(data[3]),
+							"monthly_count": len(data[1]),
+							"today_orders_count": len(data[2]),
+							"recent_orders":recent_orders,
+							"week_orders_count":len(data[0])
+						}
+				}
 		else:
-			return {"status":"failed","message":"Customer not found."}
+			return {
+					"status":"failed",
+					"message":"Customer not found."
+				}
 	except Exception:
 		other_exception("Error in ecommerce_business_store_singlevendor.v2.customer")
-		return {"status":"failed","message":"Something Went Wrong."}
+		return {
+				"status":"failed",
+				"message":"Something Went Wrong."
+			}
 
 
 def check_condition_in_order_list(customer,status,driver,date,shipping_method,
@@ -276,14 +295,16 @@ def get_customer_order_list(page_no = None, page_length = None):
 				limit_start = (int(page_no)-1) * int(page_length)
 				fields_list = ["name","creation","status","payment_status","total_amount"]
 				order = frappe.get_all('Order', 
-								filters={'customer': customer_id,'naming_series': ('!=','SUB-ORD-')},
-								fields=fields_list, limit_start=limit_start, 
-								limit_page_length=page_length, order_by='creation desc')
+								filters = {'customer': customer_id,'naming_series': ('!=','SUB-ORD-')},
+								fields = fields_list, 
+								limit_start = limit_start, 
+								limit_page_length = page_length, 
+								order_by = 'creation desc')
 				if order:
 					for i in order:
-						order_items = frappe.get_all('Order Item', fields=['name','item'],
-													filters={'parent': i.name})
-						i.Items = order_items
+						i.Items = frappe.get_all('Order Item', 
+													fields = ['name','item'],
+													filters = {'parent': i.name})
 				return order
 			else:
 				return {"status":"failed",
@@ -519,8 +540,12 @@ def get_order_info(order_id):
 	feedback = frappe.db.get_all('Order Feedback',
 				 filters={'order': order_id}, 
 				 fields=['posted_on', 'ratings', 'comments'])
-	return {"info":order,"messages":[],"delivery_slot":delivery_slot,'feedback':feedback[0] \
-				if feedback else None}
+	return {
+		"info":order,
+		"messages":[],
+		"delivery_slot":delivery_slot,
+		'feedback':feedback[0] if feedback else []
+	}
 
 @frappe.whitelist(allow_guest = True)
 def insert_update_customer(**info):
@@ -616,6 +641,7 @@ def cancel_order(**kwargs):
 	except Exception:
 		other_exception("customer cancel_order")
 
+
 def validate_cancel_order(Orders,customer_id,customer,**kwargs):
 	if Orders.docstatus == 1:
 		from frappe.desk.form.linked_with import get_linked_docs, get_linked_doctypes
@@ -657,17 +683,20 @@ def validate_cancel_order(Orders,customer_id,customer,**kwargs):
 			return {"status":"Failed",
 					"message": "Order Not Found"}
 
+
 def generate_random_nos(n):
 	from random import randint
 	range_start = 10**(n-1)
 	range_end = (10**n)-1
 	return randint(range_start, range_end)
 
+
 @frappe.whitelist(allow_guest=True)
 def send_otp(mobile_no):
 	from ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.v2.common \
 		import send_otp as send_mobile_otp
 	return send_mobile_otp(mobile_no)
+
 
 @frappe.whitelist(allow_guest=True)
 def verify_otp(mobile_no,otp,guest_id=None):
@@ -680,6 +709,7 @@ def verify_otp(mobile_no,otp,guest_id=None):
 		return otp_resp
 	else:
 		return otp_resp
+
 
 def move_cart_items(customer, guest_id):
 	try:
@@ -715,6 +745,7 @@ def update_recently_viewed_products(guest_id, customer_id):
 	for x in recently_viewed_products:
 		frappe.enqueue("ecommerce_business_store.ecommerce_business_store.api.delete_viewed_products",customer_id=customer_id, name=x.name, product=x.product)
 
+
 @frappe.whitelist(allow_guest=True)
 def delete_viewed_products(customer_id, name, product):
 	check_already_viewed = frappe.get_all('Customer Viewed Product', filters={'parent': customer_id, 'product': product})
@@ -736,6 +767,7 @@ def delete_viewed_products(customer_id, name, product):
 	remove_product = frappe.get_doc('Customer Viewed Product', name)
 	remove_product.delete()
 	frappe.db.commit()
+
 
 def customer_login(phone):
 	usr = frappe.db.get_all("Customers",
@@ -761,6 +793,7 @@ def customer_login(phone):
 					"message":"OTP verfied successfully."}
 	return {"status":"Failed"}
 
+
 def customer_registration_login(phone):
 	usr = frappe.db.get_value("Customer Registration",{"phone":phone})
 	if usr:
@@ -784,6 +817,7 @@ def customer_registration_login(phone):
 				'status':"Success",
 				"message":"OTP verfied successfully."}	
 
+
 @frappe.whitelist(allow_guest=True)
 def get_registration_details(customer_id):
 	from ecommerce_business_store_singlevendor.utils.utils import get_customer_reg_from_token
@@ -791,6 +825,7 @@ def get_registration_details(customer_id):
 	if reg_id == customer_id:
 		return frappe.get_doc("Customer Registration",customer_id)
 	return {"status":"Failed","message":"Authoriztion Failed."}
+
 
 @frappe.whitelist(allow_guest=True)
 @customer_reg_auth(method="POST")
@@ -814,6 +849,7 @@ def update_registration_details(**kwargs):
 		other_exception("customer update_registration_details")
 		return {"status":"Failed","message":"Something went wrong."}
 
+
 @frappe.whitelist()
 @role_auth(role='Customer',method="GET")
 def get_wallet_details():
@@ -828,6 +864,7 @@ def get_wallet_details():
 	except Exception:
 		frappe.log_error(message = frappe.get_traceback(), title = 'Error in wallet_details')
 
+
 @frappe.whitelist()
 @role_auth(role='Customer',method="PUT")
 def update_device_id(device_id):
@@ -840,6 +877,7 @@ def update_device_id(device_id):
 		return {"status":"Failed","message":"Not a valid customer"}
 	except Exception:
 		frappe.log_error(message = frappe.get_traceback(), title = 'Error in update_device_i')
+
 
 @frappe.whitelist()
 def insert_address(data):
@@ -855,10 +893,9 @@ def insert_address(data):
 		customers = frappe.db.get_all('Customers', filters = filters, fields = ['*'])
 		if response.get('is_default') == 1:
 			existing_address = frappe.db.sql('''SELECT A.* 
-												FROM 
-													`tabCustomer Address` A 
-												WHERE A.parent = %(customer)s''', 
-													{'customer': customers[0].name}, as_dict=1)
+												FROM `tabCustomer Address` A 
+												WHERE A.parent = %(customer)s
+											''', {'customer': customers[0].name}, as_dict = 1)
 			if existing_address:
 				for address in existing_address:
 					addr = frappe.get_doc('Customer Address', address.name)
@@ -885,6 +922,7 @@ def insert_address(data):
 		return address.as_dict()
 	except Exception:
 		frappe.log_error(message=frappe.get_traceback(), title='v2.customer.insert_address')
+
 
 def set_address_details(address,customers,response):
 	if address.first_name == 'Guest':
@@ -916,6 +954,7 @@ def set_address_details(address,customers,response):
 		address.latitude = response.get('latitude')
 	if response.get('longitude'):
 		address.longitude = response.get('longitude')
+
 
 @frappe.whitelist()
 def delete_address(id, customer):
@@ -961,6 +1000,7 @@ def check_address(data):
 											'parent': response.get('customer') })
 	if address:
 		return address[0]
+
 
 @frappe.whitelist()
 def update_address(data):
@@ -1011,3 +1051,71 @@ def update_address(data):
 		return address.as_dict()
 	except Exception:
 		frappe.log_error(message = frappe.get_traceback(), title = 'v2.customer.update_address')
+
+
+# @frappe.whitelist(allow_guest=True)
+# def insert_address(data):
+# 	try:
+# 		check = check_address(data)
+# 		if check:
+# 			return check
+# 		response = json.loads(data)
+# 		if response.get('customer'):
+# 			filters = {'name': response.get('customer')}
+# 		else:
+# 			filters = {'user_id': frappe.session.user}
+# 		customers = frappe.db.get_all('Customers', filters=filters, fields=['*'])
+# 		if response.get('is_default') == 1:
+# 			existing_adddress = frappe.db.sql('''select a.* from `tabCustomer Address` a where a.parent=%(customer)s''', {'customer': customers[0].name}, as_dict=1)
+# 			if existing_adddress:
+# 				for address in existing_adddress:
+# 					addr = frappe.get_doc('Customer Address', address.name)
+# 					addr.is_default = 0
+# 					addr.save()
+# 		check_existing = frappe.db.get_all('Customer Address', filters={'parent': customers[0].name, 'address': response.get('addr1'), 'city': response.get('city'), 'state': response.get('state'), 'country': response.get('country')})
+# 		if check_existing:
+# 			return {'status': 'failed', 'message': _('You have already added this address')}
+# 		if response.get('address_type'):
+# 			res = validate_address(response.get('address_type'), customers[0].name)
+# 			if res and res['status'] == 'failed':
+# 				return res
+# 		address = frappe.new_doc('Customer Address')
+# 		address.first_name = (response.get('first_name') if response.get('first_name') else customers[0].first_name)
+# 		address.last_name = (response.get('last_name') if response.get('last_name') else customers[0].last_name)
+# 		if address.first_name == 'Guest':
+# 			address.first_name = customers[0].first_name
+# 		if address.last_name == 'None':
+# 			address.last_name = customers[0].last_name
+# 		address.address = response.get('addr1')
+# 		address.city = response.get('city')
+# 		address.county = response.get('district')
+# 		address.is_default = response.get('is_default')
+# 		address.state = response.get('state')
+# 		address.country = response.get('country')
+# 		address.zipcode = response.get('pincode')
+# 		if response.get('phone'):
+# 			address.phone = response.get('phone')
+# 		else:
+# 			address.phone = customers[0].phone
+# 		address.parenttype = 'Customers'
+# 		address.parentfield = 'table_6'
+# 		address.landmark = response.get('landmark')
+# 		address.parent = customers[0].name
+# 		if response.get('address_type'):
+# 			address.address_type = response.get('address_type')
+# 		if response.get('door_no'):
+# 			address.door_no = response.get('door_no')
+# 		if response.get('unit_number'):
+# 			address.unit_number = response.get('unit_number')
+# 		if response.get('latitude'):
+# 			address.latitude = response.get('latitude')
+# 		if response.get('longitude'): 
+# 			address.longitude = response.get('longitude')
+# 		if response.get('custom_company_name'):
+# 			address.custom_company_name = response.get('custom_company_name')
+# 		if response.get('custom_gst_no'):
+# 			address.custom_gst_no = response.get('custom_gst_no')
+# 		address.save(ignore_permissions=True)
+# 		return address.as_dict()
+# 	except Exception:
+# 		frappe.log_error("Error in v2.customer.insert_address", frappe.get_traceback())

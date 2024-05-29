@@ -550,25 +550,24 @@ def get_cart_items(customer_id = None):
 		other_exception("Error in v2.carts.get_cartItems")
 		return {"status":"failed","message":"something went wrong"}
 
+
 def get_items_if_customer_cart_exist(customer_cart):
-	items = frappe.db.sql(f'''
-		SELECT 
-			CI.name,CI.product,CI.product_name AS item,
-			CI.quantity,CI.price,CI.total,CI.product_name,
-			PR.brand AS product_brand,PR.brand_name,
-			CI.is_free_item,CI.is_fl_store_item,
-			CI.attribute_description,CI.attribute_ids,
-			CI.special_instruction,CI.tax_breakup,
-			CI.old_price,PR.route,PR.minimum_order_qty,
-			PR.image
-		FROM 
-			`tabCart Items` CI INNER JOIN `tabProduct` PR 
-				ON PR.name = CI.product
-		WHERE 
-			PR.name = CI.product AND CI.parent = '{customer_cart.name}' 
-		ORDER BY 
-			CI.creation DESC ''', as_dict = 1)
+	items = frappe.db.sql(f''' SELECT CI.name,CI.product,CI.product_name AS item,
+									CI.quantity,CI.price,CI.total,CI.product_name,
+									PR.brand AS product_brand,PR.brand_name,
+									CI.is_free_item,CI.is_fl_store_item,
+									CI.attribute_description,CI.attribute_ids,
+									CI.special_instruction,CI.tax_breakup,
+									CI.old_price,PR.route,PR.minimum_order_qty,
+									PR.image
+								FROM `tabCart Items` CI 
+								INNER JOIN `tabProduct` PR ON PR.name = CI.product
+								WHERE PR.name = CI.product 
+									AND CI.parent = '{customer_cart.name}' 
+								ORDER BY CI.creation DESC 
+							''', as_dict = 1)
 	return items
+
 
 def check_attr_id_in_item(item):
 	if item.attribute_ids:
@@ -588,6 +587,7 @@ def check_attr_id_in_item(item):
 					images = sorted(images, key = lambda x: x.get('is_primary'),reverse = True)
 					item['image'] = images[0].get('thumbnail')
 					
+
 def check_items_in_customer_cart(items,tax_rates,customer_cart,mp_items):
 	if items:
 		for item in items:
@@ -612,6 +612,7 @@ def check_items_in_customer_cart(items,tax_rates,customer_cart,mp_items):
 			mp_items.append(item)
 	customer_cart.marketplace_items = mp_items
 	
+
 def get_customer_cart(cart_type,customer):
 	customer_cart = frappe.db.get_value('Shopping Cart',{'customer': customer,'cart_type': cart_type},
 									 ['customer', 'name', 'tax', 'tax_breakup', 'total'], as_dict = 1)

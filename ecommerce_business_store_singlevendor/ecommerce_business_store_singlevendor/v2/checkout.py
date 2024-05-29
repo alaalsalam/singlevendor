@@ -75,15 +75,16 @@ def get_shipping_methods():
 								FROM 
 									`tabShipping Method`
 								WHERE show_in_website = 1
-								ORDER BY display_order''',as_dict=True)
-		for d in data:
-			if order_settings.shipping_calculated_by=="Shipping Provider":
-				if d.is_deliverable==1 and order_settings.shipping_provider: 
-					shipping_modes = frappe.db.get_all("Shipping Mode List",
-														filters={"parent":order_settings.
-																shipping_provider},
-														fields=["label","shipping_mode"])
-					d.shipping_modes = shipping_modes
+								ORDER BY display_order
+							''',as_dict=True)
+		# for d in data:
+		# 	if order_settings.shipping_calculated_by=="Shipping Provider":
+		# 		if d.is_deliverable==1 and order_settings.shipping_provider: 
+		# 			shipping_modes = frappe.db.get_all("Shipping Mode List",
+		# 												filters={"parent":order_settings.
+		# 														shipping_provider},
+		# 												fields=["label","shipping_mode"])
+		# 			d.shipping_modes = shipping_modes
 		return data
 	except Exception:
 		other_exception("Error in v2.checkout.get_shipping_method")

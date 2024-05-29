@@ -448,10 +448,12 @@ def get_coupon_code(coupon_code, subtotal, customer_id, cart_items,discount_type
 	cartitems = [i.product for i in cart_items if i.product]
 	cartattrubutes = [i.attribute_ids.replace("\n", "") for i in cart_items if i.attribute_ids]
 	rule = get_coupon_code_from_discount_rule(product_array,coupon_code,today_date)
+	frappe.log_error("rule",rule)
 	if rule:	
 		out = get_coupon_code_by_rule(out,rule, discount_type, subtotal,customer_id, 
 										cart_items,total_weight,shipping_method, 
 										payment_method,cartitems,cartattrubutes)
+		frappe.log_error("OUTTTTTTTTTT", out)
 	else:
 		if shipping_charges:
 			if flt(shipping_charges)>0:
@@ -1476,6 +1478,7 @@ def get_coupon_code_by_rule(out,rule, discount_type, subtotal, customer_id, cart
 
 
 def get_coupon_code_from_discount_rule(product_array,coupon_code,today_date):
+	today = getdate(today_date)
 	query = f'''SELECT D.* FROM `tabDiscounts` AS D
 				LEFT JOIN `tabDiscount Products` AS DP ON D.name = DP.parent 
 				LEFT JOIN `tabDiscount Applied Product` AS DAP ON D.name = DAP.parent  
@@ -1490,12 +1493,9 @@ def get_coupon_code_from_discount_rule(product_array,coupon_code,today_date):
 								ELSE 1 = 1 END))
 					AND requires_coupon_code = 1 
 					AND coupon_code = "{coupon_code}"  
-				ORDER BY priority DESC '''.format(
-													product_array = product_array,
-													coupon_code = coupon_code, 
-													today = getdate(today_date)
-												)
-	rule = frappe.db.sql(query, as_dict=1)
+				ORDER BY priority DESC 
+			'''
+	rule = frappe.db.sql(query, as_dict = 1)
 	return rule
 
 
