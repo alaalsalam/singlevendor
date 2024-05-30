@@ -730,7 +730,7 @@ def not_check_items(check_items):
                 return check_stock
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 # @role_auth(role='Customer',method="POST")
 def insert_order(data):
     if type(data) == str:
@@ -2686,41 +2686,44 @@ def validate_product_cart_qty_inventory_method(product,qty,attributeId,customer)
 @frappe.whitelist(allow_guest = True)
 def validate_attributes_stock_mob(product, attribute_id, variant_html, cart_qty, add_qty = None, customer = None):
     try:
-        product_info = frappe.get_doc('Product', product)
-        product_price = product_info.price
-        check_data = frappe.db.get_all('Product Variant Combination',
-                                        filters = {'parent': product, 'attribute_id': attribute_id},
-                                        fields = ['stock', 'price', 'weight', 'sku', 'role_based_pricing'])
-        if check_data:
-            if check_data[0].price > 0:
-                product_price = check_data[0].price
-            qty = 0
-            if check_data[0].stock > 0:
-                customer_id = (unquote(frappe.request.cookies.get('customer_id')) \
-                        if frappe.request.cookies.get('customer_id') else None)
-                if customer:
-                    customer_id = customer
-                if customer_id:
-                    cart = frappe.db.get_all('Shopping Cart', fields = ['*'],
-                                    filters = {'customer': customer_id, 'cart_type': 'Shopping Cart'})
-                    if cart:
-                        cartitem = frappe.db.get_all('Cart Items', fields = ['*'],
-                                filters = {'product': product, 'parent': cart[0].name,
-                                            'attribute_description': variant_html})
-                        if cartitem:
-                            qty = (float(cartitem[0].qty) if add_qty == True else 0)
-            qty = flt(qty) + flt(cart_qty)
-            discount = get_product_price(product_info, qty,product_price, attribute_id)
-            return _validate_inventory_product_info(qty,check_data,product_info,discount)
+        if not attribute_id:
+            return "No atribute Id"
         else:
-            if product_info.inventory_method == 'Track Inventory By Product Attributes':
-                return {
-                        'status': 'Failed',
-                        'attr_status': 1,
-                        'price': product_info.price,
-                        'message': 'Sorry! No stock available for ' + 
-                                    str(product_info.item.encode('ascii', 'ignore'))
-                    }
+            product_info = frappe.get_doc('Product', product)
+            product_price = product_info.price
+            check_data = frappe.db.get_all('Product Variant Combination',
+                                            filters = {'parent': product, 'attribute_id': attribute_id},
+                                            fields = ['stock', 'price', 'weight', 'sku', 'role_based_pricing'])
+            if check_data:
+                if check_data[0].price > 0:
+                    product_price = check_data[0].price
+                qty = 0
+                if check_data[0].stock > 0:
+                    customer_id = (unquote(frappe.request.cookies.get('customer_id')) \
+                            if frappe.request.cookies.get('customer_id') else None)
+                    if customer:
+                        customer_id = customer
+                    if customer_id:
+                        cart = frappe.db.get_all('Shopping Cart', fields = ['*'],
+                                        filters = {'customer': customer_id, 'cart_type': 'Shopping Cart'})
+                        if cart:
+                            cartitem = frappe.db.get_all('Cart Items', fields = ['*'],
+                                    filters = {'product': product, 'parent': cart[0].name,
+                                                'attribute_description': variant_html})
+                            if cartitem:
+                                qty = (float(cartitem[0].qty) if add_qty == True else 0)
+                qty = flt(qty) + flt(cart_qty)
+                discount = get_product_price(product_info, qty,product_price, attribute_id)
+                return _validate_inventory_product_info(qty,check_data,product_info,discount)
+            else:
+                if product_info.inventory_method == 'Track Inventory By Product Attributes':
+                    return {
+                            'status': 'Failed',
+                            'attr_status': 1,
+                            'price': product_info.price,
+                            'message': 'Sorry! No stock available for ' + 
+                                        str(product_info.item.encode('ascii', 'ignore'))
+                        }
     except Exception:
         frappe.log_error('Error in v2.orders.validate_attributes_stock_mob', frappe.get_traceback())
 

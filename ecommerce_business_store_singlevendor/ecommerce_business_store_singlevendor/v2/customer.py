@@ -7,6 +7,7 @@ from ecommerce_business_store_singlevendor.utils.utils import \
     role_auth,customer_reg_auth,get_auth_token,get_customer_from_token,\
 	other_exception,authentication_exception,doesnotexist_exception,\
 	permission_exception,validation_exception
+from ecommerce_business_store_singlevendor.utils.setup import get_business_from_web_domain, get_settings_from_domain
 
 @frappe.whitelist(allow_guest = True)
 def login(usr,pwd):
@@ -1051,6 +1052,92 @@ def update_address(data):
 		return address.as_dict()
 	except Exception:
 		frappe.log_error(message = frappe.get_traceback(), title = 'v2.customer.update_address')
+
+@frappe.whitelist(allow_guest=True)
+def insert_customers(data):
+	try:
+		responsedata = json.loads(data)
+		parent_customer = None
+		regapproval = 0 
+		if responsedata.get('reg_approval') and (responsedata.get('reg_approval') == 1 or responsedata.get('reg_approval') == "1"):
+			regapproval = 1
+		document = "Customers"
+		exist_reg = None
+
+		if regapproval==1:
+			document = "Customer Registration"
+			exist_reg = frappe.db.get_value(document,{"phone": responsedata.get("phone"), "customer_status":("!=", "Rejected")})
+			if responsedata.get("email"):
+				if frappe.db.exists("Customer Registration", {"email": responsedata.get("email"), "customer_status":("!=", "Rejected")}):
+					return {'status':'failed','customer':"", 'msg': "Email already registered!"}
+		if regapproval==0:
+			exist_reg = frappe.db.get_value(document,{"phone": responsedata.get("phone"), "customer_status":("!=", "Rejected")})
+			if exist_reg:
+				return {'status':'failed','customer':"", 'message': "Mobile Number already registered!"}
+			if responsedata.get("email"):
+				if frappe.db.exists("Customers", {"email": responsedata.get("email"), "customer_status":("!=", "Rejected")}):
+					return {'status':'failed','customer':"", 'message': "Email already registered!"}
+		frappe.log_error("login_response",exist_reg)
+		if responsedata.get('name'):
+			customer = frappe.get_doc(document,responsedata.get('name'))
+		else:	
+			customer = frappe.new_doc(document)
+			business = None
+			if responsedata.get('domain'):
+				business = get_business_from_web_domain(responsedata.get('domain'))
+				customer.business = business
+		customer.first_name = responsedata.get("first_name")
+		customer.last_name = responsedata.get("last_name")
+		order_settings = get_settings_from_domain('Order Settings')
+		customer.customer_status = "Approved" if order_settings.auto_customer_approval else "Waiting for Approval"
+		if responsedata.get('phone'):
+			customer.phone = responsedata.get("phone")
+		customer.email = responsedata.get("email")
+		customer.gender = responsedata.get("gender")
+		if responsedata.get('random_pwd'):
+			customer.set_new_password = frappe.generate_hash(length=8)
+		else:
+			customer.set_new_password = responsedata.get('pwd')
+		# frappe.db.sql('''delete from `tabCustomer Address` where parent=%(parent)s and parenttype="Customers" and parentfield="table_6"''',{'parent':customer.name})
+		if responsedata.get('address'):
+			customer.table_6 = []			
+			for item in responsedata.get('address'):
+				customer.append('table_6', item)
+		if responsedata.get('parent_customer'):
+			customer.parent_doctype = 'Customers'
+			customer.parent_level = responsedata.get('parent_customer')
+		if exist_reg and regapproval==1:
+			return {'status':'failed','customer':"", 'msg': "Customer already registered!"}
+		else:
+			customer.save(ignore_permissions=True)
+		if regapproval==0:
+			# created by sivaranjani-21 july 2020
+			if responsedata.get('custom_role'):
+				cur_cust = frappe.get_doc("Customers", customer.name)
+				cur_cust.append("customer_role", {"role": responsedata.get('custom_role')})
+				cur_cust.save(ignore_permissions=True)
+			#end
+			# updated by siva for affiliate marketting 
+			if 'loyalty' in frappe.get_installed_apps():
+				if responsedata.get('referral_code'):
+					parent_customer = frappe.db.get_value("Customers", {"referral_code":responsedata.get('referral_code')},as_dict=True)
+					if parent_customer:
+						if frappe.db.get_value("Customers",parent_customer,"is_group")==0:
+							parent = frappe.get_doc("Customers", parent_customer)
+							parent.is_group = 1
+							parent.save(ignore_permissions=True)
+						cur_cust = frappe.get_doc("Customers", customer.name)
+						cur_cust.parent_doctype = "Customers"
+						cur_cust.parent_level = parent_customer.name
+						cur_cust.save(ignore_permissions=True)
+			if responsedata.get('guest_id'):
+				move_cart_items(customer.name, responsedata.get('guest_id'))
+		return {'status':'success','customer':customer, 'msg':"","message":"Congratulations your account has been successfully created."}
+	except Exception as e:
+		frappe.db.rollback()	
+		frappe.log_error(frappe.get_traceback(), "ecommerce_business_store.ecommerce_business_store.mobileapi.insert_customers")
+		return {'status':'failed', 'msg':""}
+
 
 
 # @frappe.whitelist(allow_guest=True)

@@ -254,7 +254,17 @@ def read_file_from_url(url):
 	data = json.loads(file)
 	return data
 
-
+@frappe.whitelist()
+def get_business_from_web_domain(domain, raise_exception=False):
+	domain = get_subdomain(domain)
+	check_website = frappe.db.get_all('Website', filters={'domain_name': domain}, fields=['business'])
+	if check_website:
+		if check_website[0].business:
+			state = frappe.db.get_value("Business", check_website[0].business, "disable")
+			if state == 1 and raise_exception:
+				frappe.throw(frappe._('Business not found'))
+			return check_website[0].business
+		
 @frappe.whitelist()
 def get_doc_versions(doctype, name, check_field_change=False, check_field=None):
 	versions = frappe.get_version(doctype, name)

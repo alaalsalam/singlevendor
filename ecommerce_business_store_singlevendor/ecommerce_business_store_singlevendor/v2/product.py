@@ -7,10 +7,11 @@ from urllib.parse import unquote, urlencode
 from pytz import timezone
 import pytz
 from six import string_types
-from ecommerce_business_store_singlevendor.utils.setup import get_settings_value,get_settings
 from ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.v2.category \
     import get_parent_categories,get_parent_categorie
 from ecommerce_business_store_singlevendor.utils.utils import get_customer_from_token, other_exception
+from ecommerce_business_store_singlevendor.utils.setup import get_business_from_web_domain, get_settings_value, get_settings \
+
 
 try:
 	catalog_settings = get_settings('Catalog Settings')
@@ -163,31 +164,31 @@ def get_customer_recently_viewed_products(customer=None, domain=None, isMobile=0
 
 @frappe.whitelist(allow_guest=True)
 def get_product_other_info(item, domain=None, isMobile=0, business=None):
-	'''
-		To get additional product information to show in product detail page
+    '''
+        To get additional product information to show in product detail page
 
-		param: item: product id
-	'''
-	if domain:
-		business = None
-		business = get_business_from_web_domain(domain)
-
-	customer_bought = best_sellers = related_products = []
-	categories_list = frappe.db.sql('''select category, category_name, (select route from `tabProduct Category` c where c.name = pcm.category) as route from `tabProduct Category Mapping` pcm where parent = %(parent)s order by idx limit 1''', {'parent': item}, as_dict=1)
-	if catalog_settings.customers_who_bought:
-		customer_bought = get_products_bought_together(item, business=business, isMobile=isMobile)
-	if catalog_settings.enable_best_sellers:
-		if categories_list and categories_list[0].category:
-			best_sellers = get_category_based_best_sellers(categories_list[0].category, item, business=business, isMobile=isMobile)
-	if catalog_settings.enable_related_products:
-		if categories_list:
-			related_products = get_category_products(categories_list[0].category, productsid=item, page_size=18, domain=domain, isMobile=isMobile)
-	return {
-		'best_seller_category': best_sellers,
-		'related_products': related_products,
-		'products_purchased_together': customer_bought,
-		'product_category': (categories_list[0] if categories_list else {}),
-		}
+        param: item: product id
+    '''
+    # frappe.log_error(domain)
+    if domain:
+        business = None
+        business = get_business_from_web_domain(domain)
+    customer_bought = best_sellers = related_products = []
+    categories_list = frappe.db.sql('''select category, category_name, (select route from `tabProduct Category` c where c.name = pcm.category) as route from `tabProduct Category Mapping` pcm where parent = %(parent)s order by idx limit 1''', {'parent': item}, as_dict=1)
+    if catalog_settings.customers_who_bought:
+        customer_bought = get_products_bought_together(item, business=business)
+    if catalog_settings.enable_best_sellers:
+        if categories_list and categories_list[0].category:
+            best_sellers = get_category_based_best_sellers(categories_list[0].category, item, business=business)
+    if catalog_settings.enable_related_products:
+        if categories_list:
+            related_products = get_category_products(categories_list[0].category, productsid=item, page_size=18)
+    return {
+        'best_seller_category': best_sellers,
+        'related_products': related_products,
+        'products_purchased_together': customer_bought,
+        'product_category': (categories_list[0] if categories_list else {}),
+    }
 
 def get_products_bought_together(item, business=None, isMobile=0):
 	cond = ''
@@ -1359,12 +1360,14 @@ def get_search_products(customer= None,search_text=None, sort_by=None, page_no=1
 			search_results = get_list_product_details(search_results,customer)
 		return search_results
 	except Exception:
+		frappe.log_error("Error in v2.product.get_search_products",frappe.get_traceback())
 		other_exception("Error in v2.product.get_search_products")
 		
 
 def get_search_results(search_text, sort_by, page_no, page_size, brands, ratings, 
 	min_price,max_price,attributes,customer=None):
 	try:
+		frappe.log_error("search_text",search_text)
 		from frappe.website.utils import cleanup_page_name
 		search_text = unquote(search_text)
 		queryText=cleanup_page_name(search_text).replace('_', '-')
@@ -1412,16 +1415,16 @@ def get_search_results(search_text, sort_by, page_no, page_size, brands, ratings
 def get_search_data(select_query,search_text,page_no,page_size,customer,brands,attributes,
 							 conditions,sort,search_query):
 		try:
-			start_with_condition = " and (P.item like '{}%%')".format(search_text)
+			start_with_condition = " AND (P.item like '{}%%')".format(search_text)
 			list_columns = get_product_list_columns()
 			start_with_items  = f"""SELECT DISTINCT 
-										{list_columns}
+										{list_columns}{select_query}
 									FROM 
 										`tabProduct` P
 									LEFT JOIN 
 										`tabProduct Search Keyword` S ON S.parent = P.name 
 									WHERE 
-										P.is_active = 1 AND P.status = 'Approved' {select_query}
+										P.is_active = 1 AND P.status = 'Approved' 
 										{start_with_condition} {conditions} {sort}
 									LIMIT 
 										{(int(page_no) - 1) * int(page_size)}, {int(page_size)}"""
@@ -1430,7 +1433,7 @@ def get_search_data(select_query,search_text,page_no,page_size,customer,brands,a
 						FROM 
 							`tabProduct` P
 						LEFT JOIN 
-							`tabProduct Search Keyword` s 
+							`tabProduct Search Keyword` S 
 								ON 
 									S.parent=P.name
 						WHERE 
@@ -1438,6 +1441,7 @@ def get_search_data(select_query,search_text,page_no,page_size,customer,brands,a
 							AND (
 								P.route LIKE '%{search_text}%') 
 						LIMIT {(int(page_no) - 1) * int(page_size)},{int(page_size)}"""
+			frappe.log_error("start_with_items",query)
 			data = get_search_result(start_with_items,query,page_size)
 			return data
 		except Exception:

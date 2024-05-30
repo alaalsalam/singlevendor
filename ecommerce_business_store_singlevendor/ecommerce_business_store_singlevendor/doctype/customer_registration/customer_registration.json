@@ -1,0 +1,808 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2024-05-30 15:34:07.194988",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "personal_details_tab",
+  "customer_dashboard",
+  "customer_section_break",
+  "customer_html",
+  "section_break_2",
+  "customer_types",
+  "disable",
+  "column_break_ehyzx",
+  "customer_status",
+  "section_break_1",
+  "naming_series",
+  "first_name",
+  "full_name",
+  "phone",
+  "alternate_phone",
+  "set_new_password",
+  "allow_multiple_address",
+  "user_id",
+  "business",
+  "column_break_3",
+  "last_name",
+  "email",
+  "dob",
+  "gender",
+  "customer_type",
+  "no_of_employees",
+  "address_section",
+  "address_map",
+  "address",
+  "landmark",
+  "latitude",
+  "column_break_js4ko",
+  "country",
+  "state",
+  "city",
+  "zipcode",
+  "longitude",
+  "sec_1",
+  "table_6",
+  "section_viewed_products",
+  "viewed_products",
+  "new_password",
+  "player_id",
+  "is_group",
+  "lft",
+  "rgt",
+  "old_parent",
+  "parent_doctype",
+  "parent_level",
+  "customer_preference",
+  "customer_notes",
+  "sec_role",
+  "customer_role",
+  "section_break_31",
+  "recent_orders",
+  "business_details",
+  "business_name",
+  "store_name_same_as_business_name",
+  "store_name",
+  "is_same_personal_address",
+  "column_break_2y1f",
+  "same_as_personal",
+  "business_phone",
+  "route",
+  "column_break_znhr",
+  "establishment_year",
+  "store_class",
+  "sales_executive",
+  "business_address_section",
+  "business_address_map",
+  "business_address",
+  "business_state",
+  "column_break_2vzj",
+  "business_landmark",
+  "business_city",
+  "column_break_9v2v",
+  "business_country",
+  "business_zip",
+  "business_location_section",
+  "business_latitude",
+  "column_break_ny2nx",
+  "business_longitude",
+  "column_break_ncxzc",
+  "accuracy",
+  "section_images",
+  "store_front_image",
+  "store_closeup_image",
+  "store_operator_image",
+  "column_break_2",
+  "help",
+  "gst_in",
+  "weekly_off",
+  "operate_multiple_stores",
+  "kyc_tab_break",
+  "personal_kyc",
+  "kyc_status",
+  "customer_identity_proof",
+  "customer_address_proof",
+  "lead_details_tab",
+  "lead_source",
+  "visit_status",
+  "column_break_tuxo",
+  "lead_status",
+  "lead_mobile_no",
+  "remark",
+  "uuid"
+ ],
+ "fields": [
+  {
+   "fieldname": "personal_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Personal Details"
+  },
+  {
+   "fieldname": "customer_dashboard",
+   "fieldtype": "HTML",
+   "label": "Customer Dashboard"
+  },
+  {
+   "fieldname": "customer_section_break",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer_html",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer_types",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer Type",
+   "options": "Customer\nLead",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "default": "0",
+   "fieldname": "disable",
+   "fieldtype": "Check",
+   "label": "Disable",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_ehyzx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Waiting for Approval",
+   "fieldname": "customer_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Waiting for Approval\nApproved\nRejected",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "CUST-\nCRM-LEAD-.YYYY.-\nGC-",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "First name",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "Full Name"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Phone",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\"",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alternate_phone",
+   "fieldtype": "Data",
+   "label": "Alternate Phone",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "set_new_password",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Set New Password"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_multiple_address",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Allow Multiple Address"
+  },
+  {
+   "fieldname": "user_id",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "User Id",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "business",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Seller",
+   "options": "Business"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Last Name",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "dob",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Date Of Birth",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "customer_type",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Customer Type",
+   "options": "\nCompany\nFreelancer",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.customer_type == \"Company\"",
+   "fieldname": "no_of_employees",
+   "fieldtype": "Int",
+   "label": "No. of Employees",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.allow_multiple_address==0",
+   "fieldname": "address_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Address"
+  },
+  {
+   "fieldname": "address_map",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Address Map"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "landmark",
+   "fieldtype": "Data",
+   "label": "Landmark",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Latitude",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_js4ko",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "options": "Country",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "State",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City / Town",
+   "options": "City",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "zipcode",
+   "fieldtype": "Data",
+   "label": "Zipcode",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Longitude",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "depends_on": "eval:doc.allow_multiple_address==1",
+   "fieldname": "sec_1",
+   "fieldtype": "Section Break",
+   "label": "Customer Address"
+  },
+  {
+   "fieldname": "table_6",
+   "fieldtype": "Table",
+   "label": "Customer Address",
+   "options": "Customer Address"
+  },
+  {
+   "fieldname": "section_viewed_products",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Viewed Products"
+  },
+  {
+   "fieldname": "viewed_products",
+   "fieldtype": "Table",
+   "label": "Viewed Products",
+   "options": "Customer Viewed Product"
+  },
+  {
+   "fieldname": "new_password",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Set New Password"
+  },
+  {
+   "fieldname": "player_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Player Id"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "lft"
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "rgt"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Old Parent"
+  },
+  {
+   "default": "Customers",
+   "fieldname": "parent_doctype",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Parent DocType",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "parent_level",
+   "fieldtype": "Link",
+   "label": "Parent",
+   "options": "Customers"
+  },
+  {
+   "fieldname": "customer_preference",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Customer Preference",
+   "options": "Customer Preference"
+  },
+  {
+   "fieldname": "customer_notes",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Customer Notes"
+  },
+  {
+   "depends_on": "eval:((!doc.__islocal))",
+   "fieldname": "sec_role",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Roles"
+  },
+  {
+   "fieldname": "customer_role",
+   "fieldtype": "Table MultiSelect",
+   "in_standard_filter": 1,
+   "label": "Roles",
+   "options": "Customer Role"
+  },
+  {
+   "fieldname": "section_break_31",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "recent_orders",
+   "fieldtype": "HTML",
+   "label": "Recent Orders"
+  },
+  {
+   "fieldname": "business_details",
+   "fieldtype": "Tab Break",
+   "label": "Business Details"
+  },
+  {
+   "fieldname": "business_name",
+   "fieldtype": "Data",
+   "label": "Business Name",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "default": "0",
+   "fieldname": "store_name_same_as_business_name",
+   "fieldtype": "Check",
+   "label": "Store Name same as Business Name",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "store_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Store Name",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "default": "0",
+   "fieldname": "is_same_personal_address",
+   "fieldtype": "Check",
+   "label": "Business Address Same as Personal Address",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_2y1f",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "same_as_personal",
+   "fieldtype": "Check",
+   "label": "Business Number same as Personal Number",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "business_phone",
+   "fieldtype": "Data",
+   "label": "Business Phone",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Link",
+   "label": "Route",
+   "options": "Route",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_znhr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "establishment_year",
+   "fieldtype": "Data",
+   "label": "Establishment Year",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "store_class",
+   "fieldtype": "Select",
+   "label": "Store Class",
+   "options": "\nClass A\nClass B\nClass C",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "sales_executive",
+   "fieldtype": "Small Text",
+   "label": "Sales Executive",
+   "read_only": 1
+  },
+  {
+   "fieldname": "business_address_section",
+   "fieldtype": "Section Break",
+   "label": "Business Address"
+  },
+  {
+   "fieldname": "business_address_map",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Business Address Map"
+  },
+  {
+   "fieldname": "business_address",
+   "fieldtype": "Data",
+   "label": "Business Address as Per KYC Document",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "business_state",
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "State",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_2vzj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_landmark",
+   "fieldtype": "Data",
+   "label": "Landmark",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "business_city",
+   "fieldtype": "Link",
+   "label": "City/Town",
+   "options": "City",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_9v2v",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\"",
+   "options": "Country",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "business_zip",
+   "fieldtype": "Data",
+   "label": "Pin Code",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "business_location_section",
+   "fieldtype": "Section Break",
+   "label": "Business Location"
+  },
+  {
+   "fieldname": "business_latitude",
+   "fieldtype": "Data",
+   "label": "Latitude",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_ny2nx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "business_longitude",
+   "fieldtype": "Data",
+   "label": "Longitude",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_ncxzc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accuracy",
+   "fieldtype": "Data",
+   "label": "Accuracy",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "section_images",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "store_front_image",
+   "fieldtype": "Attach Image",
+   "label": "Store Front Image",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "store_closeup_image",
+   "fieldtype": "Attach Image",
+   "label": "Store Closeup Image",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "store_operator_image",
+   "fieldtype": "Attach Image",
+   "label": "Store Operator Image",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "help",
+   "fieldtype": "HTML",
+   "label": "Help"
+  },
+  {
+   "fieldname": "gst_in",
+   "fieldtype": "Data",
+   "label": "GSTIN",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "weekly_off",
+   "fieldtype": "Select",
+   "label": "Weekly Off",
+   "options": "\nSunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "default": "0",
+   "fieldname": "operate_multiple_stores",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "I Operate Multiple Stores"
+  },
+  {
+   "fieldname": "kyc_tab_break",
+   "fieldtype": "Tab Break",
+   "label": "KYC"
+  },
+  {
+   "fieldname": "personal_kyc",
+   "fieldtype": "Section Break",
+   "label": "Personal KYC"
+  },
+  {
+   "default": "Unverified",
+   "fieldname": "kyc_status",
+   "fieldtype": "Select",
+   "label": "KYC Status",
+   "mandatory_depends_on": "eval:doc.customer_status==\"Approved\"",
+   "options": "Unverified\nVerified",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "customer_identity_proof",
+   "fieldtype": "Table",
+   "label": "Customer Identity Proof",
+   "options": "Identity Proof Document",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "customer_address_proof",
+   "fieldtype": "Table",
+   "label": "Customer Address Proof",
+   "options": "Address Proof Document",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "depends_on": "eval:doc.customer_types==\"Lead\"",
+   "fieldname": "lead_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Lead Details"
+  },
+  {
+   "fieldname": "lead_source",
+   "fieldtype": "Link",
+   "label": "Lead Source",
+   "options": "Lead Source",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" || doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "visit_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Visit Status",
+   "options": "\nConverted\nPending\nInvalid\nNot Interested",
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "column_break_tuxo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead_status",
+   "fieldtype": "Select",
+   "label": "Lead Status",
+   "options": "\nOpen\nOnboarded\nDropped\nInvalid\nNot Interested",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "lead_mobile_no",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Mobile No",
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  },
+  {
+   "fieldname": "uuid",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "uuid",
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.customer_status==\"Approved\" && doc.lead_status==\"Onboarded\""
+  }
+ ],
+ "links": [],
+ "modified": "2024-05-30 15:34:07.194988",
+ "modified_by": "Administrator",
+ "module": "Ecommerce Business Store SingleVendor",
+ "name": "Customer Registration",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "full_name,email,phone",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "first_name",
+ "track_changes": 1,
+ "track_seen": 1
+}
