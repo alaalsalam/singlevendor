@@ -138,7 +138,7 @@ def check_value_in_array(array, value, property_name):
     for obj in array:
         if obj.get(property_name) == value:
             return True
-    return False
+    return False 
 
 @frappe.whitelist()
 def update_order_item(doc,method):

@@ -893,9 +893,7 @@ class Order(Document):
 					
 	def check_outstanding_balance(self, total_amount,discount_new):
 		paid_amount = 0
-		outstanding_amount = 0
-		if self.outstanding_amount != 0:
-			outstanding_amount = round(flt(total_amount), 2)
+		outstanding_amount = round(flt(total_amount), 2)
 		payment_reference = frappe.db.get_all('Payment Reference', 
 										filters = {
 													'reference_doctype': 'Order', 

@@ -6,7 +6,7 @@ app_publisher = "Tridotstech Private Ltd."
 app_description = "Single vendor ecommerce app"
 app_email = "info@valiantsystems.com"
 app_license = "MIT"
-
+ 
 app_logo_url = "/assets/ecommerce_business_store_singlevendor/images/gokommerce-logo.png"
 
 # setup wizard

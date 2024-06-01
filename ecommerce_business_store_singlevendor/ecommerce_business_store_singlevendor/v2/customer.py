@@ -901,7 +901,7 @@ def insert_address(data):
 				for address in existing_address:
 					addr = frappe.get_doc('Customer Address', address.name)
 					addr.is_default = 0
-					addr.save()
+					addr.save(ignore_permissions = True)
 		check_existing = frappe.db.get_all('Customer Address', 
 										filters={	'parent': customers[0].name, 
 													'address': response.get('addr1'), 

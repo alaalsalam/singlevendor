@@ -3,7 +3,7 @@ import datetime
 from datetime import datetime
 import frappe, json, requests, os, socket, math
 from frappe import _
-from frappe.utils import flt, getdate, nowdate
+from frappe.utils import flt, getdate, nowdate 
 from frappe.model.mapper import get_mapped_doc
 from urllib.parse import unquote
 from six import string_types
@@ -883,8 +883,9 @@ def validate_insert_order(res,order_settings,cart,customer_id,catalog_settings,r
                                     cart,
                                     discount_data
                                 )
-        order_total = lis[0]
+        order_total = lis[0] 
         order_info = lis[1]
+        frappe.log_error("---order_info",order_info)
         discount_data = lis[2]
         tax_breakup = None
         tax_splitup = []
