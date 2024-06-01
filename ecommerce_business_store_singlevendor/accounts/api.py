@@ -5,6 +5,7 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.utils import flt, nowdate, now
 from datetime import date, timedelta,datetime
 from frappe.utils import now_datetime
+from ecommerce_business_store_singlevendor.utils.setup import get_business_from_web_domain, get_settings_from_domain
 from ecommerce_business_store_singlevendor.utils.setup import get_settings
 
 
@@ -305,55 +306,131 @@ def check_MOP_and_amount(pe,mode_of_payment, source, amount, total):
         pe.received_amount = abs(total)
         paid_amount = abs(total)
         return paid_amount
-@frappe.whitelist(allow_guest = True)
-def make_payment(source_name = None, order = None, mode_of_payment = None, amount = None):
-    try:
-        frappe.log_error("source_name",source_name)
-        default_currency = get_settings('Catalog Settings')
-        if source_name:
-            source = frappe.get_all("Order",
-                                fields=["name","outstanding_amount","total_amount","customer_name","customer",
-                                        "customer_type"],
-                                filters={"name":source_name})[0]
-        frappe.log_error("source",source)
-        if order:
-            source = frappe.get_all("Order",fields=["*"],filters={"name":order})[0]
-        if flt(source.outstanding_amount) == 0:
-            return {'status': 'failed', 'message': frappe._('No outstanding amount for this order')}
-        if flt(source.outstanding_amount) != 0:
-            total = source.outstanding_amount
-        else:
-            total = source.total_amount
-        pe = frappe.new_doc("Payment Entry")
-        pe.payment_type = "Receive" if flt(source.outstanding_amount) > flt(0) else "Pay"
-        payment_type_check(pe, source_name)
-        pe.posting_date = nowdate()
-        paid_amount = check_MOP_and_amount(pe,mode_of_payment, source, amount, total)
+    
+# @frappe.whitelist(allow_guest = True)
+# def make_payment(source_name = None, order = None, mode_of_payment = None, amount = None):
+#     try:
+#         frappe.log_error("source_name",source_name)
+#         default_currency = get_settings('Catalog Settings')
+#         if source_name:
+#             source = frappe.get_all("Order",
+#                                 fields=["name","outstanding_amount","total_amount","customer_name","customer",
+#                                         "customer_type"],
+#                                 filters={"name":source_name})[0]
+#         if order:
+#             source = frappe.get_all("Order",fields=["*"],filters={"name":order})[0]
+#         if flt(source.outstanding_amount) == 0:
+#             return {'status': 'failed', 'message': frappe._('No outstanding amount for this order')}
+#         if flt(source.outstanding_amount) != 0:
+#             total = source.outstanding_amount
+#         else:
+#             total = source.total_amount
+#         pe = frappe.new_doc("Payment Entry")
+#         pe.payment_type = "Receive" if flt(source.outstanding_amount) > flt(0) else "Pay"
+#         payment_type_check(pe, source_name)
+#         pe.posting_date = nowdate()
+#         paid_amount = check_MOP_and_amount(pe,mode_of_payment, source, amount, total)
  
 
-        pe.allocate_payment_amount = 1
-        payment_type = 'received from'
-        if pe.payment_type == 'Pay':
-            payment_type = 'paid to'
-        pe.remarks = 'Amount {0} {1} {2} {3}'.format(default_currency.default_currency,
-                                                        pe.paid_amount,
-                                                        payment_type, pe.party)
-        # frappe.log_error("source.order_date",source.order_date)
-        pe.append("references",{'reference_doctype':"Order",
-                                'reference_name': source.name,
-                                "bill_no": "",
-                                "due_date": source.order_date,
-                                'total_amount': abs(total),
-                                'outstanding_amount': 0,
-                                'allocated_amount': paid_amount })
-        if source_name:
-            return pe
-        else:
-            pe.flags.ignore_permissions=True
-            pe.submit()
-            return pe.name
-    except Exception:
-        frappe.log_error(message = frappe.get_traceback(), title = "Error in accounts.api.make_payment")
+#         pe.allocate_payment_amount = 1
+#         payment_type = 'received from'
+#         if pe.payment_type == 'Pay':
+#             payment_type = 'paid to'
+#         pe.remarks = 'Amount {0} {1} {2} {3}'.format(default_currency.default_currency,
+#                                                         pe.paid_amount,
+#                                                         payment_type, pe.party)
+#         # frappe.log_error("source.order_date",source.order_date)
+#         pe.append("references",{'reference_doctype':"Order",
+#                                 'reference_name': source.name,
+#                                 "bill_no": "",
+#                                 "due_date": source.order_date,
+#                                 'total_amount': abs(total),
+#                                 'outstanding_amount': 0,
+#                                 'allocated_amount': paid_amount })
+#         if source_name:
+#             return pe
+#         else:
+#             pe.flags.ignore_permissions=True
+#             pe.submit()
+#             return pe.name
+#     except Exception:
+#         frappe.log_error(message = frappe.get_traceback(), title = "Error in accounts.api.make_payment")
+
+@frappe.whitelist(allow_guest=True)
+def make_payment(source_name=None, target_doc=None, order=None, mode_of_payment=None, amount=None, vendor_order=None,payment_type=None,transaction_id=None):
+	try:
+		default_currency = get_settings_from_domain('Catalog Settings')
+		remarks = ''
+		business=None
+		if source_name:
+			source = frappe.get_all("Order",fields=["*"],filters={"name":source_name})[0]
+		if order:
+			source = frappe.get_all("Order",fields=["*"],filters={"name":order})[0]
+		if flt(source.outstanding_amount) == 0:
+			return {'status': 'failed', 'message': frappe._('No outstanding amount for this order')}
+		if flt(source.outstanding_amount) != 0:
+			total = source.outstanding_amount
+		else:
+			total = source.total_amount
+		pe = frappe.new_doc("Payment Entry")
+		if not payment_type:
+			pe.payment_type = "Receive" if flt(source.outstanding_amount) > flt(0) else "Pay"
+			if pe.payment_type == 'Pay':
+				pe.payment_type = 'Receive'
+				check_prev_payments = frappe.db.sql('''select ifnull(sum(allocated_amount), 0) from `tabPayment Reference` 
+					pr inner join `tabPayment Entry` pe on pe.name = pr.parent where pe.payment_type = "Receive" 
+					and reference_doctype = "Order" and reference_name = %(ref)s''', {'ref': source_name})
+				if check_prev_payments and check_prev_payments[0]:
+					if float(check_prev_payments[0][0]) > 0:
+						pe.payment_type = 'Pay'
+		else:
+			pe.payment_type = payment_type
+		if not business:
+			business=source.business
+		pe.business = business
+		pe.posting_date = nowdate()
+		if mode_of_payment:
+			pe.mode_of_payment = mode_of_payment
+		else:
+			pe.mode_of_payment = ""
+		pe.party_type = source.customer_type
+		pe.party = source.customer
+		pe.party_name = source.customer_name
+		pe.contact_person = ""
+		pe.contact_email = ""
+		pe.reference_no = transaction_id if transaction_id else ""
+		if amount:
+			pe.paid_amount = (amount)
+			pe.base_paid_amount = (amount)
+			pe.received_amount = (amount)
+			paid_amount=amount
+		else:
+			pe.paid_amount = abs(total)
+			pe.base_paid_amount = abs(total)
+			pe.received_amount = abs(total)
+			paid_amount = abs(total)
+		pe.allocate_payment_amount = 1
+		payment_type = 'received from'
+		if pe.payment_type == 'Pay':
+			payment_type = 'paid to'
+		pe.remarks = 'Amount {0} {1} {2} {3}'.format(default_currency.default_currency, pe.paid_amount, payment_type, pe.party)
+		pe.append("references", {
+			'reference_doctype':"Order",
+			'reference_name': source.name,
+			"bill_no": "",
+			"due_date": source.order_date,
+			'total_amount': abs(total),
+			'outstanding_amount': 0,
+			'allocated_amount': paid_amount
+		})
+		if source_name:
+			return pe
+		else:
+			pe.flags.ignore_permissions=True
+			pe.submit()
+			return pe.name
+	except Exception:
+		frappe.log_error(frappe.get_traceback(), "accounts.api.make_payment")
 
 
 @frappe.whitelist(allow_guest=True)
