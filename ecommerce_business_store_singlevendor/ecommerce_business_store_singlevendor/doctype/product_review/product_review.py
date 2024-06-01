@@ -3,7 +3,7 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-import frappe
+import frappe 
 from frappe.model.document import Document
 from frappe.utils import flt
 from frappe.model.naming import make_autoname
@@ -99,6 +99,7 @@ class ProductReview(Document):
 						"amount":0,
 						"message": "Reward Point for Product Review "+self.name
 						}).insert(ignore_permissions=True)
+					frappe.db.commit()
 
 @frappe.whitelist()
 def convert_product_image(image_name,size,productid):
@@ -112,7 +113,7 @@ def convert_product_image(image_name,size,productid):
 				})
 		if org_file_doc:
 			org_file_doc.make_thumbnail(set_as_thumbnail=False,width=size,height=size,
-							   					suffix=str(size)+"x"+str(size))
+												   suffix=str(size)+"x"+str(size))
 	except Exception:
 		frappe.log_error(frappe.get_traceback(), 
 			"Error in doctype.product_review.convert_product_image") 

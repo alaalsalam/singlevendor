@@ -1711,6 +1711,7 @@ def review_captcha_validation(data):
 			review.is_approved = 1
 		review.save(ignore_permissions=True)
 		review.creation = getdate(review.creation).strftime('%b %d, %Y')
+		frappe.db.commit()
 		return review.as_dict()
 	except Exception:
 		other_exception("Error in v2.product.review_captcha_validation")
