@@ -3333,7 +3333,7 @@ def reorder(order_id):
             cart_doc = frappe.new_doc('Shopping Cart')
             if cart:
                 frappe.db.sql(f'''DELETE FROM `tabCart Items`
-                                WHERE parent = {cart[0].name}''')
+                                WHERE parent = '{cart[0].name}' ''')
                 frappe.db.commit()
                 cart_doc = frappe.get_doc('Shopping Cart', cart[0].name)
             cart_doc.cart_type = "Shopping Cart"
