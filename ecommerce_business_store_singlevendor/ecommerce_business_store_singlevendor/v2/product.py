@@ -422,6 +422,7 @@ def get_product_details(route):
 						attribute.size_chart_params = unique_sizes
 			product_brand_image_list(product)
 			product = product_details(product,customer_id)
+			product[0].question_answers = frappe.db.sql(f""" select * from `tabProduct Enquiry` where product = '{product[0].name}' and is_approved=1 """, as_dict = 1)
 			return product[0]
 	except Exception as e:
 		other_exception("Error in v2.product.get_product_details")
