@@ -657,6 +657,7 @@ def check_route(route):
 	footer_content = data[2]
 
 	return [sub_header,header_content,footer_content]
+
 @frappe.whitelist(allow_guest=True)
 def get_page_content_with_pagination(route=None, user=None, customer=None,
 										application_type="mobile",seller_classify="All Stores",
@@ -685,11 +686,13 @@ def get_page_content_with_pagination(route=None, user=None, customer=None,
 			sub_header = data[0]
 			header_content = data[1]
 			footer_content = data[2]
-		return {"sub_header":sub_header,"side_menu":side_menu,
+		return {
+				"sub_header":sub_header,"side_menu":side_menu,
 				"list_content":list_content,"list_style":list_style,
 				"page_type":page_type,"page_content":page_content,
 				"header_content":header_content,
-				"footer_content":footer_content}
+				"footer_content":footer_content
+				}
 	except Exception as e:
 		frappe.log_error(message=frappe.get_traceback(), title='Error in page_content')			
 
@@ -933,42 +936,25 @@ def get_conditional_products(seller_classify,items_filter):
 	seller_classify_cond = ""
 	if seller_classify!="All Stores":
 		seller_classify_cond = "AND AB.business_classification='" + seller_classify + "'"
-	query = no_stock_products_yuery(items_filter,conditions,seller_classify_cond)
+	query = no_stock_products_query(items_filter,conditions,seller_classify_cond)
 	if catalog_settings.no_stock_products==1:
 		query = conditional_products_query(items_filter,conditions)
 	result = frappe.db.sql(query, as_dict=True)
 	return result
 
-def no_stock_products_yuery(items_filter,conditions,seller_classify_cond):
-	query = f"""SELECT DISTINCT 
-				PP.product, P.item, PP.price_list,P.full_description,P.route AS brand_route 
-				PP.name AS product_price,P.has_variants, P.short_description,P.tax_category,
-				P.brand_name AS product_brand (
-					SELECT price 
-					FROM `tabProduct Price` PR 
-					INNER JOIN `tabPrice List Zone` ZPR 
-					ON PR.price_list = ZPR.parent 
-					WHERE product = P.name AND price > 0 
-					ORDER BY price 
-					LIMIT 1) AS price, PP.old_price,
-				P.sku, P.name, P.route, P.inventory_method, P.minimum_order_qty,P.image AS product_image,
-				P.disable_add_to_cart_button, P.weight,P.approved_total_reviews,CM.category,P.gross_weight
-			FROM `tabProduct` P 
-			INNER JOIN `tabProduct Price` PP 
-				ON PP.product = P.name 
-			INNER JOIN `tabProduct Category Mapping` CM 
-				ON CM.parent = P.name 
-			INNER JOIN `tabProduct Category` PC 
-				ON CM.category = PC.name 
-			WHERE P.is_active = 1 AND P.show_in_market_place = 1 AND
-				PP.price > 0 AND P.status = 'Approved' 
-			AND (CASE WHEN (P.has_variants = 1 AND 
-				EXISTS (SELECT VC.name 
-						FROM `tabProduct Variant Combination` VC 
-						WHERE VC.show_in_market_place = 1 '{seller_classify_cond}' AND 
-							VC.disabled = 0 THEN 1 = 1 
-					WHEN (P.has_variants = 0 THEN 1 = 1 ELSE 1 = 0 END) 
-			AND P.name IN (%s) %s GROUP BY PP.product """ % (items_filter, conditions)
+def no_stock_products_query(items_filter,conditions,seller_classify_cond):
+	query = f"""SELECT DISTINCT P.item, P.price, P.old_price, P.short_description,P.has_variants,
+				P.sku, P.name, P.route, P.inventory_method, P.is_gift_card, P.image AS product_image,
+				P.minimum_order_qty, P.maximum_order_qty, P.disable_add_to_cart_button, 
+				P.weight, P.approved_total_reviews,
+				P.brand_unique_name AS brand_route,P.route,P.brand_name AS product_brand
+			FROM `tabProduct` P
+			INNER JOIN `tabProduct Category Mapping` CM ON CM.parent=P.name
+			INNER JOIN `tabProduct Category` pc ON CM.category=pc.name
+			WHERE P.is_active = 1 
+				AND P.status='Approved' AND P.price > 0
+				AND P.name IN ({items_filter})
+			GROUP BY P.name """
 	return query
 
 @frappe.whitelist(allow_guest=True)
@@ -1888,3 +1874,39 @@ def get_country_list():
 							FROM `tabCountry` 
 							WHERE enabled = 1
 						''', as_dict = 1)
+
+
+# on 1/7/24 backup
+
+
+# def no_stock_products_query(items_filter,conditions,seller_classify_cond):
+# 	query = f"""SELECT DISTINCT 
+# 				PP.product, P.item, PP.price_list,P.full_description,P.route AS brand_route 
+# 				PP.name AS product_price,P.has_variants, P.short_description,P.tax_category,
+# 				P.brand_name AS product_brand (
+# 					SELECT price 
+# 					FROM `tabProduct Price` PR 
+# 					INNER JOIN `tabPrice List Zone` ZPR 
+# 					ON PR.price_list = ZPR.parent 
+# 					WHERE product = P.name AND price > 0 
+# 					ORDER BY price 
+# 					LIMIT 1) AS price, PP.old_price,
+# 				P.sku, P.name, P.route, P.inventory_method, P.minimum_order_qty,P.image AS product_image,
+# 				P.disable_add_to_cart_button, P.weight,P.approved_total_reviews,CM.category,P.gross_weight
+# 			FROM `tabProduct` P 
+# 			INNER JOIN `tabProduct Price` PP 
+# 				ON PP.product = P.name 
+# 			INNER JOIN `tabProduct Category Mapping` CM 
+# 				ON CM.parent = P.name 
+# 			INNER JOIN `tabProduct Category` PC 
+# 				ON CM.category = PC.name 
+# 			WHERE P.is_active = 1 AND P.show_in_market_place = 1 AND
+# 				PP.price > 0 AND P.status = 'Approved' 
+# 			AND (CASE WHEN (P.has_variants = 1 AND 
+# 				EXISTS (SELECT VC.name 
+# 						FROM `tabProduct Variant Combination` VC 
+# 						WHERE VC.show_in_market_place = 1 '{seller_classify_cond}' AND 
+# 							VC.disabled = 0 THEN 1 = 1 
+# 					WHEN (P.has_variants = 0 THEN 1 = 1 ELSE 1 = 0 END) 
+# 			AND P.name IN (%s) %s GROUP BY PP.product """ % (items_filter, conditions)
+# 	return query

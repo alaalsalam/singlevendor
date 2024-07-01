@@ -68,8 +68,10 @@ def insert_question_aproduct(data):
 			'question': response.get('question'),
 			'product': response.get('product'),
 			}).insert(ignore_permissions=True)
-		result.creation = getdate(result.creation).strftime('%d %b, %Y')
+		result.save(ignore_permissions=True)
 		frappe.db.commit()
+		frappe.log_error("result",result)
+		result.creation = getdate(result.creation).strftime('%d %b, %Y')
 		return result
 	except Exception:
 		frappe.log_error(frappe.get_traceback(), 'ecommerce_business_store.ecommerce_business_store.api.insert_question_aproduct')
