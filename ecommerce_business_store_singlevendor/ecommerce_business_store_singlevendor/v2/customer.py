@@ -1138,6 +1138,14 @@ def insert_customers(data):
 		frappe.log_error(frappe.get_traceback(), "ecommerce_business_store.ecommerce_business_store.mobileapi.insert_customers")
 		return {'status':'failed', 'msg':""}
 
+@frappe.whitelist(allow_guest = True)
+def get_return_request_details():
+	try:
+		return_request_reason = frappe.db.sql('''select name from `tabReturn Request Reasons`''',as_dict = 1)
+		return_request_action = frappe.db.sql('''select name from `tabReturn Request Action`''',as_dict = 1)
+		return {'return_request_reason':return_request_reason,'return_request_action':return_request_action}
+	except Exception as e:
+		frappe.log_error(title = "get_return_request_details", message = frappe.get_traceback())
 
 
 # @frappe.whitelist(allow_guest=True)

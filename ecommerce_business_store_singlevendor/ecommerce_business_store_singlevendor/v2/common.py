@@ -525,9 +525,11 @@ def get_page_builder_data_pagination(page, customer=None,application_type="mobil
 										fields=['use_page_builder'])
 	if page_builders:
 		use_page_builder = page_builders[0].use_page_builder
+	frappe.log_error("--use_page_builder-->>//>",use_page_builder)
 	if use_page_builder:
 		with open(os.path.join(path, 'data_source', (page[0].name.lower().replace(' ','_') +ptype + '.json'))) as f:
 			data = json.loads(f.read())
+			frappe.log_error("--data-->>//>",data)
 			return validate_page_builder_data_pagination(data,page_size,page_no,customer)
 	else:
 		return frappe.db.get_all("Web Page Builder",
@@ -574,6 +576,7 @@ def validate_page_builder_data_pagination(data,page_size,page_no,customer):
 											'Tabs']:
 					doc = frappe.get_doc('Page Section', item.get('section'))
 					item = doc.run_method('section_data', customer=customer,add_info=None)
+					frappe.log_error("--item-->?",item)
 			chack_section_type_equals_dynamic_in_item(item)
 			lists.append(item)
 		index = index+1
@@ -672,6 +675,7 @@ def get_page_content_with_pagination(route=None, user=None, customer=None,
 			if customer_info:
 				customer = customer_info[0].name
 		page_ = validate_route(customer,application_type,page_no,page_size,route,page_type)
+		frappe.log_error("--page_--->",page_)
 		page_content = page_[0]
 		page_type = page_[1]
 		page_content = validate_page_section(page_content,seller_classify)
@@ -713,6 +717,7 @@ def validate_route(customer,application_type,page_no,page_size,route,page_type):
 		check_builder = frappe.db.get_all('Web Page Builder', 
 											filters={"route":route}, 
 											fields=['name', 'page_type','w_page_type','route'])
+		frappe.log_error("--check_builder--",check_builder)
 		if check_builder:
 			page_type = check_builder[0].w_page_type
 			if check_builder[0].page_type !="List" and check_builder[0].page_type != "Detail":
@@ -729,10 +734,13 @@ def validate_page_section(page_content,seller_classify):
 				items_filter = ""
 				conditional_products = []
 				items_filter = ",".join(['"' + psp.get('name') + '"' for psp in page_section.get("data")])
+				frappe.log_error("--items_filter--",items_filter)
 				conditional_products = get_conditional_products(seller_classify=seller_classify,
 																	items_filter=items_filter)
+				frappe.log_error("--conditional_products--",conditional_products)
 				if conditional_products:
 					p_data = get_list_product_details(conditional_products)
+					frappe.log_error("--p_data--",p_data)
 					for pr in p_data:
 						if pr.get("vendor_price_list"):
 							if pr.get("has_variants") == 0:
@@ -853,11 +861,13 @@ def check_route_in_page_content(route,customer,application_type):
 	check_builder = frappe.db.get_all('Web Page Builder',
 										filters={"name":route}, 
 										fields=['name', 'page_type','w_page_type','route'])
+	frappe.log_error("--check_builder--",check_builder)
 	if check_builder:
 		page_type = check_builder[0].w_page_type
 		if check_builder[0].page_type !="List" and check_builder[0].page_type != "Detail":
 			
 			page_content =  get_page_builder_data(check_builder, customer,application_type)
+			frappe.log_error("--page_content--",page_content)
 	else:
 		return {
 			"status":"Failed",
@@ -875,8 +885,10 @@ def get_page_content(route, user=None, customer=None,application_type="mobile",s
 				customer = customer_info[0].name
 		if route:
 			data = check_route_in_page_content(route,customer,application_type)
+			frappe.log_error("--data--",data)
 			page_type = data[0]
 			page_content = data[1]
+		frappe.log_error("--page_content--",page_content)
 		customer = get_customer_from_token()
 		page_content = validate_page_section(page_content,seller_classify)
 		out = validate_page_type(page_type,route,side_menu,list_content,list_style)
@@ -1332,12 +1344,14 @@ def get_page_builder_data(page, customer=None,application_type="mobile"):
 	if page_builders:
 		use_page_builder = page_builders[0].use_page_builder
 	file_path = os.path.join(path, 'data_source', (page[0].name.lower().replace(' ','_') + ptype + '.json'))
+	frappe.log_error("--file_path--",file_path)
 	if use_page_builder:
 		with open(file_path) as f:
 			data = json.loads(f.read())
 			from go1_cms.go1_cms.doctype.page_section.page_section import get_data_source
 			lists = []
 			for item in data:
+				frappe.log_error("--item---",item)
 				if item.get('login_required') == 1 and customer:
 					doc = frappe.get_doc('Page Section', item.get('section'))
 					item['data'] = get_data_source(doc.query, doc.reference_document, doc.no_of_records, 1, 
@@ -1347,6 +1361,7 @@ def get_page_builder_data(page, customer=None,application_type="mobile"):
 					if item['section_type'] in item_list:
 						doc = frappe.get_doc('Page Section', item.get('section'))
 						item = doc.run_method('section_data', customer=customer,add_info=None)
+						frappe.log_error("--page-sec-item--",item)
 				if item.get('section_type')=="Dynamic":
 					fields=["name","conditions","page_section","section_type","section_title",
 							"reference_document","sort_field","sort_by","custom_section_data",
