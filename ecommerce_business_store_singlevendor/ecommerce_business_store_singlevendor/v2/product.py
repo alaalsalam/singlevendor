@@ -42,7 +42,7 @@ class Product:
 		return """ P.item, P.price, P.old_price, P.short_description,P.has_variants,
 				P.sku, P.name, P.route, P.inventory_method, P.is_gift_card, P.image AS product_image,
 				P.minimum_order_qty, P.maximum_order_qty, P.disable_add_to_cart_button, 
-				P.weight, P.approved_total_reviews,
+				P.weight, P.approved_total_reviews,P.tax_category,
 				P.brand_unique_name AS brand_route,P.route,P.brand_name AS product_brand """
 	
 	def get_sorted_category_products(self,category, sort_by, page_no, page_size, brands,
@@ -330,6 +330,44 @@ def get_list_product_details(products,customer = None):
 			if float(x.get("old_price")) > 0 and float(x.get("price")) < float(x.get("old_price")):
 				x["discount_percentage"]= int(round((flt(str(x.get("old_price"))) - flt(str(x.get("price")))) / 
 										flt(str(x.get("old_price"))) * 100, 0))
+			if x.get("tax_category"):
+				tax_rates = frappe.db.sql("SELECT SUM(rate) AS t_rate FROM `tabTax Rates` WHERE parent=%(tax_template)s",{"tax_template":x.get("tax_category")},as_dict=1)
+				if tax_rates:
+					if catalog_settings.included_tax == 0:
+						x["price_with_tax"] = round((x["price"] + (x["price"] * tax_rates[0].t_rate / 100)),2)
+						x["price_without_tax"] = x["price"]
+					else:
+						x["price_with_tax"] = round((x["price"] - (x["price"] * tax_rates[0].t_rate / (100 + tax_rates[0].t_rate))),2)
+						x["price_without_tax"] = x["price"]
+					x["tax_percentage"] = tax_rates[0].t_rate
+			if x.get("has_variants"):
+				p_variants  = frappe.db.sql('''SELECT
+												PVM.attribute_id,PVM.price,PVM.old_price,PA.is_pre_selected,
+												PVM.stock 
+											FROM
+												`tabProduct Variant Combination` PVM
+												INNER JOIN `tabProduct` P ON P.name = PVM.parent
+												LEFT JOIN `tabProduct Attribute Option` PA ON PA.name =	REPLACE(PVM.attribute_id, '\n', '')
+											WHERE
+												PVM.disabled = 0 AND P.name = "{product}"
+											ORDER BY PA.is_pre_selected DESC'''.format(product=x.get("name")), as_dict=True)
+				is_price_update = 0
+				x.default_variant = None
+				for v in p_variants:
+					v.discount_percentage = 0
+					if float(v.old_price) > 0 and float(v.price) < float(v.old_price):
+						v.discount_percentage = int(round((v.old_price - v.price) / v.old_price * 100, 0))
+					combinations = get_attributes_combination(v.attribute_id)
+					v.variant_text = ""
+					if combinations:
+						v.variant_text = combinations[0].combination_txt
+						v.variant_label_ = combinations[0].variant__label
+					if not is_price_update:
+						is_price_update = 1
+						x.price = v.price
+						x.old_price = v.old_price
+						x.default_variant = v
+				x.variants = p_variants
 	return products
 
 def get_customer_recently_viewed_products(customer=None):
@@ -822,25 +860,60 @@ def attribute_options(attribute,x,op,count,attribute_ids,customer,has_attr_stock
 		op.images = []
 	return has_attr_stock
 
-
 def get_product_variant(x):
-	product_variant = frappe.db.sql(f'''SELECT name, price, role_based_pricing, stock, weight 
-										FROM 
-											`tabProduct Variant Combination` 
-										WHERE 
-											parent = '{x.name}'
-										AND disabled=0 
-										AND show_in_market_place=1''', as_dict=1)
-	for v_comb in product_variant:
-		v_comb.video_list = frappe.db.sql(
+	
+	# product_variant = frappe.db.sql(f'''SELECT name, price, role_based_pricing, stock, weight 
+	# 									FROM 
+	# 										`tabProduct Variant Combination` 
+	# 									WHERE 
+	# 										parent = '{x.name}'
+	# 									AND disabled=0 
+	# 									AND show_in_market_place=1''', as_dict=1)
+	# for v_comb in product_variant:
+	# 	v_comb.video_list = frappe.db.sql(
+	# 						""" SELECT name 
+	# 							FROM 
+	# 								`tabProduct Attribute Option Video` 
+	# 							WHERE 
+	# 								option_id = %(option_id)s""", 
+	# 							{"option_id": v_comb.name},as_dict = 1)
+	# x.product_variant = product_variant
+
+
+	p_variants  = frappe.db.sql('''SELECT
+									PVM.attribute_id,PVM.price,PVM.old_price,PA.is_pre_selected,
+									PVM.stock,PVM.name 
+								FROM
+									`tabProduct Variant Combination` PVM
+									INNER JOIN `tabProduct` P ON P.name = PVM.parent
+									LEFT JOIN `tabProduct Attribute Option` PA ON PA.name =	REPLACE(PVM.attribute_id, '\n', '')
+								WHERE
+									PVM.disabled = 0 AND P.name = "{product}"
+								ORDER BY PA.is_pre_selected DESC'''.format(product=x.get("name")), as_dict=True)
+	is_price_update = 0
+	x.default_variant = None
+	for v in p_variants:
+		v.discount_percentage = 0
+		if float(v.old_price) > 0 and float(v.price) < float(v.old_price):
+			v.discount_percentage = int(round((v.old_price - v.price) / v.old_price * 100, 0))
+		combinations = get_attributes_combination(v.attribute_id)
+		v.variant_text = ""
+		if combinations:
+			v.variant_text = combinations[0].combination_txt
+			v.variant_label_ = combinations[0].variant__label
+		if not is_price_update:
+			is_price_update = 1
+			x.price = v.price
+			x.old_price = v.old_price
+			x.default_variant = v
+		v.video_list = frappe.db.sql(
 							""" SELECT name 
 								FROM 
 									`tabProduct Attribute Option Video` 
 								WHERE 
 									option_id = %(option_id)s""", 
-								{"option_id": v_comb.name},as_dict = 1)
-	x.product_variant = product_variant
-
+								{"option_id": v.name},as_dict = 1)
+	x.product_variant = p_variants
 
 def product_specification_attribute(x):
 	specification_group = []
