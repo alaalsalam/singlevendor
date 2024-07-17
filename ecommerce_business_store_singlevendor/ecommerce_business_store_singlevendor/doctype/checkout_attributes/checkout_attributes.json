@@ -1,11 +1,11 @@
 {
+ "actions": [],
  "autoname": "naming_series:",
  "creation": "2020-04-23 12:46:27.224216",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "business",
   "question",
   "short_description",
   "column_break_3",
@@ -24,20 +24,11 @@
   "attribute_options",
   "section_break_15",
   "description",
-  "section_break_19",
-  "weight_based_charges",
   "requirements_section",
   "checkout_attribute_requirements",
   "requirements_html"
  ],
  "fields": [
-  {
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Business",
-   "options": "Business"
-  },
   {
    "fieldname": "question",
    "fieldtype": "Small Text",
@@ -138,17 +129,6 @@
    "label": "Charge Based On Weight?"
   },
   {
-   "collapsible_depends_on": "eval:doc.charge_based_on_weight==1",
-   "fieldname": "section_break_19",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "weight_based_charges",
-   "fieldtype": "Table",
-   "label": "Weight Based Charges",
-   "options": "Checkout Attribute Charges"
-  },
-  {
    "fieldname": "requirements_section",
    "fieldtype": "Section Break",
    "label": "Requirements"
@@ -171,10 +151,12 @@
    "label": "Short Description"
   }
  ],
- "modified": "2021-03-05 04:15:08.211419",
+ "links": [],
+ "modified": "2024-07-17 11:51:46.935082",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Checkout Attributes",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -193,6 +175,7 @@
  "search_fields": "question",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "title_field": "question",
  "track_changes": 1
 }

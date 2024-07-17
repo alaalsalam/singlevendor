@@ -308,7 +308,7 @@ class CrudCart:
 				if not check_stock.get("status"):
 					return check_stock
 				else:
-					wishlist_item_doc.delete()
+					wishlist_item_doc.delete(ignore_permissions = True)
 					frappe.db.commit()
 			else:
 				check_stock = self.add_item_to_existing_cart(wishlist_item_doc,product_details,customer_cart)
@@ -337,7 +337,7 @@ class CrudCart:
 		wishlist_item_doc.parent = customer_cart
 		resp = self.validate_stock_min_max_qty(product_details,wishlist_item_doc.quantity,wishlist_item_doc.attribute_ids)
 		if resp.get("status"):
-			wishlist_item_doc.save()
+			wishlist_item_doc.save(ignore_permissions = True)
 			parent_doc = frappe.get_doc('Shopping Cart',wishlist_item_doc.parent)
 			parent_doc.save(ignore_permissions=True)
 		return resp
@@ -431,7 +431,7 @@ class CrudCart:
 			if not check_stock.get("status"):
 				return check_stock
 			else:
-				wishlist_item_doc.delete()
+				wishlist_item_doc.delete(ignore_permissions = True)
 				frappe.db.commit()
 		else:
 			check_stock = self.add_item_to_existing_cart(
@@ -508,10 +508,13 @@ def delete_cart_items(name,customer_id = None):
 		other_exception("Error in v2.carts.delete_cart_items")
 		return {"status":"Failed","message":"something went wrong"}
 	
-@frappe.whitelist()
-def clear_cartitem():
+@frappe.whitelist(allow_guest = True)
+def clear_cartitem(customer_id = None):
 	try:
-		customer = get_customer_from_token()
+		if not customer_id:
+			customer = get_customer_from_token()
+		else:
+			customer = customer_id
 		cart = frappe.db.get_value('Shopping Cart',{'customer': customer,
 											'cart_type': 'Shopping Cart'},"name")
 		if cart:

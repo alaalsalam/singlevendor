@@ -196,7 +196,7 @@ def get_customer_from_token():
 			customer_email = frappe.db.get_all("Customers",filters={"email":users[0].name,"customer_status":"Approved"})
 			if customer_email:
 				customer_id = customer_email[0].name
-				frappe.log_error("customer_id",customer_id)
+				# frappe.log_error("customer_id",customer_id)
 				return customer_id
 	return None
 

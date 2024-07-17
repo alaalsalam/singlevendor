@@ -683,6 +683,7 @@ def update_cart():
 
 @frappe.whitelist()
 def get_products(doctype, txt, searchfield, start, page_len, filters):
+	condition = ""
 	if txt:
 		condition += ' and (name like "%{txt}%" or item like "%{txt}%")'.format(txt = txt)
 	return frappe.db.sql('''
@@ -1157,51 +1158,46 @@ def get_product_allowed_discount(allowed_discount,out,currency,req_data):
 def get_product_discount_list(discounts_list,qty,customer_id,rate,product,attribute_id,allowed_discount):
 	out = {}
 	for discount in discounts_list:
-			allow = True
-			if discount.min_qty > 0 and cint(qty) < cint(discount.min_qty):
-				allow = False
-			if discount.max_qty > 0 and cint(qty) > cint(discount.max_qty):
-				allow = False
-			if allow:
-				if discount.limitations != 'Unlimited':
-					if discount.limitations == 'N times only':
-						if int(discount.limitation_count) <= int(discount.history):
-							allow = False
-					else:
-						if customer_id:
-							history = get_usage_history(discount)
-							usage_history = list(filter(lambda x: x.customer == customer_id, history))
+		allow = True
+		if discount.min_qty > 0 and cint(qty) < cint(discount.min_qty):
+			allow = False
+		if discount.max_qty > 0 and cint(qty) > cint(discount.max_qty):
+			allow = False
+		if allow:
+			if discount.limitations != 'Unlimited':
+				if discount.limitations == 'N times only':
+					if int(discount.limitation_count) <= int(discount.history):
+						allow = False
+				else:
+					if customer_id:
+						history = get_usage_history(discount)
+						usage_history = list(filter(lambda x: x.customer == customer_id, history))
 
-							if usage_history:
-								if len(usage_history) >= int(discount.limitation_count):
-									allow = False
-			if allow:
-				allowed_discount = discount
-				if not flt(discount.requirements) > 0:
-					if discount.price_or_product_discount == 'Price':
-						if discount.percent_or_amount == 'Discount Percentage':
-							discount_amt = ((flt(rate) if rate else flt(product.get("price"))) * \
-									flt(discount.discount_percentage) / 100)
-						else:
-							discount_amt = discount.discount_amount
-						out['discount_amount'] = flt(discount_amt)
-						out['rate'] = (flt(rate) if rate else flt(product.get("price"))) - flt(discount_amt)
-						out['total'] = flt(out['rate']) * cint(qty)
-					elif discount.price_or_product_discount == 'Product':
-						out = get_product_discount_by_product(discount,product,attribute_id,out)
-				break
+						if usage_history:
+							if len(usage_history) >= int(discount.limitation_count):
+								allow = False
+		if allow:
+			if not flt(discount.requirements) > 0:
+				if discount.price_or_product_discount == 'Price':
+					if discount.percent_or_amount == 'Discount Percentage':
+						discount_amt = ((flt(rate) if rate else flt(product.get("price"))) * \
+								flt(discount.discount_percentage) / 100)
+					else:
+						discount_amt = discount.discount_amount
+					frappe.log_error("--entered-->",discount_amt)
+					out['discount_amount'] = flt(discount_amt)
+					out['rate'] = (flt(rate) if rate else flt(product.get("price"))) - flt(discount_amt)
+					out['total'] = flt(out['rate']) * cint(qty)
+				elif discount.price_or_product_discount == 'Product':
+					out = get_product_discount_by_product(discount,product,attribute_id,out)
+			break
 	return out
 
 
-def get_product_discount_requirement(
-										discounts_list,
-										qty,
-										customer_id,
-										rate,
-										product,
-										attribute_id,
-										currency,
-										allowed_discount
+def get_product_discount_requirement(discounts_list,qty,
+									customer_id,rate,
+									product,attribute_id,
+									currency,allowed_discount
 									):
 	out = get_product_discount_list(
 										discounts_list,

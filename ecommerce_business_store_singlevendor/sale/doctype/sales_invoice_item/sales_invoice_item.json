@@ -11,7 +11,6 @@
   "item_sku",
   "ordered_weight",
   "weight",
-  "business",
   "attribute_description",
   "checkout_attributes",
   "attribute_ids",
@@ -83,14 +82,6 @@
   },
   {
    "allow_on_submit": 1,
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "label": "Business",
-   "options": "Business",
-   "read_only": 1
-  },
-  {
-   "allow_on_submit": 1,
    "fieldname": "attribute_description",
    "fieldtype": "Text Editor",
    "label": "Attribute Description",
@@ -130,7 +121,6 @@
   },
   {
    "allow_on_submit": 1,
-   "depends_on": "",
    "fieldname": "special_instruction",
    "fieldtype": "Small Text",
    "label": "Special Instruction",
@@ -205,7 +195,6 @@
   },
   {
    "allow_on_submit": 1,
-   "depends_on": "",
    "fieldname": "shipping_charges",
    "fieldtype": "Currency",
    "label": "Shipping Charges",
@@ -222,7 +211,6 @@
   },
   {
    "allow_on_submit": 1,
-   "depends_on": "",
    "fieldname": "shipping_status",
    "fieldtype": "Select",
    "label": "Shipping Status",
@@ -251,7 +239,6 @@
   {
    "allow_on_submit": 1,
    "default": "0",
-   "depends_on": "",
    "fieldname": "return_created",
    "fieldtype": "Check",
    "label": "Return Created",
@@ -267,7 +254,7 @@
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-06-08 20:08:39.207187",
+ "modified": "2024-07-17 12:06:41.475971",
  "modified_by": "Administrator",
  "module": "Sale",
  "name": "Sales Invoice Item",

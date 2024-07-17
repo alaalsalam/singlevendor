@@ -1,11 +1,10 @@
 {
+ "actions": [],
  "creation": "2020-02-14 15:24:30.606017",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "business",
-  "column_break_2",
   "google_site_verification",
   "section_break_2",
   "google_analytics_code",
@@ -24,16 +23,6 @@
   "header_script"
  ],
  "fields": [
-  {
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "label": "Business",
-   "options": "Business"
-  },
-  {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
-  },
   {
    "fieldname": "google_site_verification",
    "fieldtype": "Data",
@@ -116,7 +105,8 @@
    "label": "Header Script"
   }
  ],
- "modified": "2021-06-29 19:07:39.232368",
+ "links": [],
+ "modified": "2024-07-17 11:16:44.476362",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Social Tracking Code",
@@ -134,5 +124,6 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

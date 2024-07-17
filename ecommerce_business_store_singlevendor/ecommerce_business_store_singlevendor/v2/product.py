@@ -74,9 +74,9 @@ class Product:
 @frappe.whitelist(allow_guest=True)
 def get_parent_categories(domain=None,business=None):
 	try:
-		if domain:
-			if not business:
-				business = get_business_from_web_domain(domain)
+		# if domain:
+		# 	if not business:
+		# 		business = get_business_from_web_domain(domain)
 		filters = {'parent_product_category': '', 'is_active': 1}
 		if business:
 			filters = {'parent_product_category': '', 'is_active': 1, 'business': business}
@@ -379,7 +379,7 @@ def get_customer_recently_viewed_products(customer=None):
 		cond = ''
 		recently_viewed_products = frappe.db.sql('''select C.product 
 													from `tabCustomer Viewed Product` C 
-													inner join `tabProduct` P on P.name = c.product 
+													inner join `tabProduct` P on P.name = C.product 
 													where C.parent = %(parent)s {cond} 
 													order by viewed_date desc'''.format(cond=cond),
 													{'parent': customer}, as_dict=1)
@@ -417,15 +417,17 @@ def recently_viewed_query(conditions,products,customer=None):
 	return products
 
 @frappe.whitelist(allow_guest=True)
-def get_product_details(route):
+def get_product_details(route,customer_id = None):
 	try:
-		customer_id = get_customer_from_token()
+		if not customer_id:
+			customer_id = get_customer_from_token()
+		# frappe.log_error("--customer_id--1-->",customer_id)
 		query = "SELECT * from `tabProduct` P WHERE  P.route = '{route}'" .format(route=route)
 		product = frappe.db.sql(query, as_dict=1)
 		if not product:
 			return {"status":"Failed","message":"Product not found."}
 		if product:
-			product = get_products_info(product)
+			product = get_products_info(product,customer_id)
 			if product[0].product_attribute:
 				for attribute in product[0].product_attributes:
 					if attribute.size_chart:
@@ -628,30 +630,28 @@ def get_discount_list(today_date):
 											`tabDiscounts` 
 										WHERE 
 											(discount_type = 'Assigned to Products' OR 
-											discount_type = 'Assigned to Categories' OR 
-											discount_type = 'Assigned to Business')
+											discount_type = 'Assigned to Categories')
 										AND (CASE WHEN 
 												start_date IS NOT NULL 
-											THEN start_date <= "{today_date}"ELSE 1 = 1 end) AND
+											THEN start_date <= "{today_date}" ELSE 1 = 1 END) AND
 										(CASE WHEN 
 											end_date IS NOT NULL 
 											THEN end_date >= "{today_date}"
-										ELSE 1 = 1 END)""",as_dict=1)
+										ELSE 1 = 1 END)""",as_dict = 1)
     return discount_list
 
-def get_products_info(product, current_category=None):
-	customer = get_customer_from_token()
+def get_products_info(product,customer_id = None, current_category=None):
 	media_settings = frappe.get_single('Media Settings')
 	catalog_settings = frappe.get_single('Catalog Settings')
 	if product:
 		today_date = get_today_date(replace=True)
 		discount_list = get_discount_list(today_date)
 		for x in product:
-			price_details = product_price_details(x, discount_list, media_settings,customer)
+			product_variant = get_product_variant(x)
+			price_details = product_price_details(x, discount_list, media_settings,customer_id)
 			mapped_category_result = product_mapped_category(x)
 			show_attributes = 0
-			product_attributes = product_attributes_data(x, customer, show_attributes)
-			product_variant = get_product_variant(x)
+			product_attributes = product_attributes_data(x, customer_id, show_attributes)
 			specification_attribute = product_specification_attribute(x)
 			tax_category = product_tax_category(show_attributes,x, catalog_settings, 
 												current_category=current_category)
@@ -693,19 +693,20 @@ def product_price_details(x, discount_list, media_settings, customer):
 	x.vendor_price_list = []
 	if discount_list:
 		price_details = get_product_price(x, customer=customer)
-	product_price = x.price
+	# product_price = x.price
+	# frappe.log_error("--price_details-->",price_details)
 	if price_details:
-		if price_details.get('discount_amount'):
-			product_price = price_details.get('rate')
+		# if price_details.get('discount_amount'):
+		# 	product_price = price_details.get('rate')
 		x.discount_rule = price_details.get('discount_rule')
 		x.discount_label = price_details.get('discount_label')
 		discount_info = frappe.db.get_all("Discounts",
 							filters={"name":price_details.get('discount_rule')},
 							fields=['percent_or_amount','discount_percentage','discount_amount','discount_type'])
-		discount_requirements = product_discount_requirements(x,price_details,customer,discount_info)
-	if x.price != product_price:
-		x.old_price = x.price
-		x.price = product_price
+		product_discount_requirements(x,price_details,customer,discount_info)
+	# if x.price != product_price:
+	# 	x.old_price = x.price
+	# 	x.price = product_price
 	if float(x.old_price) > 0 and float(x.price) < float(x.old_price):
 		x.discount_percentage = int(round((x.old_price - x.price) / x.old_price * 100, 0))
 	if not x.product_image:
@@ -716,41 +717,48 @@ def product_discount_requirements(x,price_details,customer,discount_info):
 	discount_requirements = frappe.db.get_all("Discount Requirements",
 								filters={"parent":price_details.get('discount_rule')},
 								fields=['items_list','discount_requirement'])
+	# frappe.log_error("--discount_requirements-->",discount_requirements)
 	customer_list = []
 	if discount_requirements:
 		for dr in discount_requirements:
-			if dr.discount_requirement== "Limit to customer":
+			if dr.discount_requirement == "Limit to customer":
 				items = json.loads(dr.items_list)
 				customer_list = [i.get('item') for i in items]
-	for vp in x["vendor_price_list"]:
-		is_allowed = 1
-		if customer_list:
-			if not customer:
-				is_allowed = 0
-			if customer not in customer_list:
-				is_allowed = 0
-		if is_allowed==1:
-			if vp.get("variants"):
-				for v in vp.get("variants"):
-					v_price = v.product_price
-					if discount_info[0].percent_or_amount == "Discount Percentage":
-						v["product_price"] = flt(v_price) - flt(v_price)*flt(discount_info[0].discount_percentage)/100
-						v["old_price"] = v_price
-						v["discount_percentage"] = discount_info[0].discount_percentage
-					else:
-						v["product_price"] = flt(v_price) - flt(discount_info[0].discount_amount)
-						v["old_price"] = v_price
-						v["discount_percentage"] = round((flt(discount_info[0].discount_amount)/v_price)*100,2)
-			vp_price = vp.product_price
+	# frappe.log_error("--customer_list-->",customer_list)
+	is_allowed = 1
+	if customer_list:
+		if not customer:
+			is_allowed = 0
+		if customer not in customer_list:
+			is_allowed = 0
+	if is_allowed == 1:
+		# frappe.log_error("--x--->",x)
+		if x.get("has_variants") and x.get("product_variant"):
+			for v in x.get("product_variant"):
+				v_price = v.price
+				if discount_info[0].percent_or_amount == "Discount Percentage":
+					v["price"] = flt(v_price) - flt(v_price) * flt(discount_info[0].discount_percentage) / 100
+					v["old_price"] = v_price
+					v["discount_percentage"] = discount_info[0].discount_percentage
+				else:
+					v["price"] = flt(v_price) - flt(discount_info[0].discount_amount)
+					v["old_price"] = v_price
+					v["discount_percentage"] = round((flt(discount_info[0].discount_amount) / v_price) * 100,2)
+		else:
+			actual_price = x.price
+			# frappe.log_error("--actual_price--->",actual_price)
+			# frappe.log_error("--discount_info[0].percent_or_amount--->",discount_info[0].percent_or_amount)
 			if discount_info[0].percent_or_amount == "Discount Percentage":
-				vp["product_price"] = flt(vp_price) - flt(vp_price)*flt(discount_info[0].discount_percentage)/100
-				vp["old_price"] = vp_price
-				vp["discount_percentage"] = discount_info[0].discount_percentage
+				x.old_price = actual_price
+				x.price = flt(actual_price) - flt(actual_price) * flt(discount_info[0].discount_percentage)/100
+				x.discount_percentage = discount_info[0].discount_percentage
 			else:
-				vp["product_price"] = flt(vp_price) - flt(discount_info[0].discount_amount)
-				vp["old_price"] = vp_price
-				vp["discount_percentage"] = round((flt(discount_info[0].discount_amount)/vp_price)*100,2)
-
+				x.old_price = actual_price
+				x.price = flt(actual_price) - flt(discount_info[0].discount_amount)
+				x.discount_percentage = round((flt(discount_info[0].discount_amount)/actual_price) * 100,2)
+			x.actual_old_price = x.old_price
+			x.actual_price = x.price
+		# frappe.log_error("--x--->",x)
 
 def product_attributes_data(x,customer,show_attributes):
 	product_attributes = frappe.db.get_all('Product Attribute Mapping',

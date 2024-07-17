@@ -11,7 +11,6 @@
  "field_order": [
   "product",
   "attribute_id",
-  "business",
   "column_break_2",
   "product_name",
   "attribute_description",
@@ -57,12 +56,6 @@
    "fieldname": "attribute_id",
    "fieldtype": "Select",
    "label": "Attribute ID"
-  },
-  {
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "label": "Seller",
-   "options": "Business"
   },
   {
    "fieldname": "column_break_2",
@@ -243,7 +236,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-02-17 17:38:24.659803",
+ "modified": "2024-07-17 11:08:14.259765",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Product Price",

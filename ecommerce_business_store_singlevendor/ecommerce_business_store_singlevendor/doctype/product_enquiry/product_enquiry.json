@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "creation": "2019-04-15 12:34:35.947439",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -11,8 +12,6 @@
   "product",
   "product_name",
   "is_approved",
-  "business",
-  "business_email_id",
   "section_break_7",
   "question",
   "section_break_9",
@@ -61,20 +60,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Business",
-   "options": "Business"
-  },
-  {
-   "fieldname": "business_email_id",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Business Email Id",
-   "options": "Email"
-  },
-  {
    "fieldname": "section_break_7",
    "fieldtype": "Section Break"
   },
@@ -105,7 +90,8 @@
    "label": "Is Approved"
   }
  ],
- "modified": "2020-11-27 05:28:37.234673",
+ "links": [],
+ "modified": "2024-07-17 12:05:50.049114",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Product Enquiry",
@@ -126,5 +112,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

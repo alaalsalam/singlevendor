@@ -7,13 +7,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "business_info_section",
-  "address",
-  "column_break_1jf5k",
-  "about_us",
-  "column_break_nyjvd",
-  "business_email",
-  "business_phone",
   "app_store_links_section",
   "ios_store_icon",
   "ios_url",
@@ -34,7 +27,6 @@
   "column_break_zzppc",
   "default_footer",
   "setting_section",
-  "business",
   "website_url",
   "column_break_ebpfx",
   "static_pb",
@@ -74,41 +66,6 @@
   "default_shipping_status"
  ],
  "fields": [
-  {
-   "fieldname": "business_info_section",
-   "fieldtype": "Section Break",
-   "label": "Business Info"
-  },
-  {
-   "fieldname": "address",
-   "fieldtype": "Small Text",
-   "label": "Address"
-  },
-  {
-   "fieldname": "column_break_1jf5k",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "about_us",
-   "fieldtype": "Small Text",
-   "label": "About Us"
-  },
-  {
-   "fieldname": "column_break_nyjvd",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "business_email",
-   "fieldtype": "Data",
-   "label": "Business Email",
-   "options": "Email"
-  },
-  {
-   "fieldname": "business_phone",
-   "fieldtype": "Data",
-   "label": "Business Phone",
-   "options": "Phone"
-  },
   {
    "fieldname": "app_store_links_section",
    "fieldtype": "Section Break",
@@ -208,13 +165,6 @@
    "fieldtype": "Section Break",
    "hidden": 1,
    "label": "Mobile App Setting"
-  },
-  {
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Business",
-   "options": "Business"
   },
   {
    "fieldname": "website_url",
@@ -402,7 +352,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-05-24 17:03:14.845380",
+ "modified": "2024-07-17 11:03:38.089876",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Mobile App Setting",

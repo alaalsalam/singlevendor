@@ -7,7 +7,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "business",
   "general",
   "website_logo",
   "login_image",
@@ -149,13 +148,6 @@
   "meta_keywords"
  ],
  "fields": [
-  {
-   "fieldname": "business",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Business",
-   "options": "Business"
-  },
   {
    "fieldname": "general",
    "fieldtype": "Section Break",
@@ -962,7 +954,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2024-02-13 19:38:06.669289",
+ "modified": "2024-07-17 11:13:48.077749",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Catalog Settings",

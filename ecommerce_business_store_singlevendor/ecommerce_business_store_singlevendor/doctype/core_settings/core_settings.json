@@ -13,9 +13,6 @@
   "section_break_5",
   "language",
   "column_break_7",
-  "default_settings",
-  "default_business",
-  "column_break_11",
   "auto_product_approval",
   "section_break_13",
   "tab_view_settings",
@@ -66,22 +63,6 @@
   },
   {
    "fieldname": "column_break_7",
-   "fieldtype": "Column Break"
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "default_settings",
-   "fieldtype": "Section Break",
-   "label": "Default Settings(Default business)"
-  },
-  {
-   "fieldname": "default_business",
-   "fieldtype": "Link",
-   "label": "Default Business",
-   "options": "Business"
-  },
-  {
-   "fieldname": "column_break_11",
    "fieldtype": "Column Break"
   },
   {
@@ -169,7 +150,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2024-03-27 20:09:50.545481",
+ "modified": "2024-07-17 11:14:41.329189",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Core Settings",
