@@ -590,7 +590,7 @@ class Order(Document):
 		if self.docstatus == 1:
 			frappe.db.set_value(self.doctype,self.name,'total_amount',self.total_amount)
 		if self.payment_status == "Paid":
-			update_giftcard_payments(self.name,self.transaction_id)
+			# update_giftcard_payments(self.name,self.transaction_id)
 			if self.giftcard_coupon_code:
 				update_giftcard_status(self)
 		if self.docstatus == 0:

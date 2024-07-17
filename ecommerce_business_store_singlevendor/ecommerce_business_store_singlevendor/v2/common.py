@@ -1190,7 +1190,10 @@ def validate_otp(mobile_no,otp,doctype):
 			if customer_login_resp.get("status")=="Success":
 				return customer_login_resp
 			else:
-				return customer_registration_login(mobile_no)
+				if customer_login_resp.get("message") == "user not found":
+					return customer_registration_login(mobile_no)
+				else:
+					return customer_login_resp
 		# if doctype == "SE":
 		# 	check_mobile = frappe.db.get_all("Employee",
 		# 								filters={"mobile_no":mobile_no},
@@ -1215,16 +1218,15 @@ def validate_otp(mobile_no,otp,doctype):
 	
 def customer_login(phone):
 	usr = frappe.db.get_all("Customers",filters={"phone":phone},fields=["email","name","full_name"])
+	frappe.log_error("--usr--->",usr)
 	if usr:
 		token = get_auth_token(usr[0].email)
 		if token:
 			has_role = frappe.db.get_all('Has Role',
 							filters={'parent': usr[0].email, 'role': "Customer"})
+			frappe.log_error("--has_role->",has_role)
 			if not has_role:
-				frappe.local.response.http_status_code = 500
-				frappe.local.response.status = "Failed"
-				frappe.local.response.message = "You dont have access."
-				return
+				return {"status":"Failed","message":"You dont have access."}
 			return {'type':'Customer',
 					'api_key': token['api_key'],
 					'api_secret': token['api_secret'],
@@ -1233,7 +1235,7 @@ def customer_login(phone):
 					'customer_name':usr[0].full_name,
 					'status':"Success",
 					"message":"OTP verfied successfully."}
-	return {"status":"Failed"}
+	return {"status":"Failed","message":"user not found"}
 
 def vendor_login(phone):
 	usr = frappe.db.get_all("Shop User",filters={"mobile_no":phone},
@@ -1291,36 +1293,35 @@ def customer_registration_login(phone):
 					'status':"Success",
 					"message":"OTP verfied successfully."}	
 	else:
-		status = "Waiting for Approval" if not order_settings.auto_customer_approval else "Approved"
-		cus_reg = frappe.new_doc("Customers")
-		cus_reg.phone = phone
-		cus_reg.first_name = phone
-		cus_reg.email = email
-		cus_reg.new_password  = pwd
-		cus_reg.customer_status = status
-		cus_reg.allow_multiple_address = 1 if order_settings.allow_multiple_address else 0
-		cus_reg.save(ignore_permissions=True)
-		frappe.db.commit()
-		token = get_auth_token(email)
-		if token:
-			has_role = frappe.db.get_all('Has Role',
-							filters={'parent': email, 'role': "Customer"})
-			if not has_role:
-				frappe.local.response.http_status_code = 500
-				frappe.local.response.status = "Failed"
-				frappe.local.response.message = "You dont have access."
-				return
-			return {
-					'type':'Customer',
-					'api_key': token['api_key'],
-					'api_secret': token['api_secret'],
-					'customer_id':cus_reg.name,
-					'customer_email':cus_reg.email,
-					'customer_name':cus_reg.full_name,
-					'status':"Success",
-					"message":"OTP verfied successfully."
-				}	
-		return {"status":"Failed"}
+		if not frappe.db.get_value("Customers",{"phone":phone},"name"):
+			status = "Waiting for Approval" if not order_settings.auto_customer_approval else "Approved"
+			cus_reg = frappe.new_doc("Customers")
+			cus_reg.phone = phone
+			cus_reg.first_name = phone
+			cus_reg.email = email
+			cus_reg.new_password  = pwd
+			cus_reg.customer_status = status
+			cus_reg.allow_multiple_address = 1 if order_settings.allow_multiple_address else 0
+			cus_reg.save(ignore_permissions=True)
+			frappe.db.commit()
+			token = get_auth_token(email)
+			if token:
+				has_role = frappe.db.get_all('Has Role',
+								filters={'parent': email, 'role': "Customer"})
+				if not has_role:
+					return {"status":"Failed",'message':"You dont have access."}
+				return {
+						'type':'Customer',
+						'api_key': token['api_key'],
+						'api_secret': token['api_secret'],
+						'customer_id':cus_reg.name,
+						'customer_email':cus_reg.email,
+						'customer_name':cus_reg.full_name,
+						'status':"Success",
+						"message":"OTP verfied successfully."
+					}	
+		else:
+			return {"status":"Failed",'message':"mobile number already registed."}
 
 def generate_random_nos(n):
 	from random import randint

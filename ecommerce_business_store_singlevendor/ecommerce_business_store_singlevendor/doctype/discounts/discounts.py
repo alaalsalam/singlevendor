@@ -1184,7 +1184,7 @@ def get_product_discount_list(discounts_list,qty,customer_id,rate,product,attrib
 								flt(discount.discount_percentage) / 100)
 					else:
 						discount_amt = discount.discount_amount
-					frappe.log_error("--entered-->",discount_amt)
+					# frappe.log_error("--entered-->",discount_amt)
 					out['discount_amount'] = flt(discount_amt)
 					out['rate'] = (flt(rate) if rate else flt(product.get("price"))) - flt(discount_amt)
 					out['total'] = flt(out['rate']) * cint(qty)
@@ -1690,12 +1690,13 @@ def get_product_dixcount_rule_(rule,product):
 		if discount.discount_type == "Assigned to Categories" \
 					and discount.price_or_product_discount == "Price":
 			categories = get_product_categories(product.name)
-			discount_categories = frappe.db.sql(f'''SELECT discount_value
-													FROM `tabDiscount Categories`
-													WHERE category IN %(category)s 
-														AND parent = %(parent)s
-												''', {'category': categories, 'parent': discount.name},
-													as_dict=1)
+			query = f'''SELECT discount_value
+										FROM `tabDiscount Categories`
+													WHERE category IN ({categories})
+														AND parent = "{discount.name}"
+												'''
+			# frappe.log_error("---query-->",query)
+			discount_categories = frappe.db.sql(query,as_dict=1)
 			if discount_categories:
 				for x in discount_categories:
 					if x.discount_value:

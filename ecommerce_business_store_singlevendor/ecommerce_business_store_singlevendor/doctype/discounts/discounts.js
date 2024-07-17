@@ -414,10 +414,13 @@ frappe.ui.form.on('Discounts', {
                 row.find('.btn-danger').click(function() {
                     let lists = frm.doc["discount_requirements"].filter(obj => obj.name != f.name);
                     frm.doc.discount_requirements = lists;
-                    if (!f.__islocal)
+                    if (!f.__islocal){
+                        frm.dirty()
                         frm.save();
-                    else
+                    }
+                    else{
                         frm.trigger("requirement_html")
+                    }
                 });
                 if (f.discount_requirement == 'Spend x amount') {
                     let input = frappe.ui.form.make_control({

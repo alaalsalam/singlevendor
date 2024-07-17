@@ -714,7 +714,7 @@ def verify_otp(mobile_no,otp,guest_id=None):
 
 def move_cart_items(customer, guest_id):
 	try:
-		from ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.v2.cart \
+		from ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.v2.common \
 			import update_cart
 		if not guest_id:
 			guest = frappe.request.cookies.get('guest_customer')
