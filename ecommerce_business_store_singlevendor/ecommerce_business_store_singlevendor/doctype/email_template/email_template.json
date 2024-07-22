@@ -1,6 +1,7 @@
 {
+ "actions": [],
  "autoname": "field:name1",
- "creation": "2019-04-25 13:25:56.055896",
+ "creation": "2024-07-20 17:59:30.936567",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -34,7 +35,8 @@
    "label": "Replacement Variables"
   }
  ],
- "modified": "2020-09-21 23:32:59.990877",
+ "links": [],
+ "modified": "2024-07-20 17:59:30.936567",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Email Template",
@@ -55,5 +57,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

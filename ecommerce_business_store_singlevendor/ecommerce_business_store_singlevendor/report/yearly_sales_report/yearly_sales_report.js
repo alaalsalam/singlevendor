@@ -9,18 +9,6 @@
 			"reqd": 1
 		},
 		
-		{
-			"fieldname": "from_date",
-			"fieldtype": "Date",
-			"label": __("From Date"),
-			"default": ""
-		},
-		{
-			"fieldname":"to_date",
-			"label": __("To Date"),
-			"fieldtype": "Date",
-			"default": ""
-		},
 	],
 	"onload": function() {
 		var business_filter = frappe.query_report.get_filter('business');

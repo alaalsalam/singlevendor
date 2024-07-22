@@ -1,6 +1,3 @@
 Ecommerce Business Store SingleVendor
 Sale
 Accounts
-Services
-Membership
-crm

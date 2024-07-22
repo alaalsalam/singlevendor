@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"0NCwrUxTnN\",\"type\":\"header\",\"data\":{\"text\":\"Go1 Commerce<br>\",\"col\":12}},{\"id\":\"_9dgF7vXd-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":3}},{\"id\":\"gFnnYtPL7R\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product Mapping Tool\",\"col\":3}},{\"id\":\"IKHvsKjjZx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Orders\",\"col\":3}},{\"id\":\"KQ0qV-6-k5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Discounts\",\"col\":3}},{\"id\":\"OWvO01Xb9J\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buyers\",\"col\":3}},{\"id\":\"8W5wYyxg4p\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sellers\",\"col\":3}},{\"id\":\"T9EfUgm310\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product Import Tool\",\"col\":3}},{\"id\":\"YkS0XxzRfr\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User OTPs\",\"col\":3}},{\"id\":\"OoSyBjXfjt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Targets\",\"col\":3}},{\"id\":\"1u5mpjjLqt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Data Imports\",\"col\":3}},{\"id\":\"SEk_P3FxPG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wallet\",\"col\":3}},{\"id\":\"8jsq7i17Mm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wallet Transactions\",\"col\":3}},{\"id\":\"BehxUmonkz\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product Updates Approvals\",\"col\":3}},{\"id\":\"UXzVayfBnJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buyers Import Tool\",\"col\":3}},{\"id\":\"NHcyTdmwzi\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"kr07f7Yo7R\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":3}},{\"id\":\"SauYmDILAu\",\"type\":\"card\",\"data\":{\"card_name\":\"Catalog\",\"col\":3}},{\"id\":\"frFkD16JiT\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":3}},{\"id\":\"8I-I-vZlgp\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales\",\"col\":3}},{\"id\":\"WiI-JkB-Ja\",\"type\":\"card\",\"data\":{\"card_name\":\"Promotions\",\"col\":3}},{\"id\":\"SfifbG9wXV\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":3}}]",
+ "content": "[{\"id\":\"0NCwrUxTnN\",\"type\":\"header\",\"data\":{\"text\":\"Go1 Commerce<br>\",\"col\":12}},{\"id\":\"_9dgF7vXd-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product\",\"col\":3}},{\"id\":\"IKHvsKjjZx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Orders\",\"col\":3}},{\"id\":\"KQ0qV-6-k5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Discounts\",\"col\":3}},{\"id\":\"OWvO01Xb9J\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buyers\",\"col\":3}},{\"id\":\"T9EfUgm310\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Product Import Tool\",\"col\":3}},{\"id\":\"YkS0XxzRfr\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"User OTPs\",\"col\":3}},{\"id\":\"1u5mpjjLqt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Data Imports\",\"col\":3}},{\"id\":\"SEk_P3FxPG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wallet\",\"col\":3}},{\"id\":\"8jsq7i17Mm\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wallet Transactions\",\"col\":3}},{\"id\":\"NHcyTdmwzi\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"kr07f7Yo7R\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":3}},{\"id\":\"GQNw3Lv_wD\",\"type\":\"card\",\"data\":{\"card_name\":\"Catalog\",\"col\":3}},{\"id\":\"frFkD16JiT\",\"type\":\"card\",\"data\":{\"card_name\":\"CRM\",\"col\":3}},{\"id\":\"8I-I-vZlgp\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales\",\"col\":3}},{\"id\":\"WiI-JkB-Ja\",\"type\":\"card\",\"data\":{\"card_name\":\"Promotions\",\"col\":3}},{\"id\":\"SfifbG9wXV\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":3}}]",
  "creation": "2024-01-23 14:39:16.350701",
  "custom_blocks": [],
  "docstatus": 0,
@@ -246,223 +246,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Sales",
-   "link_count": 6,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Orders",
-   "link_count": 0,
-   "link_to": "Order",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Order Cancel Reasons",
-   "link_count": 0,
-   "link_to": "Order Cancel Reason",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Return Requests",
-   "link_count": 0,
-   "link_to": "Return Request",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Return Request Reasons",
-   "link_count": 0,
-   "link_to": "Return Request Reasons",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Shipping Rate Method",
-   "link_count": 0,
-   "link_to": "Shipping Rate Method",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Order Feedbacks",
-   "link_count": 0,
-   "link_to": "Order Feedback",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Promotions",
-   "link_count": 6,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Discounts",
-   "link_count": 0,
-   "link_to": "Discounts",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Wallet",
-   "link_count": 0,
-   "link_to": "Wallet",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Wallet Transactions",
-   "link_count": 0,
-   "link_to": "Wallet Transaction",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Email Groups",
-   "link_count": 0,
-   "link_to": "Email Group",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Email Group Members",
-   "link_count": 0,
-   "link_to": "Email Group Member",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Newsletters",
-   "link_count": 0,
-   "link_to": "Newsletter",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Reports",
-   "link_count": 7,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Sales Report",
-   "link_count": 0,
-   "link_to": "Customer Order",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Daily Sales Report",
-   "link_count": 0,
-   "link_to": "Daily Sales Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Monthly Sales Report",
-   "link_count": 0,
-   "link_to": "Monthly Sales Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Yearly Sales Report",
-   "link_count": 0,
-   "link_to": "Yearly Sales Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Item Wise Sales Report",
-   "link_count": 0,
-   "link_to": "Item Wise Sales Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Best Selling Items By Amount",
-   "link_count": 0,
-   "link_to": "Best Selling Items By Amount",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Product Variants",
-   "link_count": 0,
-   "link_to": "Product Variant Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Products",
    "link_count": 0,
    "link_to": "Product",
@@ -647,9 +430,355 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Catalog",
+   "link_count": 8,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Products",
+   "link_count": 0,
+   "link_to": "Product",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Categories",
+   "link_count": 0,
+   "link_to": "Product Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Brands",
+   "link_count": 0,
+   "link_to": "Product Brand",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attributes",
+   "link_count": 0,
+   "link_to": "Product Attribute",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Specification Attributes",
+   "link_count": 0,
+   "link_to": "Specification Attribute",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Return Policies",
+   "link_count": 0,
+   "link_to": "Return Policy",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Replacement Policies",
+   "link_count": 0,
+   "link_to": "Replacement Policy",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tax Templates",
+   "link_count": 0,
+   "link_to": "Product Tax Template",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Promotions",
+   "link_count": 7,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Discounts",
+   "link_count": 0,
+   "link_to": "Discounts",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Wallet",
+   "link_count": 0,
+   "link_to": "Wallet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Wallet Transactions",
+   "link_count": 0,
+   "link_to": "Wallet Transaction",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Email Groups",
+   "link_count": 0,
+   "link_to": "Email Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Email Group Members",
+   "link_count": 0,
+   "link_to": "Email Group Member",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Newsletters",
+   "link_count": 0,
+   "link_to": "Newsletter",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Availability Notifications",
+   "link_count": 0,
+   "link_to": "Product Availability Notification",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Orders",
+   "link_count": 0,
+   "link_to": "Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Cancel Reasons",
+   "link_count": 0,
+   "link_to": "Order Cancel Reason",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Return Requests",
+   "link_count": 0,
+   "link_to": "Return Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Return Request Reasons",
+   "link_count": 0,
+   "link_to": "Return Request Reasons",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Shipping Rate Method",
+   "link_count": 0,
+   "link_to": "Shipping Rate Method",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Order Feedbacks",
+   "link_count": 0,
+   "link_to": "Order Feedback",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Best Selling Items By Quantity",
+   "link_count": 0,
+   "link_to": "Best Selling Items",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 9,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Sales Report",
+   "link_count": 0,
+   "link_to": "Sales Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Order Summary",
+   "link_count": 0,
+   "link_to": "Customer Order Summary",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Daily Sales Report",
+   "link_count": 0,
+   "link_to": "Daily Sales Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Monthly Sales Report",
+   "link_count": 0,
+   "link_to": "Monthly Sales Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Yearly Sales Report",
+   "link_count": 0,
+   "link_to": "Yearly Sales Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Item Wise Sales Report",
+   "link_count": 0,
+   "link_to": "Item Wise Sales Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Best Selling Items By Amount",
+   "link_count": 0,
+   "link_to": "Best Selling Items By Amount",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Best Selling Items By Quantity",
+   "link_count": 0,
+   "link_to": "Best Selling Items",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Product Never Purchased",
+   "link_count": 0,
+   "link_to": "Product Never Purchased",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-01-24 11:09:15.293574",
+ "modified": "2024-07-20 17:13:21.682706",
  "modified_by": "Administrator",
  "module": "Ecommerce Business Store SingleVendor",
  "name": "Go1 Commerce",
@@ -674,13 +803,6 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Employee Targets",
-   "link_to": "Employee Target",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
    "label": "User OTPs",
    "link_to": "User OTP Verification",
    "type": "DocType"
@@ -695,29 +817,8 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Product Updates Approvals",
-   "link_to": "Product Update Approval",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
    "label": "Data Imports",
    "link_to": "Data Import",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Buyers Import Tool",
-   "link_to": "Customers Import Tool",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Sellers",
-   "link_to": "Business",
    "type": "DocType"
   },
   {
@@ -739,13 +840,6 @@
    "doc_view": "List",
    "label": "Buyers",
    "link_to": "Customers",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Product Mapping Tool",
-   "link_to": "Product Mapping Tool",
    "type": "DocType"
   },
   {

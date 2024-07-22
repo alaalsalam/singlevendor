@@ -7,13 +7,12 @@ app_description = "Single vendor ecommerce app"
 app_email = "info@valiantsystems.com"
 app_license = "MIT"
  
-app_logo_url = "/assets/ecommerce_business_store_singlevendor/images/gokommerce-logo.png"
+app_logo_url = "/assets/ecommerce_business_store_singlevendor/images/go1_commerce_logo.svg"
 
-# setup wizard
-# setup_wizard_requires = "assets/ecommerce_business_store_singlevendor/js/setup_wizard.js"
-# setup_wizard_stages = "ecommerce_business_store_singlevendor.utils.setup_wizard.get_setup_stages"
-# setup_wizard_complete = "ecommerce_business_store_singlevendor.utils.setup_wizard.setup_complete"
-#page Analytics 
+website_context = {
+	"favicon": "/assets/ecommerce_business_store_singlevendor/images/go1favicon.svg",
+	"splash_image": "/assets/ecommerce_business_store_singlevendor/images/go1_commerce_logo.svg",
+}
 leaderboard = "ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.leaders.get_leaderboards"
 
 boot_session = "ecommerce_business_store_singlevendor.ecommerce_business_store_singlevendor.v2.common.boot_session"

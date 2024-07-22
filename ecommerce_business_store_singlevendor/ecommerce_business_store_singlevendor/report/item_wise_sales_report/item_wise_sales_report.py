@@ -29,8 +29,6 @@ def get_columns():
 
 def get_data(filters):
 	conditions =""
-	if filters.get('business'):
-		conditions += ' and o.business = "{0}"'.format(filters.get('business'))
 	if filters.get('from_date'):
 		conditions+=' and o.order_date>="%s"' % filters.get('from_date')
 	if filters.get('to_date'):
